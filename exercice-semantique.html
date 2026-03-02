@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Exercice Semantique</title>
+</head>
+
+<body>
+  
+  <!-- header indique que c'est l'en tête de la page -->
+  <header>
+
+    <img src="asset/logocat.png" alt="logo" loading="lazy">
+
+    <!-- indique que ce bloc contient la navigation principale du site -->
+    <nav>
+
+      <!-- liste désordonné idéal pour les menu/listes -->
+      <ul>
+        <li><a href="#article">Blog</a></li>
+        <li><a href="#similaire">Articles similaires</a></li>
+        <li><a href="https://www.woopets.fr/chat/races/" target="_blank">En savoir plus</a></li>
+        <li><a href="#reseau">Nos réseaux</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- contient le contenu principal unique d’une page (chaque page doit avoir qu'une seule main) -->
+  <main>
+
+    <!-- idéal pour un article de blog -->
+    <article id="article">
+
+      <!-- sert uniquement à regrouper du contenu pour le style ou la mise en page -->
+      <div>
+        <h1>Les chats</h1>
+        <p>Les chats sont des animaux domestiques très appréciés dans le monde entier pour leur beauté et leur caractère indépendant. Ils possèdent une grande agilité, capable de sauter plusieurs fois leur propre hauteur, ce qui en fait des chasseurs naturels. Leur sens de l’équilibre est remarquable, et ils peuvent grimper facilement aux arbres ou sur les meubles. Les chats passent une grande partie de leur journée à se toiletter, utilisant leur langue rugueuse pour nettoyer leur pelage et réguler leur température corporelle. Leur ronronnement, souvent associé à la détente, peut également être un moyen de communication pour exprimer leurs besoins ou leur stress. Certains chats sont très affectueux et aiment se blottir contre leurs propriétaires, apportant réconfort et chaleur. Ils ont un sens de l’ouïe très développé, capable de détecter des sons que les humains ne perçoivent pas. Leur vue nocturne est également exceptionnelle, leur permettant de chasser ou de se déplacer facilement dans l’obscurité. Les chats adorent jouer avec des objets mobiles comme des balles, des ficelles ou des plumes, ce qui stimule leur instinct de chasse et leur intelligence. Leur alimentation doit être adaptée à leur âge et à leur santé pour maintenir un poids idéal et prévenir les maladies. Certains chats développent des liens très forts avec d’autres animaux domestiques ou avec les humains, montrant une grande capacité d’adaptation sociale. Ils utilisent également différents moyens de communication, comme les miaulements, les postures de queue et les frottements contre les objets ou les personnes. Les chats sont connus pour leur curiosité naturelle et aiment explorer de nouveaux environnements, souvent avec prudence mais détermination. Leur présence est souvent apaisante, et ils contribuent à réduire le stress et l’anxiété chez leurs propriétaires. Certains chats ont des comportements très particuliers, comme chasser des insectes ou observer intensément les oiseaux à la fenêtre. Grâce à leur combinaison de beauté, de mystère et de compagnie affectueuse, les chats continuent d’enchanter et de fasciner des millions de foyers à travers le monde. Ils représentent un parfait mélange d’indépendance et d’affection, ce qui les rend uniques parmi les animaux de compagnie.</p>
+        <p><small>Sources : ChatGPT</small></p>
+        <time datetime="2026-03-02">Lundi 2 Mars</time>
+      </div>
+      
+      <!-- sert à regrouper un contenu multimédia avec une légende éventuelle -->
+      <figure>
+        <img src="asset/happy.jpeg" alt="happy">
+        <figcaption><small>Happy, le chat de mon frère (et mon chat que je me suis pas du tout approprié)</small></figcaption>
+      </figure>
+      
+    </article>
+
+    <!-- sert à regrouper du contenu secondaire ou complémentaire par rapport au contenu principal de la page -->  
+    <!-- je l'ai mis dans main pour le css -->
+    <aside>
+
+      <h2>L'autrice</h2>
+      <p>Une jeune femme de 20 ans passionné par le codage, le dessin, la peinture, Minecraft, la nourriture, et les chats. Aime aussi le vélo, la muscu et la boxe mais qui reste des activités pas assez en progression par manque (ou mal organnisation) de temps.</p>
+
+    </aside>
+
+  </main>
+
+  
+
+  <!-- sert à regrouper un contenu thématiquement lié dans une page -->
+  <section id="similaire">
+
+    <!-- h2 par respect de la hiérarchie -->
+    <h2>Article similaires</h2>
+    <p>Si vous voulez savoir plus sur les chats, voici d'autres articles sur ces adorables animaux</p>
+
+    <!-- sert uniquement à regrouper du contenu pour le style ou la mise en page -->
+    <div class="container">
+
+      <!-- card 1 -->
+      <div class="card">
+        <img src="asset/card1.png" alt="article1">
+        <h3>Jeu de mots sur les chats</h3>
+        <p>Si vous aimez les chats au point de les intégrer sur vos phrases, l'humour est le meilleur moyens pour cela !</p>
+        <a href="https://www.purina.ca/fr/articles/cat/facts/cat-jokes-and-puns" target="_blank">Voir plus</a>
+      </div>
+
+      <!-- card 2 -->
+      <div class="card">
+        <img src="asset/card2.png" alt="article2">
+        <h3>Les chats peuvent-ils manger des arachides ?</h3>
+        <p>Intéressant pour les personnes qui s'inquiète pour les chats, il ne faut pas donner n'importe quoi !</p>
+        <a href="https://www.purina.ca/fr/articles/cat/can-cats-eat/can-cats-eat-peanut-butter" target="_blank">Voir plus</a>
+      </div>
+
+      <!-- card 3 -->
+      <div class="card">
+        <img src="asset/card3.png" alt="article3">
+        <h3>Combien de temps un chat survit sans eau ?</h3>
+        <p>Pour les personnes curieuses sur les capacitées incoyables des chats :0</p>
+        <a href="https://www.purina.ca/fr/articles/cat/feeding/how-long-cats-not-eat" target="_blank">Voir plus</a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- contient le contenu de bas de page d’une page -->
+  <footer id="reseau">
+
+    <div class="foot">
+      <h2>Suivez-nous!</h2>
+      <div>
+        <a href="https://www.facebook.com/?locale=fr_FR"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/fr/"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://x.com/?lang=fr"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+    <p>All right reserved - Copyright © Salsabila - <a href="">Mention légales</a></p>
+
+  </footer>
+
+  <!-- pour les logos -->
+  <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
