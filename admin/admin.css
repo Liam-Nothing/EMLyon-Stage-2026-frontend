@@ -1,0 +1,17 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+
+    /* Activer quand on aura un logo png */
+    /* img{
+        height: 50px;
+        width: 50px;
+    }  */
+
+    #navbarAdmin{
+        display: flex;
+        gap: 30px;
+    }
+}

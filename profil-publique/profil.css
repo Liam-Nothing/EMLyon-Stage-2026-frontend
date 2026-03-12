@@ -1,0 +1,72 @@
+/* Si la maquette prevoit une animation d'apparition (fade-in au chargement), elle pourra etre ajoutee plus tard avec CSS `@keyframes` ou JS. */
+
+main {
+  background-color: #263326;
+  /* height: 100vh; */
+}
+
+.profile-container {
+    background-color: #355734;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #FFFEF9;
+
+    h1 {
+      color: #FFFEF9;
+    }
+
+    p {
+        width: 75%;
+        margin: 0 auto;
+    }
+}
+
+.profile-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+
+.links{
+    display: flex;
+    justify-content: center;
+}
+
+.links-container{
+    width: 100%;
+    max-width: 600px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #355734;
+}
+
+.link-card{
+    background-color: #4A7449;
+    border-radius: 10px;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--background-color);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.link-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 10px rgba(0,0,0,0.15);
+}

@@ -1,0 +1,67 @@
+
+/* CET FILE EST UNIVERSEL POUR TOUTES LES HTML */
+
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+*, *::before, *::after { 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; 
+}
+
+:root {
+  --primary-color: #40798C;
+  --secondary-color: #CFD7C7;
+  --surface-color: #FBF8E1;
+  --background-color: #FFFEF9;
+  --text-color: #0B2027;
+  --error-color: #C14141;
+  --success-color: #45753C;
+  --title-font-family: "Rubik", sans-serif; /* Pour h1 et h2 */
+  --small-title-font: "Hind Madurai", sans-serif; /* Pour h3 */
+  --text-font-family: "Noto Sans", sans-serif;
+  --text-font-size: 16px;
+  --small-text-font-size: 14px;
+  --caption-text-font-size: 12px; /* Pour les droits */
+  --border-radius: 10px;
+  --box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: var(--text-font-family);
+  color: var(--text-color);
+  font-size: var(--text-font-size);
+  background-color: var(--background-color);
+  /* line-height: 1.5; */
+}
+
+a {
+  font-family: var(--text-font-family);
+  color: var(--text-color);
+  font-size: var(--text-font-size);
+  text-decoration: none;
+}
+
+h1 {
+  font-family: var(--title-font-family);
+  font-size: 32px;
+  color: var(--text-color);
+}
+
+h2 {
+  font-family: var(--title-font-family);
+  font-size: 24px;
+  color: var(--text-color);
+}
+
+h3 {
+  font-family: var(--small-title-font);
+  font-size: 20px;
+  color: var(--text-color);
+}
+
+.btn-forme {
+  padding: 45px 18px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+}
