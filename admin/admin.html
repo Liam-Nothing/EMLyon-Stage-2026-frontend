@@ -9,33 +9,134 @@
     <link rel="stylesheet" href="admin.css">
 
     <!-- ne pas oublier le favicon -->
-    <title>Document</title> <!-- a changer -->
+    <title>JointIn Liens</title> <!-- a changer -->
 </head>
 <body>
     <header>
-        <nav>
-            <div id="logo">
-                <p>Logo</p>
-            </div>
+        <img src="" alt="logo" class="logo">
 
-            <div id="navbarAdmin">
+        <div class="btn-align">
+            <a href="" class="btn-forme btn-main" id="public-btn">Page Publique</a>
+            <a href="" class="btn-forme btn-second" id="logout-btn">Log-out</a>
+        </div>
+        <!-- ajouter menu -->
+    </header>
+
+    <main>
+
+        <nav class="navBar">
+
+            <div class="nav-left">
                 <a href="">Liens</a>
                 <a href="">Design</a>
                 <a href="">Profil</a>
             </div>
 
-            <div>
-                <button class="logout-btn">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
+            <div class="nav-right">
+                <p>Link : <a href="">xxx/xxxxxx.xx </a></p>
+                <a href=""><i class="fa-regular fa-copy"></i></a>
             </div>
-        </nav>
-    </header>
 
-    <main>
+        </nav>
+        <!-- ================================ Suite du code =================================== -->
+
+        <section id="liens">
+            <h2> Mes liens</h2>
+
+            <button class="addLink">
+                Ajoutez un lien
+            </button>
+
+            <div class="linkList">
+
+                <!-- Card 1 -->
+                <div class="linkCard">
+
+                    <div class ="drag">
+                    </div>
+                    
+                    <div class="linkContent">
+                        <div class="linkHeader">
+                            <strong>Minecraft Vide Youtube</strong>
+
+                            <button class="edit">Edit</button>
+                        </div>
+
+                        <div class="url">https://youtube.com</div>
+
+                        <hr>
+
+                        <div class="linkActions">
+                            <span class="imageLink">
+                                <!-- image lien -->
+                            </span>
+
+                            <button class="delete"> 
+                                <!-- icone poubelle -->
+                            </button>
+
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                            
+                            <!-- <div>
+                                <input type="checkbox" id="switch">
+                                <label for="switch" class="toggle"></label>
+                            </div> -->
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Card2 -->
+                <div class="linkCard">
+
+                    <div class ="drag">
+                    </div>
+                    
+                    <div class="linkContent">
+                        <div class="linkHeader">
+                            <strong>Cat Vide Youtube</strong>
+
+                            <button class="edit">Edit</button>
+                        </div>
+
+                        <div class="url">https://youtube.com</div>
+
+                        <hr>
+
+                        <div class="linkActions">
+                            <span class="imageLink">
+                                <!-- image lien -->
+                            </span>
+
+                            <button class="delete"> 
+                                <!-- icone poubelle -->
+                            </button>
+
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+
+                            <!-- <div>
+                                <input type="checkbox" id="switch">
+                                <label for="switch" class="toggle"></label>
+                            </div> -->
+
+                        </div>
+                    </div>
+                </div>
+ 
+            </div>
+        </section>
     </main>
 
     <footer>
+      <p>- Made with <a href="#">JointIn</a> -</p>
     </footer>
 
 

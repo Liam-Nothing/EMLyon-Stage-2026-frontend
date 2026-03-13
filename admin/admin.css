@@ -1,17 +1,80 @@
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
 
-    /* Activer quand on aura un logo png */
-    /* img{
-        height: 50px;
-        width: 50px;
-    }  */
+/* Toggle liens */
+/* .toggle{
+    width: 60px;
+    height: 30px;
+    background: #ccc;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+}
+.toggle::before{
+    content: "";
+    position: absolute;
+    top:2px;
+    left:2px;
+    width: 26px;
+    height: 26px;
+    background:white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+input{
+    display: none;
+}
+input:checked + .toggle{
+    background: #4c52ff;
+}
+input:checked + .toggle::before{
+    left: 32px;
+} */
 
-    #navbarAdmin{
-        display: flex;
-        gap: 30px;
-    }
+/* =================================================
+====================================================
+==================================================== */
+
+
+
+
+/* Toggle liens */
+.switch{
+position:relative;
+display:inline-block;
+width:42px;
+height:22px;
+}
+.switch input{
+display:none;
+}
+.slider{
+position:absolute;
+cursor:pointer;
+background:#ccc;
+border-radius:20px;
+top:0;
+left:0;
+right:0;
+bottom:0;
+transition:0.3s;
+}
+.slider:before{
+position:absolute;
+content:"";
+height:18px;
+width:18px;
+left:2px;
+bottom:2px;
+background:white;
+border-radius:50%;
+transition:0.3s;
+}
+input:checked + .slider{
+background:#3f6f3a;
+}
+input:checked + .slider:before{
+transform:translateX(20px);
+}
+
+section {
+  width: 60%;
 }
