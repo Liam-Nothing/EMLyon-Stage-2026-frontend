@@ -2,6 +2,8 @@ console.log("Server starting...");
 
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
+
 const app = express();
 
 app.get('/', (req, res) => {
@@ -72,3 +74,6 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`); 
   next(); 
 });
+
+// Servir les fichiers statiques depuis ../front
+app.use(express.static(path.join(__dirname, '../front')));
