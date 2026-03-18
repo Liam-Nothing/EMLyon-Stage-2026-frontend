@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="admin.css">
 
     <!-- ne pas oublier le favicon -->
+    <!-- <link rel="shortcut icon" href="../assets/LogoJointInWhite.png" type="image/x-icon"> -->
+
     <title>JointIn Liens</title> <!-- a changer -->
 </head>
 <body>
     <header>
-        <img src="" alt="logo" class="logo">
+        <img src="../assets/LogoJointInWhite.png" alt="logo" class="logo">
 
         <div class="btn-align">
             <a href="" class="btn-forme btn-main" id="public-btn">Page Publique</a>
@@ -44,6 +46,7 @@
             <h2> Mes liens</h2>
 
             <button class="addLink">
+                <i class="fa-solid fa-plus"></i>
                 Ajoutez un lien
             </button>
 
@@ -53,6 +56,7 @@
                 <div class="linkCard">
 
                     <div class ="drag">
+                        <i class="fa-solid fa-grip-vertical"></i>
                     </div>
                     
                     <div class="linkContent">
@@ -68,17 +72,20 @@
 
                         <div class="linkActions">
                             <span class="imageLink">
-                                <!-- image lien -->
+                                <i class="fa-regular fa-image"></i>
                             </span>
 
-                            <button class="delete"> 
-                                <!-- icone poubelle -->
+                            <div class="linkActionRight">
+                                <button class="delete"> 
+                                <i class="fa-solid fa-trash"></i>
                             </button>
 
                             <label class="switch">
                                 <input type="checkbox" checked>
                                 <span class="slider"></span>
                             </label>
+                            </div>
+                            
                             
                             <!-- <div>
                                 <input type="checkbox" id="switch">
@@ -95,6 +102,7 @@
                 <div class="linkCard">
 
                     <div class ="drag">
+                        <i class="fa-solid fa-grip-vertical"></i>
                     </div>
                     
                     <div class="linkContent">
@@ -110,17 +118,22 @@
 
                         <div class="linkActions">
                             <span class="imageLink">
-                                <!-- image lien -->
+                                <i class="fa-regular fa-image"></i>
                             </span>
 
-                            <button class="delete"> 
-                                <!-- icone poubelle -->
+                            <div class="linkActionRight">
+
+                                <button class="delete"> 
+                                <i class="fa-solid fa-trash"></i>
                             </button>
 
                             <label class="switch">
                                 <input type="checkbox" checked>
                                 <span class="slider"></span>
                             </label>
+
+                            </div>
+                            
 
                             <!-- <div>
                                 <input type="checkbox" id="switch">
@@ -141,5 +154,6 @@
 
 
     <script src="admin.js"></script>
+    <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
 </body>
 </html>
