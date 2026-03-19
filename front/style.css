@@ -60,19 +60,30 @@ h3 {
   color: var(--text-color);
 }
 
+textarea {
+  font-family: var(--text-font-family);
+}
+
 .btn-forme {
-  padding: 14px 35px;
+  padding: 12px 32px;
   border-radius: var(--border-radius);
   font-weight: 600;
+  transition: 0.3s;
 }
 
 .btn-main {
   background-color: var(--primary-color);
   color: var(--background-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-main:hover {
+  background-color: transparent;
+  border: 2px solid var(--background-color);
 }
 
 .btn-second {
-  box-shadow: 0 0 0 2px var(--background-color) inset;
+  border: solid 2px var(--background-color);
   color: var(--background-color);
 }
 
@@ -146,6 +157,11 @@ footer a {
   display: none;
   color: var(--background-color);
   font-size: 25px;
+}
+
+
+.grey {
+  opacity: 0.5;
 }
 
 @media (max-width:1024px) {

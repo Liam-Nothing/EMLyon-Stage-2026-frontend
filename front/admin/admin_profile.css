@@ -28,7 +28,8 @@ nav {
   padding: 30px;
   border-radius: 10px;
   display: flex;
-  margin: 20px 40px;
+  align-items: center;
+  /* margin: 20px 40px; */
   gap: 30px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
 
@@ -41,17 +42,150 @@ nav {
 }
 
 .profileContent{
-    /* .nomProfil{
-        display: flex;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+
+    .nomProfil {
+      font-weight: bold;
+      font-size: large;
     }
 
-    .bioProfil{
+    /* .bioProfil{
         display: flex;
     } */
-
-    display: flex;
-    flex-direction: column;
 }
+
+.edit {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.fa-pen {
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.fa-pen:hover {
+  color: var(--primary-color);
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+
+/* ==================== Modify ==================== */
+
+#modify-profil {
+  width: 60%;
+  padding: 0 40px;
+}
+
+.card-modify-profil {
+  width: 100%;
+  background: #FBF8E1;
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  /* margin: 20px 40px; */
+  gap: 30px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.cmp-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-modify {
+  position: relative;
+
+  img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+  }
+
+  i {
+    position: absolute;
+    left: 72px;
+    bottom: 5px;
+    background-color: var(--background-color);
+    padding: 5px 6px;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+}
+
+input[type=file] {
+  display: none;
+}
+
+.save-discard-btns {
+  display: flex;
+  gap: 15px;
+}
+
+.small-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  height: fit-content;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.save:hover {
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-discard {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: solid 2px var(--primary-color);
+}
+
+.btn-discard:hover {
+  color: var(--background-color);
+  border-color: var(--error-color);
+  background-color: var(--error-color);
+}
+
+.cmp-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type=text], textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: transparent;
+}
+
+input[type=text]:focus, textarea:focus {
+  outline: none;
+  border-color: #4c7b8a;
+  box-shadow: 0 0 5px rgba(76,123,138,0.4);
+}
+
+textarea {
+  resize: none;
+  height: 90px;
+}
+
+/* ================================================ */
+
 
 @media (max-width:768px) {
   #profil{

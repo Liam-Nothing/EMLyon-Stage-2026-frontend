@@ -9,19 +9,22 @@
     <link rel="stylesheet" href="admin.css">
 
     <!-- ne pas oublier le favicon -->
-    <!-- <link rel="shortcut icon" href="../assets/LogoJointInWhite.png" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="../assets/LogoJointInWhite.png" type="image/x-icon">
 
-    <title>JointIn Liens</title> <!-- a changer -->
+    <title>JointIn - Liens</title> <!-- a changer -->
 </head>
 <body>
     <header>
         <img src="../assets/LogoJointInWhite.png" alt="logo" class="logo">
 
         <div class="btn-align">
-            <a href="" class="btn-forme btn-main" id="public-btn">Page Publique</a>
+            <a href="../index.html" class="btn-forme btn-main" id="public-btn">Page Publique</a>
             <a href="" class="btn-forme btn-second" id="logout-btn">Log-out</a>
         </div>
         <!-- ajouter menu -->
+         <div class="menue">
+            <i class="fa-solid fa-bars"></i>
+        </div>
     </header>
 
     <main>
@@ -30,17 +33,38 @@
 
             <div class="nav-left">
                 <a href="">Liens</a>
-                <a href="">Design</a>
-                <a href="">Profil</a>
+                <a href="" class="grey">Design</a>
+                <a href="admin_profile.html" class="grey">Profil</a>
             </div>
 
             <div class="nav-right">
                 <p>Link : <a href="">xxx/xxxxxx.xx </a></p>
-                <a href=""><i class="fa-regular fa-copy"></i></a>
+                <a href="" class="hidden"><i class="fa-regular fa-copy"></i></a>
             </div>
 
         </nav>
         <!-- ================================ Suite du code =================================== -->
+        <section id="formulaire">
+            <h2>Ajouter un nouveau lien</h2>
+
+            <form class="formCard">
+                <div class="formLink">
+                    <input type="text" placeholder="Titre du lien">
+                </div>
+
+                <div class="formLink">
+                    <input type="url" placeholder="https://...">
+                </div>
+  
+                <div class="formLink">
+                    <input type="file">
+                </div>
+
+                <button type="submit" class="addLink"> Ajouter le lien </button>
+                
+            </form>
+
+        </section>
 
         <section id="liens">
             <h2> Mes liens</h2>
@@ -63,7 +87,9 @@
                         <div class="linkHeader">
                             <strong>Minecraft Vide Youtube</strong>
 
-                            <button class="edit">Edit</button>
+                            <button class="edit">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
                         </div>
 
                         <div class="url">https://youtube.com</div>
@@ -109,7 +135,9 @@
                         <div class="linkHeader">
                             <strong>Cat Vide Youtube</strong>
 
-                            <button class="edit">Edit</button>
+                            <button class="edit">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
                         </div>
 
                         <div class="url">https://youtube.com</div>
@@ -146,6 +174,7 @@
  
             </div>
         </section>
+
     </main>
 
     <footer>

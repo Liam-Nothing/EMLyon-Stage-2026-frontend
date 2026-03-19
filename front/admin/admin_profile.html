@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="admin_profile.css">
 
+    <link rel="shortcut icon" href="../assets/LogoJointInWhite.png" type="image/x-icon">
     <!-- ne pas oublier le favicon -->
-    <title>JointIn Admin</title> <!-- a changer -->
+    <title>JointIn - Profil</title> <!-- a changer -->
 </head>
 <body>
     <header>
         <img src="../assets/LogoJointInWhite.png" alt="logo" class="logo">
 
         <div class="btn-align">
-            <a href="" class="btn-forme btn-main" id="public-btn">Page Publique</a>
+            <a href="../index.html" class="btn-forme btn-main" id="public-btn">Page Publique</a>
             <a href="" class="btn-forme btn-second" id="logout-btn">Log-out</a>
         </div>
 
@@ -30,8 +31,8 @@
         <nav class="navBar">
 
             <div class="nav-left">
-                <a href="">Liens</a>
-                <a href="">Design</a>
+                <a href="admin.html" class="grey">Liens</a>
+                <a href="" class="grey">Design</a>
                 <a href="">Profil</a>
             </div>
 
@@ -60,9 +61,48 @@
                         <p>Bio : Jeune entrepreneur - Voici mes réseaux où vous pouvez me 
                         suivre et les liens de mes projets accomplis</p>
                     </div>
+                    <div class="edit">
+                        <button>
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- =========================== Modify profil =========================== -->
+
+        <section id="modify-profil">
+
+            <div class="card-modify-profil">
+                <!-- Image a changer -->
+                 <div class="cmp-top">
+                    <div class="image-modify">
+                        <img src="https://i.pinimg.com/736x/4a/3b/c5/4a3bc5e3332173e49e7ebe0ee35eddbf.jpg" alt="photo de profil">
+                        
+                        <label for="pfp" class="plus"><i class="fa-solid fa-plus"></i></label>
+                        <input type="file" name="pfp" id="pfp" accept="image/png, image/jpeg">
+                    </div>
+
+                    <div class="save-discard-btns">
+                        <a href="" class="btn-discard small-btn">Annulé</a>
+                        <a href="" class="btn-main small-btn save">Sauvegardé</a>
+                    </div>
+                 </div>
+
+                <div class="cmp-bottom">
+                    
+                    <input type="text" name="name" id="name" placeholder="Nom">
+
+                    <textarea name="bio" id="bio" placeholder="Bio"></textarea>
+
+                </div>
+
+            </div>            
+
+        </section>
+
+        <!-- ============================================================== -->
 
         <section id="preview">
             <!-- Coder le preview de la carte -->
@@ -76,6 +116,7 @@
     </footer>
 
 
-    <script src="admin.js"></script>
+    <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
+    <script src="admin_profile.js"></script>
 </body>
 </html>
