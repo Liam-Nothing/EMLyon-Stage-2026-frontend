@@ -15,3 +15,4 @@ const link = readJSON('../data/links.json');
 app.get('/api/links', (req, res) => {
   res.json(link);
 });
+
