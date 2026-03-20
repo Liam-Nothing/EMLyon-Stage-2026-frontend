@@ -164,6 +164,11 @@ footer a {
   opacity: 0.5;
 }
 
+/* ERREUR  */
+.error {
+  color: var(--error-color);
+}
+
 @media (max-width:1024px) {
   .nav-right p {
     display: none;

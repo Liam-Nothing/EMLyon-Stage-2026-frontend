@@ -191,9 +191,30 @@ textarea {
   #profil{
     width: 100%;
   }
+  #modify-profil {
+    width: 100%;
+  }
   .cardProfil {
     margin: 0;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media (max-width:500px) {
+  .cmp-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .save-discard-btns {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+
+@media (max-width:414px) {
+  .nav-right a {
+    display: none;
   }
 }

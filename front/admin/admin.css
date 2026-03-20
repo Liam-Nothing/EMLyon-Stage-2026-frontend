@@ -168,12 +168,45 @@ button  {
     background-color: transparent;
 }
 
+
+
+
 .fa-trash:hover {
     color: var(--error-color);
 }
 
 .fa-pen:hover, .fa-image:hover {
     color: var(--primary-color);
+}
+
+/* reseau */
+#reseau {
+    width: 60%;
+
+    .reseau-align {
+        margin: 15px 55px;
+
+
+        button {
+            /* background-color: var(--primary-color); */
+            border: solid 2px var(--text-color);
+            /* padding: 8px;*/
+            border-radius: 25px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+
+            i {
+                font-size: 24px;
+                /* background-color: var(--primary-color);
+                padding: 8px;
+                border-radius: 25px; */
+            }
+        }
+    }
 }
 
 
@@ -197,7 +230,15 @@ button  {
     box-shadow: 0 0 5px rgba(76,123,138,0.4);
 }
 
-.formCard{
+#formulaire .addLink {
+    margin: 0;
+}
+
+#formulaire h2 {
+    padding: 25px 20px 0 25px;
+}
+
+/*.formCard*/ #formulaire{
     /* background-color: var(--surface-color);
     box-shadow: var(--box-shadow);
     border-radius: 10px;
@@ -206,14 +247,89 @@ button  {
     flex-direction: column;
     overflow: hidden; */
 
-    background: #f2f2f2;
-    padding: 25px;
+    background-color: var(--surface-color);
     border-radius: 10px;
-    max-width: 400px;
+    max-width: 600px;
+    box-shadow: var(--box-shadow);
+    
+}
+
+.formCard {
+    /* padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; */
+
+    width: 100%;
+    background: #FBF8E1;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    /* margin: 20px 40px; */
+    gap: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* formulaire reseau */
+
+#formulaire-reseau {
+    background-color: var(--surface-color);
+    border-radius: 10px;
+    max-width: 600px;
+    box-shadow: var(--box-shadow);
+
+    .addLink {
+        margin: 0;
+    }
+}
+
+#formulaire-reseau input{
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: transparent;
+
+}
+
+#formulaire-reseau input:focus{
+    outline: none;
+    border-color: #4c7b8a;
+    box-shadow: 0 0 5px rgba(76,123,138,0.4);
+}
+
+.save-discard-btns {
+  display: flex;
+  gap: 15px;
+}
+
+.small-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  height: fit-content;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.save:hover {
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
 }
 
 
+.btn-discard {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: solid 2px var(--primary-color);
+}
 
+.btn-discard:hover {
+  color: var(--background-color);
+  border-color: var(--error-color);
+  background-color: var(--error-color);
+}
 
 
 
@@ -221,7 +337,7 @@ button  {
 /* =========================== RESPONSIVE ============================= */
 /* ==================================================================== */
 @media (max-width:768px) {
-    #liens {
+    #liens, #formulaire, #formulaire-reseau, #reseau {
         width: 100%;
     }
 }

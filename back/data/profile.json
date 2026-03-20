@@ -1,0 +1,17 @@
+{
+  "name": "El Mehdi & Salsabila",
+  "bio": "Web developers in training at La Toile / EM Lyon",
+  "avatar": "",
+  "theme": "default",
+  "colors": {
+    "background": "#ffffff",
+    "primary": "#000000",
+    "cardBackground": "#f5f5f5"
+  },
+  "socialLinks": [
+    { 
+    "platform": "github",
+    "url": "https://github.com/..." 
+    }
+  ]
+}
