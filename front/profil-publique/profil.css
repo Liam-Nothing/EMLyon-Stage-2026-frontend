@@ -1,7 +1,7 @@
 /* Si la maquette prevoit une animation d'apparition (fade-in au chargement), elle pourra etre ajoutee plus tard avec CSS `@keyframes` ou JS. */
 
 body {
-  background-color: #263326;
+  background-color: #214B59;
   /* height: 100vh; */
 }
 
@@ -59,7 +59,7 @@ body {
 
 /* 1 - full + border-radius round */
 .link-card{
-  background-color: #4A7449;
+  background-color: #95CBDC;
   border-radius: 10px;
   padding: 8px 24px;
   text-decoration: none;
@@ -137,7 +137,7 @@ body {
 /* =============================================== */
 
 .link-card a {
-  color: var(--background-color);
+  color: var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,7 +153,7 @@ body {
 
 /* =============================== Card Color ============================ */
 .big-card {
-  background-color: #355734;
+  background-color: var(--primary-color);
   max-width: 600px;
   margin: 0 auto;
   padding: 28px;
@@ -174,12 +174,13 @@ body {
   display: flex;
   justify-content: center;
   padding-top: 20px;
+  color: var(--background-color);
 }
 
 .foot a {
   font-size: var(--small-text-font-size);
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--background-color);
 }
 
 @media (max-width:768px) {

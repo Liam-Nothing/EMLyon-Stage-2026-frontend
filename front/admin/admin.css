@@ -269,7 +269,7 @@ button  {
     margin-top: 25px;
     /* margin: 20px 40px; */
     gap: 30px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+    /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08); */
 }
 
 /* formulaire reseau */
