@@ -19,3 +19,32 @@ Accept: application/json
 # Requête vers /api/links
 GET http://localhost:3000/api/links
 Accept: application/json
+
+
+###
+
+# POST - Ajouter un lien
+POST http://localhost:3000/api/links
+Content-Type: application/json
+
+{
+  "title": "Mon nouveau lien",
+  "url": "https://exemple.com",
+  "icon": ""
+}
+
+###
+
+# PUT - Modifier un lien
+PUT http://localhost:3000/api/links/1
+Content-Type: application/json
+
+{
+  "title": "Titre modifié"
+}
+
+
+###
+
+# DELETE - Supprimer un lien
+DELETE http://localhost:3000/api/links/1

@@ -75,5 +75,7 @@ app.use((req, res, next) => {
   next(); 
 });
 
+app.use('/api', router);
+
 // Servir les fichiers statiques depuis ../front
 app.use(express.static(path.join(__dirname, '../front')));

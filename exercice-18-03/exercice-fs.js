@@ -65,21 +65,23 @@ console.log(readLinks);
 
 // Creer deux fonctions reutilisables : `readJSON(filePath)` qui lit et parse un fichier JSON, et `writeJSON(filePath, data)` qui stringify et ecrit les donnees dans un fichier
 
-function readJSON(filePath) {
-  // Lit et parse .json
-  //fs.readFileSync('fichier.json','utf8') pour lire
-  //JSON.parse(fs.readFileSync)
+//=======================================================================================================================
+// function readJSON(filePath) {
+//   // Lit et parse .json
+//   //fs.readFileSync('fichier.json','utf8') pour lire
+//   //JSON.parse(fs.readFileSync)
 
-  const data = fs.readFileSync(filePath, 'utf8');
-  return JSON.parse(data);
+//   const data = fs.readFileSync(filePath, 'utf8');
+//   return JSON.parse(data);
 
-}
+// }
 
-function writeJSON(filePath, data) {
-  // Stringify et écrit dans un fichier
-  // fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2)) // data ici est la variable où il y a le tableau
-}
+// function writeJSON(filePath, data) {
+//   // Stringify et écrit dans un fichier
+//   // fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
+//   fs.writeFileSync(filePath, JSON.stringify(data, null, 2)) // data ici est la variable où il y a le tableau
+// }
+//=======================================================================================================================
 
 
 
