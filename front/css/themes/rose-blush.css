@@ -1,0 +1,33 @@
+@import "profil-publique/profil.css";
+
+:root {
+  --body-color: #7E5350;
+  --bnac-color: linear-gradient(180deg, rgba(232, 227, 198, 0.65) 0%, #D19F8B 39%, #B48080 96%);
+  --main-color: #62292B;
+}
+
+/* In HTML, linkCard and img must have the class "link-style-round" */
+
+body {
+  background-color: var(--body-color);
+}
+
+.big-card {
+  background: var(--bnac-color);
+}
+
+.link-style-outline {
+  border: 3px solid var(--main-color);
+}
+
+.profile-container h1, .profile-container p {
+  color: var(--main-color);
+}
+
+.middle a {
+  color: var(--main-color);
+}
+
+.foot, .foot a {
+  color: var(--main-color);
+}

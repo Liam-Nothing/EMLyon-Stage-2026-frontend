@@ -1,0 +1,40 @@
+@import "profil-publique/profil.css";
+
+:root {
+  --body-color: #080940;
+  --bnac-color: linear-gradient(180deg, #06097E 40%, rgb(192, 77, 255, 0.53) 100%);
+  --p-color: #06097E;
+  --profil-color: #F8A5ED;
+  --button-color: #5AC7E6;
+  --box-shadow-color: 2px 3px 0 1px rgb(255, 0, 170);
+}
+
+/* In HTML, linkCard and img must have the class "link-style-full" */
+
+body {
+  background-color: var(--body-color);
+}
+
+.big-card {
+  background: var(--bnac-color);
+}
+
+.link-style-solid {
+  background-color: var(--button-color);
+}
+
+.link-style-hard {
+  box-shadow: var(--box-shadow-color);
+}
+
+.profile-container h1, .profile-container p {
+  color: var(--profil-color);
+}
+
+.middle a {
+  color: var(--p-color);
+}
+
+.foot, .foot a {
+  color: var(--profil-color);
+}

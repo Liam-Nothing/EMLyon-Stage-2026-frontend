@@ -8,9 +8,11 @@ app.use(express.json());
 // Routes
 const linksRouter   = require('./routes/links');
 const profileRouter = require('./routes/profile');
+const themesRouter  = require('./routes/themes');
  
 app.use('/api', linksRouter);
 app.use('/api', profileRouter);
+app.use('/api/themes', themesRouter);
  
 // Démarrage du serveur
 app.listen(PORT, () => {
@@ -18,4 +20,5 @@ app.listen(PORT, () => {
   console.log(`Serveur lancé sur http://localhost:${PORT}`);
   console.log(`  → GET http://localhost:${PORT}/api/links`);
   console.log(`  → GET http://localhost:${PORT}/api/profile`);
+  console.log(`  → GET http://localhost:${PORT}/api/themes`);
 });

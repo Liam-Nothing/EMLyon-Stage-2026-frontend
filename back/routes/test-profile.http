@@ -1,0 +1,151 @@
+@baseUrl = http://localhost:3000
+
+###
+
+# 1. GET initial 
+
+GET {{baseUrl}}/api/profile
+Accept: application/json
+
+###
+
+# 2. PUT — Mise à jour du name uniquement 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "name": "Nouveau Nom"
+}
+
+###
+
+# 3. GET après update name 
+
+GET {{baseUrl}}/api/profile
+Accept: application/json
+
+###
+
+# 4. PUT — Mise à jour de la bio uniquement 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "bio": "Une nouvelle bio mise à jour ici."
+}
+
+###
+
+# 5. GET après update bio 
+
+GET {{baseUrl}}/api/profile
+Accept: application/json
+
+###
+
+# 6. PUT — Caractères spéciaux (accents, apostrophes) 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "name": "Héloïse & Ñoño",
+  "bio": "J'aime l'été, les crêpes et l'été à Montréal."
+}
+
+###
+
+# 7. PUT — Mise à jour partielle de colors 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "colors": {
+    "primary": "#ff6b35"
+  }
+}
+
+###
+
+# 8. PUT — Mise à jour des socialLinks 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "socialLinks": [
+    { "platform": "github", "url": "https://github.com/nouveau" },
+    { "platform": "linkedin", "url": "https://linkedin.com/in/nouveau" }
+  ]
+}
+
+###
+
+# ════════════════════════════════════════════════════════════
+# TESTS D'ERREUR
+# ════════════════════════════════════════════════════════════
+
+# E1. PUT — name trop long (> 50 caractères) 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "name": "Ce nom est vraiment beaucoup trop long pour être accepté par l'API"
+}
+
+###
+
+# E2. PUT — bio trop longue (> 160 caractères) 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "bio": "Cette bio est vraiment très très longue et dépasse largement la limite des cent soixante caractères autorisés par notre validation stricte côté serveur."
+}
+
+###
+
+# E3. PUT — name vide 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+###
+
+# E4. PUT — socialLinks invalide (pas un tableau) 
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "socialLinks": "github.com/monprofil"
+}
+
+###
+
+# E5. PUT — socialLink sans url
+
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+
+{
+  "socialLinks": [
+    { "platform": "github" }
+  ]
+}
+
+###
+
+# 9. GET final
+
+GET {{baseUrl}}/api/profile
+Accept: application/json

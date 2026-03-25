@@ -1,0 +1,27 @@
+@import "profil-publique/profil.css";
+
+:root {
+  --body-color: #AF9E98;
+  --bnac-color: #F5F1EE;
+  --main-color: #3F2F28;
+}
+
+body {
+  background-color: var(--body-color);
+}
+
+.big-card {
+  background-color: var(--bnac-color);
+}
+
+.link-style-outline {
+  border: 3px solid var(--main-color);
+}
+
+.profile-container h1, .profile-container p {
+  color: var(--main-color);
+}
+
+.foot, .foot a {
+  color: var(--main-color);
+}
