@@ -46,12 +46,12 @@
                 <div class="profile-container">
 
                     <div class="profile-avatar">
-                        <img src="./assets/avatar.jpg" alt="Photo de profil">
+                        <img id="profile-avatar" src="./assets/avatar.jpg" alt="Photo de profil">
                     </div>
 
-                    <h1 class="profile-name">@Mikeyy1316</h1>    
+                    <h1 class="profile-name" id="profile-name">@Mikeyy1316</h1>    
 
-                    <p class="profile-bio">Jeune entrepreneur - Voici mes réseaux où vous pouvez me suivre et les liens de mes projets accomplis</p>
+                    <p class="profile-bio" id="profile-bio">Jeune entrepreneur - Voici mes réseaux où vous pouvez me suivre et les liens de mes projets accomplis</p>
 
                 </div>
             </section>
@@ -60,7 +60,7 @@
             <section class="links">
                 <div class="links-container">
 
-                    <div class="link-card link-style-solide">
+                    <!-- <div class="link-card link-style-solide">
                         <div class="left">
                             <img src="assets/LogoJointInBlue.png" alt="test">
                         </div>
@@ -117,7 +117,7 @@
                         <div class="right">
                             
                         </div>
-                    </div>
+                    </div> -->
                     
                     
                 </div>
@@ -130,6 +130,12 @@
         </div>
 
 
+        <div id="error-state" hidden style="text-align:center;padding:40px">
+            <p>⚠️ Impossible de charger le profil. Veuillez réessayer plus tard.</p>
+            <button onclick="loadProfile()" style="margin-top:12px;padding:8px 20px;cursor:pointer"> Réessayer </button>
+        </div>
+
+
     </main>
 
     <!-- <footer>
@@ -137,6 +143,7 @@
     </footer> -->
 
     <script src="profil-publique/profil.js"></script>
+    <script src="./js/profile.js"></script>
     <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
 </body>
 </html>
