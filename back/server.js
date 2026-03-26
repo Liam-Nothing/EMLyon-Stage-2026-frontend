@@ -13,6 +13,9 @@ const themesRouter  = require('./routes/themes');
 app.use('/api', linksRouter);
 app.use('/api', profileRouter);
 app.use('/api/themes', themesRouter);
+
+
+app.use(express.static(path.join(__dirname, '../front')));
  
 // Démarrage du serveur
 app.listen(PORT, () => {
