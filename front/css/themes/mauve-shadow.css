@@ -1,12 +1,11 @@
 @import "profil-publique/profil.css";
 
 :root {
-  --body-color: #080940;
-  --bnac-color: linear-gradient(180deg, #06097E 40%, rgb(192, 77, 255, 0.53) 100%);
-  --p-color: #06097E;
-  --profil-color: #F8A5ED;
-  --button-color: #5AC7E6;
-  --box-shadow-color: 2px 3px 0 1px rgb(255, 0, 170);
+  --body-color: #401F30;
+  --bnac-color: linear-gradient(0deg, rgba(149, 113, 134, 0.41) 0%, #703D57 100%);
+  --p-color: #703D57;
+  --profil-color: #D9B8C4;
+  --button-color: #D9B8C4;
 }
 
 /* In HTML, linkCard and img must have the class "link-style-full" */
@@ -21,14 +20,6 @@ body {
 
 .link-style-solide {
   background-color: var(--button-color);
-}
-
-.link-style-hard {
-  box-shadow: var(--box-shadow-color);
-}
-
-.link-style-hard:hover {
-  box-shadow: var(--box-shadow-color);
 }
 
 .profile-container h1, .profile-container p {

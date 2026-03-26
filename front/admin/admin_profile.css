@@ -142,10 +142,14 @@ input[type=file] {
   transition: 0.3s;
 }
 
-.save:hover {
+.save {
+  padding: 10px 18px;
+}
+
+/* .save:hover {
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
-}
+} */
 
 .btn-discard {
   background-color: transparent;

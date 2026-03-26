@@ -157,6 +157,11 @@ section {
     background-color: var(--primary-color);
     color: var(--background-color);
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.addLink:hover {
+    background-color: #2B5C6C;
 }
 
 h2 {
@@ -313,10 +318,14 @@ button  {
   transition: 0.3s;
 }
 
-.save:hover {
+.save {
+  padding: 10px 18px;
+}
+
+/* .save:hover {
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
-}
+} */
 
 
 .btn-discard {

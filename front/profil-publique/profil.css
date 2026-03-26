@@ -194,6 +194,52 @@ body {
   color: var(--background-color);
 }
 
+header {
+  position: relative;
+  transition: 0.3s;
+  top: 0;
+  background-color: var(--background-color);
+}
+
+/* header.active {
+  top: -1px;
+}
+
+body {
+  position: relative;
+  transition: 0.3s;
+  top: 0;
+}
+
+body.active {
+  top: -79px;
+}
+
+#up {
+  position: absolute;
+  right: 0px;
+  top: 75px;
+  border: none;
+  background-color: rgba(11, 32, 39, 0.5);
+  color: var(--background-color);
+  padding: 5px 18px;
+  font-size: 16px;
+  border-radius: 0 0 10px 10px;
+  cursor: pointer;
+}
+
+.fa-angle-up {
+  transition: 0.3s;
+}
+
+.rotate {
+  transform: rotate(-180deg);
+} */
+
+.menue {
+  color: var(--text-color);
+}
+
 @media (max-width:768px) {
   .btn-align {
     display: inline-block;

@@ -1,0 +1,40 @@
+@import "profil-publique/profil.css";
+
+:root {
+  --body-color: #55161E;
+  --bnac-color: #A4303F;
+  --button-color: #FFECCC;
+  --box-shadow-color: 2px 3px 0 1px #C9924A;
+}
+
+body {
+  background-color: var(--body-color);
+}
+
+.big-card {
+  background-color: var(--bnac-color);
+}
+
+.link-style-solide {
+  background-color: var(--button-color);
+}
+
+.link-style-hard {
+  box-shadow: var(--box-shadow-color);
+}
+
+.link-style-hard:hover {
+  box-shadow: var(--box-shadow-color);
+}
+
+.middle a {
+  color: var(--bnac-color);
+}
+
+.profile-container h1, .profile-container p {
+  color: var(--button-color);
+}
+
+.foot, .foot a {
+  color: var(--button-color);
+}

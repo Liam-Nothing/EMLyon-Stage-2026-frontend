@@ -6,7 +6,7 @@ const path = require('path');
 const { readJSON, writeJSON } = require('../utils/jsonHelper.js');
 
 const app = express();
-const LINKS = path.join(__dirname, 'data', 'links.json');
+const LINKS = path.join(__dirname, '..', 'data', 'links.json');
 
 
 // ─── Middlewares ───────────────────────────────────────────
