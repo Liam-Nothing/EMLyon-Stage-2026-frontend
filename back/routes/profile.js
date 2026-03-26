@@ -21,8 +21,8 @@
 
 
 const express = require('express');
-const path    = require('path');
-const router  = express.Router();
+const path = require('path');
+const router = express.Router();
 const { readJSON, writeJSON } = require('../utils/jsonHelper');
 
 const PROFILE_PATH = path.join(__dirname, '..', 'data', 'profile.json');
@@ -51,6 +51,20 @@ router.put('/profile', (req, res) => {
       }
       if (updates.name.length > 50) {
         return res.status(400).json({ error: 'Name must be 50 characters or less' });
+      }
+    }
+
+    if (updates.avatar !== undefined) {
+      if (typeof updates.avatar !== "string") {
+        return res.status(400).json({ error: "Avatar must be a string" });
+      }
+      
+      // Accepte soit une chaîne base64 data URI, soit une URL, soit vide
+      const isBase64  = updates.avatar.startsWith("data:image/")
+      const isURL     = updates.avatar.startsWith("http")
+      const isEmpty   = updates.avatar === ""
+      if (!isBase64 && !isURL && !isEmpty) {
+        return res.status(400).json({ error: "Avatar must be a base64 data URI (data:image/...), a URL, or an empty string" });
       }
     }
 
