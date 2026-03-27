@@ -1,0 +1,102 @@
+# Requête vers /api/links
+GET http://localhost:3000/api/links
+Accept: application/json
+
+###
+
+# Requête vers /api/links
+POST http://localhost:3000/api/links
+Content-Type: application/json
+
+{
+  "title": "Google",
+  "url": "https://google.com",
+  "icon": "🔍"
+}
+
+###
+
+# Requête vers /api/links
+POST http://localhost:3000/api/links
+Content-Type: application/json
+
+{
+  "title": "Youtube",
+  "url": "https://youtube.com",
+  "icon": "🔍"
+}
+
+###
+
+# Requête vers /api/links
+POST http://localhost:3000/api/links
+Content-Type: application/json
+
+{
+  "title": "twitter",
+  "url": "https://x.com",
+  "icon": "🔍"
+}
+
+###
+
+# POST - Ajouter un lien
+POST http://localhost:3000/api/links
+Content-Type: application/json
+
+{
+  "title": "Mon nouveau lien",
+  "url": "https://exemple.com",
+  "icon": ""
+}
+
+###
+
+# PUT - Modifier un lien
+PUT http://localhost:3000/api/links/2
+Content-Type: application/json
+
+{
+  "title": "Titre modifié"
+}
+
+###
+
+# DELETE - Supprimer un lien
+DELETE http://localhost:3000/api/links/1
+
+###
+
+# Test PATCH /api/links/reorder
+PATCH http://localhost:3000/api/links/reorder
+Content-Type: application/json
+
+[
+  {
+    "id": "1774599851038",
+    "title": "Google",
+    "url": "https://google.com",
+    "icon": "🔍",
+    "order": 5,
+    "active": true,
+    "createdAt": "2026-03-27T08:24:11.038Z"
+  },
+  {
+    "id": "1774599860296",
+    "title": "Youtube",
+    "url": "https://youtube.com",
+    "icon": "🔍",
+    "order": 2,
+    "active": true,
+    "createdAt": "2026-03-27T08:24:20.296Z"
+  },
+  {
+    "id": "1774601689883",
+    "title": "Mon nouveau lien",
+    "url": "https://exemple.com",
+    "icon": "",
+    "order": 4,
+    "active": true,
+    "createdAt": "2026-03-27T08:54:49.883Z"
+  }
+]

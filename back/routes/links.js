@@ -111,7 +111,7 @@ router.put('/:id', (req, res, next) => {
   
     const updatedLink = {
       ...existingLink,
-      ...req.body,
+      ...updates,
       id:         existingLink.id,
       order:      existingLink.order,
       createdAt:  existingLink.createdAt,
@@ -134,7 +134,7 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   try {
     const id  = req.params.id;
-    const links = readJSON(LINKS);
+    let links = readJSON(LINKS);
   
     // Vérifie si le lien existe
     const linkExists = links.some(link => link.id === id);
