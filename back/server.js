@@ -15,8 +15,8 @@ const linksRouter   = require('./routes/links');
 const profileRouter = require('./routes/profile');
 const themesRouter  = require('./routes/themes');
  
-app.use('/api', linksRouter);
-app.use('/api', profileRouter);
+app.use('/api/links', linksRouter);
+app.use('/api/profile', profileRouter);
 app.use('/api/themes', themesRouter);
 
 
