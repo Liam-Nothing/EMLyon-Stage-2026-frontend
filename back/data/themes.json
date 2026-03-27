@@ -3,60 +3,100 @@
     "id": "minimal",
     "name": "Minimal",
     "colors": {
-      "background": "#ffffff",
-      "primary": "#000000",
-      "cardBackground": "#f5f5f5",
-      "textColor": "#111111"
+      "background": "#AF9E98",
+      "cardBackground": "#F5F1EE",
+      "textColor": "#3F2F28"
     },
-    "borderRadius": "8px",
-    "cardStyle": "filled"
+    "borderRadius": "0px",
+    "cardStyle": "outlined"
   },
   {
-    "id": "ocean",
-    "name": "Ocean",
+    "id": "roseBlush",
+    "name": "Rose Blush",
     "colors": {
-      "background": "#0a1628",
-      "primary": "#00b4d8",
-      "cardBackground": "#1a2f4e",
-      "textColor": "#caf0f8"
+      "background": "#7E5350",
+      "cardBackground": "linear-gradient(180deg, rgba(232, 227, 198, 0.65) 0%, #D19F8B 39%, #B48080 96%)",
+      "textColor": "#62292B"
     },
-    "borderRadius": "12px",
-    "cardStyle": "filled"
+    "borderRadius": "5px",
+    "cardStyle": "outlined"
   },
   {
     "id": "sunset",
     "name": "Sunset",
     "colors": {
-      "background": "#fff0e6",
-      "primary": "#ff6b35",
-      "cardBackground": "#ffe0cc",
-      "textColor": "#2d1b0e"
+      "background": "#91500E",
+      "primary": "#C95502",
+      "cardBackground": "linear-gradient(180deg, #FED17C 0%, #FBA327 46%, rgba(201, 85, 2, 0.73) 115%)",
+      "textColor": "#5C2300",
+      "linkTextColor": "#FFE7BA"
     },
-    "borderRadius": "16px",
-    "cardStyle": "filled"
+    "borderRadius": "50px",
+    "cardStyle": "filled",
+    "boxShadow": "3px 3px 6px rgba(0, 0, 0, 0.09)"
   },
   {
-    "id": "forest",
-    "name": "Forest",
+    "id": "midnight",
+    "name": "Midnight",
     "colors": {
-      "background": "#f0f7f0",
-      "primary": "#2d6a4f",
-      "cardBackground": "#d8f3dc",
-      "textColor": "#1b3a2d"
+      "background": "#080940",
+      "primary": "#5AC7E6",
+      "cardBackground": "linear-gradient(180deg, #06097E 40%, rgb(192, 77, 255, 0.53) 100%)",
+      "textColor": "#F8A5ED",
+      "linkTextColor": "#06097E"
     },
-    "borderRadius": "10px",
+    "borderRadius": "50px",
+    "cardStyle": "filled",
+    "boxShadow": "2px 3px 0 1px rgb(255, 0, 170)"
+  },
+  {
+    "id": "cherry",
+    "name": "Cherry",
+    "colors": {
+      "background": "#55161E",
+      "primary": "#FFECCC",
+      "cardBackground": "#A4303F"
+    },
+    "borderRadius": "0px",
+    "cardStyle": "filled",
+    "boxShadow": "2px 3px 0 1px #C9924A"
+  },
+  {
+    "id": "greenGrass",
+    "name": "Green Grass",
+    "colors": {
+      "background": "#202415",
+      "primary": "#DDB771",
+      "cardBackground": "#334011",
+      "textColor": "#CBD98D"
+    },
+    "borderRadius": "20px",
+    "cardStyle": "filled",
+    "boxShadow": "3px 3px 4px rgba(0, 0, 0, 0.25)"
+  },
+  {
+    "id": "mauveShadow",
+    "name": "Mauve Shadow",
+    "colors": {
+      "background": "#401F30",
+      "primary": "#D9B8C4",
+      "cardBackground": "linear-gradient(0deg, rgba(149, 113, 134, 0.41) 0%, #703D57 100%)",
+      "textColor": "#D9B8C4",
+      "linkTextColor": "#703D57"
+    },
+    "borderRadius": "15px",
+    "cardStyle": "filled",
+    "boxShadow": "3px 3px 6px rgba(0, 0, 0, 0.09)"
+  },
+  {
+    "id": "lavenderGrey",
+    "name": "Lavender Grey",
+    "colors": {
+      "background": "#3F446A",
+      "primary": "#F9F9ED",
+      "cardBackground": "linear-gradient(180deg, #9498C3 0%, #686EA6 100%)"
+    },
+    "borderRadius": "50px",
     "cardStyle": "outlined"
-  },
-  {
-    "id": "dark",
-    "name": "Dark",
-    "colors": {
-      "background": "#0f0f13",
-      "primary": "#6c63ff",
-      "cardBackground": "#1c1c26",
-      "textColor": "#f0f0f5"
-    },
-    "borderRadius": "12px",
-    "cardStyle": "filled"
   }
 ]
