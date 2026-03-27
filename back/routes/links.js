@@ -23,35 +23,43 @@ const router = express.Router();
 const link = readJSON(LINKS);
 
 
+// router.get('/', (req, res) => {
+//   res.json(link);
+// });
+
+
+
+// router.get('/', (req, res) => {
+//   try {
+//     // Vérifie si le fichier existe
+//     if (!fs.existsSync(LINKS)) {
+//       throw new Error("File not found");
+//     }
+
+//     // Lecture du fichier
+//     const data = fs.readFileSync(LINKS, "utf-8");
+
+//     // Parsing JSON (peut échouer si corrompu)
+//     const links = JSON.parse(data);
+
+//     res.json(links);
+//   } catch (error) {
+//     console.error(error);
+
+//     res.status(500).json({
+//       error: "Failed to read links data"
+//     });
+//   }
+
+// });
+
 router.get('/', (req, res) => {
-  res.json(link);
-});
-
-
-
-router.get('/', (req, res, next) => {
   try {
-    // Vérifie si le fichier existe
-    if (!fs.existsSync(LINKS)) {
-      throw new Error("File not found");
-    }
-
-    // Lecture du fichier
-    const data = fs.readFileSync(LINKS, "utf-8");
-
-    // Parsing JSON (peut échouer si corrompu)
-    const links = JSON.parse(data);
-
-    res.json(links);
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      error: "Failed to read links data"
-    });
+    const links = readJSON(LINKS);
+    res.json(links.sort((a, b) => a.order - b.order));
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to read links data' });
   }
-
-  next();
 });
 
 
