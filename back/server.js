@@ -1,9 +1,14 @@
 const express = require('express');
+const path = require ('path');
 const app = express();
+const morgan = require('morgan');
 const PORT = 3000;
  
 // Middleware
 app.use(express.json());
+app.use(morgan('dev'));
+app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../front')));
  
 // Routes
 const linksRouter   = require('./routes/links');
@@ -15,8 +20,6 @@ app.use('/api', profileRouter);
 app.use('/api/themes', themesRouter);
 
 
-app.use(express.static(path.join(__dirname, '../front')));
- 
 // Démarrage du serveur
 app.listen(PORT, () => {
   console.log(`Server starting...`);
