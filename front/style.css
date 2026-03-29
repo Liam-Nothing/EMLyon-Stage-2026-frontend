@@ -185,6 +185,7 @@ footer {
   display: flex;
   justify-content: center;
   padding: 20px 0;
+  width: 60%;
 }
 
 footer a {
@@ -218,9 +219,120 @@ aside {
   height: 100vh;
   display: flex;
   justify-self: end;
+  position: absolute;
+  bottom: -80px;
+  align-items: center;
+  justify-content: center;
+}
+
+aside.fixed {
   position: fixed;
   bottom: 0;
 }
+
+.cardPreview {
+  background-color: #C14141;
+  max-width: 330px;
+  height: 640px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 30px 20px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.cardPreview::-webkit-scrollbar {
+  display: none;
+}
+
+.profilPreview {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.pfpPreview {
+  background-color: #40798C;
+  height: 96px;
+  width: 96px;
+  border-radius: 50px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.linkContainerPreview {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.linkPreview {
+  padding: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; 
+  width: 100%;
+}
+
+.linkPreview:hover{
+  transform: translateY(-2px);
+}
+
+.leftPreview, .rightPreview {
+  max-width: 50px;
+  max-height: 50px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+}
+
+.rightPreview {
+  display: flex;
+  justify-self: end;
+}
+
+.middlePreview {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.footer {
+  font-size: var(--small-text-font-size);
+  position: relative;
+  bottom: 0;
+  margin-top: 15px;
+}
+
+.footer a {
+  font-size: var(--small-text-font-size);
+  font-weight: 600;
+}
+
+/* ======================================== */
 
 @media (max-width:1024px) {
   .nav-right p {
@@ -240,6 +352,12 @@ aside {
   }
   .menue {
     display: inline-block;
+  }
+  aside {
+    display: none;
+  }
+  footer {
+    width: 100%;
   }
 }
 
