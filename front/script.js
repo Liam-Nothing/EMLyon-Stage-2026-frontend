@@ -7,3 +7,39 @@ window.addEventListener("scroll", () => {
     el.classList.remove("fixed");
   }
 });
+
+const backgrounds = document.getElementById('backgroundColor');
+const card = document.getElementById('cardPreview');
+const h1 = document.getElementById('usernamePreview');
+const bio = document.getElementById('bioPreview');
+const footer = document.getElementById('footer');
+const foot = document.getElementById('stillFooter');
+const btnLink = document.querySelectorAll('.linkPreview');
+const textBtnLink = document.querySelectorAll('.myLinkPreview');
+
+
+fetch("../../back/data/profile.json")
+.then(response => response.json())
+.then(data => {
+
+  backgrounds.style.backgroundColor = data.colors.background;
+  card.style.backgroundColor = data.colors.cardBackground;
+  h1.style.color = data.colors.textColor;
+  bio.style.color = data.colors.textColor;
+  footer.style.color = data.colors.textColor;
+  foot.style.color = data.colors.textColor;
+  
+  btnLink.forEach(btn => {
+    btn.style.backgroundColor = data.colors.primary;
+    btn.style.borderRadius = data.colors.border;
+  });
+
+  textBtnLink.forEach(text => {
+    text.style.color = data.colors.linkTextColor;
+  });
+
+})
+
+.catch (error => {
+  console.log('error : Fail to load colors', error);
+});

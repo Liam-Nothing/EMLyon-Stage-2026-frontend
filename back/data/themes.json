@@ -4,22 +4,30 @@
     "name": "Minimal",
     "colors": {
       "background": "#AF9E98",
+      "primary": "transparent",
       "cardBackground": "#F5F1EE",
-      "textColor": "#3F2F28"
+      "textColor": "#3F2F28",
+      "linkTextColor": "#3F2F28",
+      "border": "2px solid #3F2F28"
     },
     "borderRadius": "0px",
-    "cardStyle": "outlined"
+    "cardStyle": "outlined",
+    "boxShadow": "none"
   },
   {
     "id": "roseBlush",
     "name": "Rose Blush",
     "colors": {
       "background": "#7E5350",
+      "primary": "transparent",
       "cardBackground": "linear-gradient(180deg, rgba(232, 227, 198, 0.65) 0%, #D19F8B 39%, #B48080 96%)",
-      "textColor": "#62292B"
+      "textColor": "#62292B",
+      "linkTextColor": "#62292B",
+      "border": "2px solid #62292B"
     },
     "borderRadius": "5px",
-    "cardStyle": "outlined"
+    "cardStyle": "outlined",
+    "boxShadow": "none"
   },
   {
     "id": "sunset",
@@ -29,7 +37,8 @@
       "primary": "#C95502",
       "cardBackground": "linear-gradient(180deg, #FED17C 0%, #FBA327 46%, rgba(201, 85, 2, 0.73) 115%)",
       "textColor": "#5C2300",
-      "linkTextColor": "#FFE7BA"
+      "linkTextColor": "#FFE7BA",
+      "border": "none"
     },
     "borderRadius": "50px",
     "cardStyle": "filled",
@@ -43,7 +52,8 @@
       "primary": "#5AC7E6",
       "cardBackground": "linear-gradient(180deg, #06097E 40%, rgb(192, 77, 255, 0.53) 100%)",
       "textColor": "#F8A5ED",
-      "linkTextColor": "#06097E"
+      "linkTextColor": "#06097E",
+      "border": "none"
     },
     "borderRadius": "50px",
     "cardStyle": "filled",
@@ -55,7 +65,10 @@
     "colors": {
       "background": "#55161E",
       "primary": "#FFECCC",
-      "cardBackground": "#A4303F"
+      "cardBackground": "#A4303F",
+      "textColor": "#FFECCC",
+      "linkTextColor": "#A4303F",
+      "border": "none"
     },
     "borderRadius": "0px",
     "cardStyle": "filled",
@@ -68,7 +81,9 @@
       "background": "#202415",
       "primary": "#DDB771",
       "cardBackground": "#334011",
-      "textColor": "#CBD98D"
+      "textColor": "#CBD98D",
+      "linkTextColor": "#334011",
+      "border": "none"
     },
     "borderRadius": "20px",
     "cardStyle": "filled",
@@ -82,7 +97,8 @@
       "primary": "#D9B8C4",
       "cardBackground": "linear-gradient(0deg, rgba(149, 113, 134, 0.41) 0%, #703D57 100%)",
       "textColor": "#D9B8C4",
-      "linkTextColor": "#703D57"
+      "linkTextColor": "#703D57",
+      "border": "none"
     },
     "borderRadius": "15px",
     "cardStyle": "filled",
@@ -93,10 +109,14 @@
     "name": "Lavender Grey",
     "colors": {
       "background": "#3F446A",
-      "primary": "#F9F9ED",
-      "cardBackground": "linear-gradient(180deg, #9498C3 0%, #686EA6 100%)"
+      "primary": "transparent",
+      "cardBackground": "linear-gradient(180deg, #9498C3 0%, #686EA6 100%)",
+      "textColor": "#F9F9ED",
+      "linkTextColor": "#F9F9ED",
+      "border": "2px solid #F9F9ED"
     },
     "borderRadius": "50px",
-    "cardStyle": "outlined"
+    "cardStyle": "outlined",
+    "boxShadow": "none"
   }
 ]

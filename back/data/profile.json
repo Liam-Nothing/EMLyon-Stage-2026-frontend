@@ -4,9 +4,12 @@
   "avatar": "",
   "theme": "default",
   "colors": {
-    "background": "#ffffff",
-    "primary": "#000000",
-    "cardBackground": "#f5f5f5"
+    "background": "#214B59",
+    "primary": "#95CBDC",
+    "cardBackground": "#40798C",
+    "textColor": "#FFFEF9",
+    "linkTextColor": "#0B2027",
+    "border": "10px"
   },
   "socialLinks": [
     { 

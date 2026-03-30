@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <title>JointIn - Theme</title>
+</head>
+<body>
+
+  <header>
+      <img src="../assets/LogoJointInWhite.png" alt="logo" class="logo">
+
+      <div class="btn-align">
+          <a href="../index.html" class="btn-forme btn-main" id="public-btn">Page Publique</a>
+          <a href="" class="btn-forme btn-second" id="logout-btn">Log-out</a>
+      </div>
+      <!-- ajouter menu -->
+        <div class="menue">
+          <i class="fa-solid fa-bars"></i>
+      </div>
+  </header>
+
+  <main>
+
+    <nav class="navBar">
+
+      <div class="nav-left">
+        <a href="../admin/admin.html" class="grey">Liens</a>
+        <a href="">Design</a>
+        <a href="../admin/admin_profile.html" class="grey">Profil</a>
+      </div>
+
+      <div class="nav-right">
+        <p>Link : <a href="">xxx/xxxxxx.xx </a></p>
+        <a href="" class="hidden"><i class="fa-regular fa-copy"></i></a>
+      </div>
+
+    </nav>
+
+    <section id="theme">
+
+      <div class="titleNav">
+
+        <div class="leftTitleNav">
+          <a href="customize.html"><i class="fa-solid fa-angle-left"></i></a>
+          <h2>Thème</h2>
+        </div>
+        <div class="saveTitleNav">
+          <div class="arrows">
+            <button id="undoButton" class="undoButton"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+            <button id="redoButton" class="redoButton"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+          </div>
+          <button class="btn-forme button" id="saveBtn">Sauvegarder</button>
+        </div>
+
+      </div>
+
+
+
+      <div class="themeChoices" id="themeChoices">
+
+        <!-- card -->
+        <!-- <div class="card">
+
+          <div class="content">
+            <div class="profil">
+              <img src="../assets/Avatar_defaut.png" alt="">
+              <span class="contentTitle"></span>
+              <div class="bio">
+                <span class="contentBio"></span>
+                <span class="contentBio2"></span>
+              </div>
+            </div>
+            <div class="links">
+              <span class="linkLinks"><span class="pLink"></span></span>
+              <span class="linkLinks"><span class="pLink"></span></span>
+              <span class="linkLinks"><span class="pLink"></span></span>
+            </div>
+          </div>
+
+          <div class="footerTheme">
+            <span class="footTheme"></span>
+          </div>
+
+        </div> -->
+        <!-- ________________________________________ -->
+
+
+      </div>
+
+    </section>
+
+    <!-- ========== Preview card ================================ -->
+        <aside id="backgroundColor">
+            <div id="cardPreview" class="cardPreview">
+
+                <div class="alignPreview">
+                    
+                    <div id="profilPreview" class="profilPreview">
+                        <div id="pfpPreview" class="pfpPreview">
+                            <img src="../assets/Avatar_defaut.png" alt="profil picture">
+                        </div>
+                        <h1 id="usernamePreview">@Mikeyy</h1>
+                        <p id="bioPreview">Jeune entrepreneur - Voici mes réseaux où vous pouvez me suivre et les liens de mes projets accomplis</p>
+                    </div>
+    
+                    <div id="linkContainerPreview" class="linkContainerPreview">
+                        <!-- links that will be add with js -->
+                        <div class="linkPreview">
+                            <div id="leftPreview" class="leftPreview"> <img src="../assets/LogoJointInBlue.png" alt=""> </div>
+                            <div id="middlePreview" class="middlePreview"> <a href="" class="myLinkPreview">Youtube</a> </div>
+                            <div id="rightPreview" class="rightPreview"></div>
+                        </div>
+    
+                    </div>
+
+                </div>
+
+                <div class="footer" id="footer"><p>- Made with <a href="#" id="stillFooter">JointIn</a> -</p></div>
+
+            </div>
+        </aside>
+        <!-- ============================================================== -->
+
+  </main>
+
+  <footer>
+    <p>- Made with <a href="#">JointIn</a> -</p>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="theme.js"></script>
+  <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
+</body>
+</html>

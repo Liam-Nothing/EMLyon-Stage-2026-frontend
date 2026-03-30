@@ -231,7 +231,7 @@ aside.fixed {
 }
 
 .cardPreview {
-  background-color: #C14141;
+  /* background-color: #C14141; */
   max-width: 330px;
   height: 640px;
   border-radius: 10px;
@@ -239,6 +239,7 @@ aside.fixed {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   padding: 30px 20px;
   position: relative;
@@ -247,6 +248,12 @@ aside.fixed {
 
 .cardPreview::-webkit-scrollbar {
   display: none;
+}
+
+.alignPreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profilPreview {
@@ -260,7 +267,7 @@ aside.fixed {
 }
 
 .pfpPreview {
-  background-color: #40798C;
+  /* background-color: #40798C; */
   height: 96px;
   width: 96px;
   border-radius: 50px;
