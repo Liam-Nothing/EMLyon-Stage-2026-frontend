@@ -50,13 +50,13 @@
         <section id="formulaire">
             <h2>Ajouter un nouveau lien</h2>
 
-            <form class="formCard">
+            <form class="formCard" id="add-link-form">
                 <div class="formLink">
-                    <input type="text" placeholder="Titre du lien">
+                    <input type="text" id="input-title" placeholder="Titre du lien">
                 </div>
 
                 <div class="formLink">
-                    <input type="url" placeholder="https://...">
+                    <input type="url" id="input-url" placeholder="https://...">
                 </div>
   
                 <div class="formLink">
@@ -64,8 +64,8 @@
                 </div>
 
                 <div class="save-discard-btns">
-                    <a href="" class="btn-discard small-btn">Annuler</a>
-                    <a href="" class="btn-main small-btn save">Ajouter le lien</a>
+                    <a href="#" class="btn-discard small-btn" id="btn-cancel">Annuler</a>
+                    <a href="#" class="btn-main small-btn save" id="btn-add-link">Ajouter le lien</a>
                 </div>
                 
             </form>
@@ -109,25 +109,25 @@
                 Ajoutez un lien
             </button>
 
-            <div class="linkList">
+            <div class="linkList" id="linkList">
 
                 <!-- Card 1 -->
-                <div class="linkCard">
+                <!-- <div class="linkCard">
 
                     <div class ="drag">
                         <i class="fa-solid fa-grip-vertical"></i>
-                    </div>
+                    </div> -->
                     
-                    <div class="linkContent">
+                    <!-- <div class="linkContent">
                         <div class="linkHeader">
                             <strong>Minecraft Vide Youtube</strong>
 
                             <button class="edit">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
-                        </div>
+                        </div> -->
 
-                        <div class="url">https://youtube.com</div>
+                        <!-- <div class="url">https://youtube.com</div>
 
                         <hr>
 
@@ -145,7 +145,7 @@
                                 <input type="checkbox" checked>
                                 <span class="slider"></span>
                             </label>
-                            </div>
+                            </div> -->
                             
                             
                             <!-- <div>
@@ -154,13 +154,13 @@
                             </div> -->
 
 
-                        </div>
+                        <!-- </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <!-- Card2 -->
-                <div class="linkCard">
+                <!-- <div class="linkCard">
 
                     <div class ="drag">
                         <i class="fa-solid fa-grip-vertical"></i>
@@ -195,7 +195,7 @@
                                 <span class="slider"></span>
                             </label>
 
-                            </div>
+                            </div> -->
                             
 
                             <!-- <div>
@@ -203,9 +203,9 @@
                                 <label for="switch" class="toggle"></label>
                             </div> -->
 
-                        </div>
+                        <!-- </div>
                     </div>
-                </div>
+                </div> -->
  
             </div>
         </section>
@@ -247,7 +247,8 @@
 
 
     <script src="../script.js"></script>
-    <script src="admin.js"></script>
+    <script src="../js/admin.js"></script>
+    <!-- <script src="admin.js"></script> -->
     <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
 </body>
 </html>
