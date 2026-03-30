@@ -16,6 +16,8 @@ const footer = document.getElementById('footer');
 const foot = document.getElementById('stillFooter');
 const btnLink = document.querySelectorAll('.linkPreview');
 const textBtnLink = document.querySelectorAll('.myLinkPreview');
+const imageLeft = document.querySelectorAll('.leftPreview');
+const imageRight = document.querySelectorAll('.rightPreview');
 
 
 fetch("../../back/data/profile.json")
@@ -36,6 +38,14 @@ fetch("../../back/data/profile.json")
 
   textBtnLink.forEach(text => {
     text.style.color = data.colors.linkTextColor;
+  });
+
+  imageLeft.forEach(img => {
+    img.style.borderRadius = data.colors.border;
+  });
+
+  imageRight.forEach(img => {
+    img.style.borderRadius = data.colors.border;
   });
 
 })

@@ -70,6 +70,11 @@ section {
   gap: 50px;
 }
 
+.selected {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
 /* ========= Preview theme ========================= */
 
 .selectCard {

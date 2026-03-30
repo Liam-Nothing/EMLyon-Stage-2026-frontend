@@ -1,3 +1,9 @@
-- the footer always has to stay at the bottom
+- the footer always has to stay at the bottom (for all pages, preview done)
 - once the preview done (with js linked etc..), put it in every other html page
-- put the default color in preview card
+- message attention seulement pr theme qd retour comme quoi pas sauvergarder
+- pour le design individuelle, il ne faut pas que le modif s'enlever en allant sur une autre rubrique
+
+- demander a Mehdi de faire le petit message d'erreur ou de success
+- la sauvergarde du theme ne marche pas (met cet erreur : theme.js:141  PUT http://127.0.0.1:5500/api/profile 405 (Method Not Allowed))
+
+- comment garder les modif meme en actualisant
