@@ -20,8 +20,8 @@ fetch("/api/themes")
     fetch("/api/profile")
       .then(res => res.json())
       .then(profile => {
-        if (profile.themeId) {
-          selectTheme(profile.themeId, false, true); // initial load, pas d'historique
+        if (profile.theme) {
+          selectTheme(profile.theme, false, true); // initial load, pas d'historique
         }
       })
       .catch(() => console.log("Impossible de récupérer le thème du profil"));
@@ -60,7 +60,10 @@ function createCard(data) {
     `;
 
     const card = wrapper.querySelector('.card');
-    card.addEventListener('click', () => selectTheme(e.id, true));
+    card.addEventListener('click', () => {
+      selectTheme(e.id, true)
+
+    });
 
     container.appendChild(wrapper);
   });
@@ -70,9 +73,9 @@ function createCard(data) {
 // ======= SELECT THEME =======
 function selectTheme(id, saveHistory = true, initialLoad = false) {
   // 🔹 Visuel
-  document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+  document.querySelectorAll('.card').forEach(card => card.classList.remove('selected'));
   const card = document.getElementById(id);
-  if (card) card.classList.add('active');
+  if (card) card.classList.add('selected');
 
   // 🔹 Appliquer le thème
   applyTheme(id);
@@ -117,14 +120,14 @@ function applyTheme(id) {
 
   btnLink.forEach(btn => {
     btn.style.backgroundColor = theme.colors.primary;
-    btn.style.borderRadius = theme.borderRadius;
+    btn.style.borderRadius = theme.colors.borderRadius;
     btn.style.border = theme.colors.border;
-    btn.style.boxShadow = theme.boxShadow;
+    btn.style.boxShadow = theme.colors.boxShadow;
   });
 
   textBtnLink.forEach(text => text.style.color = theme.colors.linkTextColor);
-  imageLeft.forEach(img => img.style.borderRadius = theme.borderRadius);
-  imageRight.forEach(img => img.style.borderRadius = theme.borderRadius);
+  imageLeft.forEach(img => img.style.borderRadius = theme.colors.borderRadius);
+  imageRight.forEach(img => img.style.borderRadius = theme.colors.borderRadius);
 
   // 🔹 Activer bouton sauvegarder
   saveButton.classList.add('active');

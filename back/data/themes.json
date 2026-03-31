@@ -8,11 +8,11 @@
       "cardBackground": "#F5F1EE",
       "textColor": "#3F2F28",
       "linkTextColor": "#3F2F28",
-      "border": "2px solid #3F2F28"
+      "border": "2px solid #3F2F28",
+      "boxShadow": "none",
+      "borderRadius": "0px"
     },
-    "borderRadius": "0px",
-    "cardStyle": "outlined",
-    "boxShadow": "none"
+    "cardStyle": "outlined"
   },
   {
     "id": "roseBlush",
@@ -23,11 +23,11 @@
       "cardBackground": "linear-gradient(180deg, rgba(232, 227, 198, 0.65) 0%, #D19F8B 39%, #B48080 96%)",
       "textColor": "#62292B",
       "linkTextColor": "#62292B",
-      "border": "2px solid #62292B"
+      "border": "2px solid #62292B",
+      "boxShadow": "none",
+      "borderRadius": "5px"
     },
-    "borderRadius": "5px",
-    "cardStyle": "outlined",
-    "boxShadow": "none"
+    "cardStyle": "outlined"
   },
   {
     "id": "sunset",
@@ -38,11 +38,11 @@
       "cardBackground": "linear-gradient(180deg, #FED17C 0%, #FBA327 46%, rgba(201, 85, 2, 0.73) 115%)",
       "textColor": "#5C2300",
       "linkTextColor": "#FFE7BA",
-      "border": "none"
+      "border": "none",
+      "boxShadow": "3px 3px 6px rgba(0, 0, 0, 0.09)",
+      "borderRadius": "50px"
     },
-    "borderRadius": "50px",
-    "cardStyle": "filled",
-    "boxShadow": "3px 3px 6px rgba(0, 0, 0, 0.09)"
+    "cardStyle": "filled"
   },
   {
     "id": "midnight",
@@ -53,11 +53,11 @@
       "cardBackground": "linear-gradient(180deg, #06097E 40%, rgb(192, 77, 255, 0.53) 100%)",
       "textColor": "#F8A5ED",
       "linkTextColor": "#06097E",
-      "border": "none"
+      "border": "none",
+      "boxShadow": "2px 3px 0 1px rgb(255, 0, 170)",
+      "borderRadius": "50px"
     },
-    "borderRadius": "50px",
-    "cardStyle": "filled",
-    "boxShadow": "2px 3px 0 1px rgb(255, 0, 170)"
+    "cardStyle": "filled"
   },
   {
     "id": "cherry",
@@ -68,11 +68,11 @@
       "cardBackground": "#A4303F",
       "textColor": "#FFECCC",
       "linkTextColor": "#A4303F",
-      "border": "none"
+      "border": "none",
+      "boxShadow": "2px 3px 0 1px #C9924A",
+      "borderRadius": "0px"
     },
-    "borderRadius": "0px",
-    "cardStyle": "filled",
-    "boxShadow": "2px 3px 0 1px #C9924A"
+    "cardStyle": "filled"
   },
   {
     "id": "greenGrass",
@@ -83,11 +83,11 @@
       "cardBackground": "#334011",
       "textColor": "#CBD98D",
       "linkTextColor": "#334011",
-      "border": "none"
+      "border": "none",
+      "boxShadow": "3px 3px 4px rgba(0, 0, 0, 0.25)",
+      "borderRadius": "20px"
     },
-    "borderRadius": "20px",
-    "cardStyle": "filled",
-    "boxShadow": "3px 3px 4px rgba(0, 0, 0, 0.25)"
+    "cardStyle": "filled"
   },
   {
     "id": "mauveShadow",
@@ -98,11 +98,11 @@
       "cardBackground": "linear-gradient(0deg, rgba(149, 113, 134, 0.41) 0%, #703D57 100%)",
       "textColor": "#D9B8C4",
       "linkTextColor": "#703D57",
-      "border": "none"
+      "border": "none",
+      "boxShadow": "3px 3px 6px rgba(0, 0, 0, 0.09)",
+      "borderRadius": "15px"
     },
-    "borderRadius": "15px",
-    "cardStyle": "filled",
-    "boxShadow": "3px 3px 6px rgba(0, 0, 0, 0.09)"
+    "cardStyle": "filled"
   },
   {
     "id": "lavenderGrey",
@@ -113,10 +113,10 @@
       "cardBackground": "linear-gradient(180deg, #9498C3 0%, #686EA6 100%)",
       "textColor": "#F9F9ED",
       "linkTextColor": "#F9F9ED",
-      "border": "2px solid #F9F9ED"
+      "border": "2px solid #F9F9ED",
+      "boxShadow": "none",
+      "borderRadius": "50px"
     },
-    "borderRadius": "50px",
-    "cardStyle": "outlined",
-    "boxShadow": "none"
+    "cardStyle": "outlined"
   }
 ]

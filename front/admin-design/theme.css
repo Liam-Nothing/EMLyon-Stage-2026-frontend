@@ -70,7 +70,7 @@ section {
   gap: 50px;
 }
 
-.selected {
+.card.selected {
   outline: 3px solid var(--primary-color);
   outline-offset: 3px;
 }

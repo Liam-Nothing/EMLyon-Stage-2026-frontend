@@ -33,9 +33,9 @@ fetch("/api/profile")
   
   btnLink.forEach(btn => {
     btn.style.backgroundColor = data.colors.primary;
-    btn.style.borderRadius = data.borderRadius;
+    btn.style.borderRadius = data.colors.borderRadius;
     btn.style.border = data.colors.border;
-    btn.style.boxShadow = data.boxShadow;
+    btn.style.boxShadow = data.colors.boxShadow;
   });
 
   textBtnLink.forEach(text => {
@@ -43,11 +43,11 @@ fetch("/api/profile")
   });
 
   imageLeft.forEach(img => {
-    img.style.borderRadius = data.borderRadius;
+    img.style.borderRadius = data.colors.borderRadius;
   });
 
   imageRight.forEach(img => {
-    img.style.borderRadius = data.borderRadius;
+    img.style.borderRadius = data.colors.borderRadius;
   });
 
 })

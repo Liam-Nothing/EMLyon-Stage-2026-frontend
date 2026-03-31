@@ -2,18 +2,18 @@
   "name": "El Mehdi & Salsabila",
   "bio": "Web developers in training at La Toile / EM Lyon",
   "avatar": "",
-  "theme": "mauveShadow",
+  "theme": "midnight",
   "colors": {
-    "background": "#401F30",
-    "primary": "#D9B8C4",
-    "cardBackground": "linear-gradient(0deg, rgba(149, 113, 134, 0.41) 0%, #703D57 100%)",
-    "textColor": "#D9B8C4",
-    "linkTextColor": "#703D57",
-    "border": "none"
+    "background": "#080940",
+    "primary": "#5AC7E6",
+    "cardBackground": "linear-gradient(180deg, #06097E 40%, rgb(192, 77, 255, 0.53) 100%)",
+    "textColor": "#F8A5ED",
+    "linkTextColor": "#06097E",
+    "border": "none",
+    "boxShadow": "2px 3px 0 1px rgb(255, 0, 170)",
+    "borderRadius": "50px"
   },
-  "borderRadius": "15px",
   "cardStyle": "filled",
-  "boxShadow": "3px 3px 6px rgba(0, 0, 0, 0.09)",
   "socialLinks": [
     {
       "platform": "github",
