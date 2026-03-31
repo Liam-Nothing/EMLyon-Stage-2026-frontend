@@ -20,7 +20,7 @@ const imageLeft = document.querySelectorAll('.leftPreview');
 const imageRight = document.querySelectorAll('.rightPreview');
 
 
-fetch("../../back/data/profile.json")
+fetch("/api/profile")
 .then(response => response.json())
 .then(data => {
 

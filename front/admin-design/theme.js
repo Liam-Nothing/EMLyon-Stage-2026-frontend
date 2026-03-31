@@ -138,17 +138,17 @@ saveButton.addEventListener('click', () => {
     return;
   }
 
-  fetch("/api/profile", {
+  fetch("/api/profile/theme", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ themeId: selectedThemeId })
   })
   .then(res => res.json())
   .then(() => {
-    showNotification("Thème sauvegardé ✅");
+    showNotification("Thème sauvegardé", "#36D399");
     saveButton.classList.remove('active'); // retirer après sauvegarde
   })
-  .catch(() => showNotification("Erreur lors de la sauvegarde ❌"));
+  .catch(() => showNotification("Erreur lors de la sauvegarde", "#FF5C72"));
 });
 
 
@@ -177,6 +177,12 @@ function updateButtons() {
 
 
 // ======= NOTIFICATION SIMPLE =======
-function showNotification(msg) {
-  alert(msg); // tu peux remplacer par un toast stylé
+function showNotification(msg, color) {
+  // alert(msg); // tu peux remplacer par un toast stylé
+  const toast = document.createElement('div');
+  toast.classList.add('boxMessage');
+  toast.style.background = color;
+  toast.innerHTML = "<p>" + msg + "</p>";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
 }
