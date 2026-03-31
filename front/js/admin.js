@@ -128,6 +128,61 @@ function createLinkCard(link) {
   return card;
 }
 
+function createEditForm(card, link) {
+  const originalHTML = card.innerHTML;
+
+  card.innerHTML = `
+    <div class="linkContent" style="width:100%">
+      <div class="edit-form">
+        <input type="text" class="edit-title" value="${link.title}" placeholder="Titre">
+        <input type="url"  class="edit-url"   value="${link.url}"   placeholder="https://...">
+        <div class="edit-actions">
+          <button class="edit-cancel  btn-discard small-btn">Annuler</button>
+          <button class="edit-save    btn-main    small-btn">Sauvegarder</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Annuler — restaure l'HTML original
+  card.querySelector('.edit-cancel').addEventListener('click', () => {
+    card.innerHTML = originalHTML;
+    card.draggable = true;
+  });
+
+  // Sauvegarder
+  card.querySelector('.edit-save').addEventListener('click', async () => {
+    const title = card.querySelector('.edit-title').value.trim();
+    const url   = card.querySelector('.edit-url').value.trim();
+
+    if (!title) { showToast('Le titre est requis', 'error'); return; }
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      showToast("L'URL doit commencer par http:// ou https://", 'error');
+      return;
+    }
+
+    try {
+      const res  = await fetch(`/api/links/${link.id}`, {
+        method:  'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ title, url }),
+      });
+      const data = await res.json();
+      if (!res.ok) { showToast(data.error || 'Erreur', 'error'); return; }
+
+      // Remplacer la card par la version mise à jour
+      const newCard = createLinkCard({ ...link, title, url });
+      card.replaceWith(newCard);
+      showToast('Lien modifié ✓');
+
+    } catch (err) {
+      showToast('Erreur réseau', 'error');
+    }
+  });
+
+  card.draggable = false; 
+}
+
 
 function initDragAndDrop() {
   const linkList = document.getElementById('linkList');
@@ -230,8 +285,20 @@ function initEventDelegation() {
  
   // Délégation : clic 
   linkList.addEventListener('click', async (e) => {
+
+    // Bouton edit
+    const editBtn = e.target.closest('.edit');
+    if (editBtn) {
+      const card = e.target.closest('.linkCard');
+      if (!card) return;
+      const id    = card.dataset.id;
+      const title = card.querySelector('strong').textContent;
+      const url   = card.querySelector('.url').textContent;
+      createEditForm(card, { id, title, url });
+      return;
+    }
  
-    // Bouton supprimer — on remonte jusqu'à .delete
+    // Bouton supprimer
     const deleteBtn = e.target.closest('.delete');
     if (deleteBtn) {
       const card = e.target.closest('.linkCard');
