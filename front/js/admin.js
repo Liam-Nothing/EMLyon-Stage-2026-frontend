@@ -32,6 +32,19 @@ function showToast(message, type = 'success') {
         from { opacity: 0; transform: translateY(12px); }
         to   { opacity: 1; transform: translateY(0); }
       }
+        .linkCard.dragging {
+        opacity: 0.3;
+        transform: scale(0.98);
+      }
+      .linkCard.drag-over {
+        border-top: 3px solid var(--color-primary, #6C63FF);
+      }
+      .linkCard[draggable="true"] {
+        cursor: grab;
+      }
+      .linkCard[draggable="true"]:active {
+        cursor: grabbing;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -64,6 +77,8 @@ function createLinkCard(link) {
   const card = document.createElement('div');
   card.className = 'linkCard';
   card.dataset.id = link.id;
+  card.draggable  = true;
+  if (!link.active) card.style.opacity = '0.45';
 
   card.innerHTML = `
     <div class="drag">
@@ -111,6 +126,101 @@ function createLinkCard(link) {
 
   if (!link.active) card.style.opacity = '0.45';
   return card;
+}
+
+
+function initDragAndDrop() {
+  const linkList = document.getElementById('linkList');
+  if (!linkList) return;
+ 
+  let draggedCard = null;
+ 
+  // Utilise la délégation sur le container
+  linkList.addEventListener('dragstart', (e) => {
+    const card = e.target.closest('.linkCard');
+    if (!card) return;
+ 
+    draggedCard = card;
+    // Léger délai pour que le navigateur capture le ghost avant l'ajout de classe
+    setTimeout(() => card.classList.add('dragging'), 0);
+    e.dataTransfer.effectAllowed = 'move';
+  });
+ 
+  linkList.addEventListener('dragend', (e) => {
+    const card = e.target.closest('.linkCard');
+    if (!card) return;
+ 
+    card.classList.remove('dragging');
+    // Retirer tous les indicateurs drag-over
+    linkList.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    draggedCard = null;
+  });
+ 
+  linkList.addEventListener('dragover', (e) => {
+    e.preventDefault(); // nécessaire pour autoriser le drop
+    e.dataTransfer.dropEffect = 'move';
+ 
+    const target = e.target.closest('.linkCard');
+    if (!target || target === draggedCard) return;
+ 
+    // Indicateur visuel sur la card survolée
+    linkList.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    target.classList.add('drag-over');
+  });
+ 
+  linkList.addEventListener('dragleave', (e) => {
+    const target = e.target.closest('.linkCard');
+    if (target) target.classList.remove('drag-over');
+  });
+ 
+  linkList.addEventListener('drop', (e) => {
+    e.preventDefault();
+ 
+    const target = e.target.closest('.linkCard');
+    if (!target || !draggedCard || target === draggedCard) return;
+ 
+    target.classList.remove('drag-over');
+ 
+    // Calculer la position du drop (avant ou après la target)
+    const rect   = target.getBoundingClientRect();
+    const midY   = rect.top + rect.height / 2;
+    const isAfter = e.clientY > midY;
+ 
+    if (isAfter) {
+      target.after(draggedCard);
+    } else {
+      target.before(draggedCard);
+    }
+ 
+    // Sauvegarder le nouvel ordre
+    saveReorder();
+  });
+}
+ 
+
+// Envoie le nouvel ordre à l'API
+async function saveReorder() {
+  const linkList = document.getElementById('linkList');
+  if (!linkList) return;
+ 
+  const cards    = [...linkList.querySelectorAll('.linkCard')];
+  const newOrder = cards.map((card, index) => ({
+    id:    card.dataset.id,
+    order: index + 1,
+  }));
+ 
+  try {
+    const res = await fetch('/api/links/reorder', {
+      method:  'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(newOrder),
+    });
+    if (!res.ok) throw new Error(`Status ${res.status}`);
+    showToast('Ordre sauvegardé ✓');
+  } catch (err) {
+    console.error('[saveReorder]', err.message);
+    showToast("Erreur lors de la sauvegarde de l'ordre", 'error');
+  }
 }
 
 
@@ -342,5 +452,6 @@ function initAddLinkForm() {
 document.addEventListener('DOMContentLoaded', () => {
   loadLinks();
   initEventDelegation();
+  initDragAndDrop();
   initAddLinkForm();
 });
