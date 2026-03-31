@@ -25,7 +25,7 @@ fetch("/api/profile")
 .then(data => {
 
   backgrounds.style.backgroundColor = data.colors.background;
-  card.style.backgroundColor = data.colors.cardBackground;
+  card.style.background = data.colors.cardBackground;
   h1.style.color = data.colors.textColor;
   bio.style.color = data.colors.textColor;
   footer.style.color = data.colors.textColor;
@@ -33,7 +33,9 @@ fetch("/api/profile")
   
   btnLink.forEach(btn => {
     btn.style.backgroundColor = data.colors.primary;
-    btn.style.borderRadius = data.colors.border;
+    btn.style.borderRadius = data.borderRadius;
+    btn.style.border = data.colors.border;
+    btn.style.boxShadow = data.boxShadow;
   });
 
   textBtnLink.forEach(text => {
@@ -41,11 +43,11 @@ fetch("/api/profile")
   });
 
   imageLeft.forEach(img => {
-    img.style.borderRadius = data.colors.border;
+    img.style.borderRadius = data.borderRadius;
   });
 
   imageRight.forEach(img => {
-    img.style.borderRadius = data.colors.border;
+    img.style.borderRadius = data.borderRadius;
   });
 
 })

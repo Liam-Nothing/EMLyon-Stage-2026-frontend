@@ -10,7 +10,7 @@ const redoButton = document.getElementById('redoButton');
 
 
 // ======= FETCH THÈMES =======
-fetch("../../back/data/themes.json")
+fetch("/api/themes")
   .then(res => res.json())
   .then(data => {
     themesData = data;
@@ -134,7 +134,7 @@ function applyTheme(id) {
 // ======= BOUTON SAUVEGARDER =======
 saveButton.addEventListener('click', () => {
   if (!selectedThemeId) {
-    showNotification("Veuillez sélectionner un thème avant de sauvegarder ❌");
+    showNotification("Veuillez sélectionner un thème avant de sauvegarder", "#FF5C72");
     return;
   }
 
