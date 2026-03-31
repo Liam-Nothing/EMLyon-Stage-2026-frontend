@@ -174,6 +174,7 @@ function createEditForm(card, link) {
       const newCard = createLinkCard({ ...link, title, url });
       card.replaceWith(newCard);
       showToast('Lien modifié ✓');
+      renderPreview();
 
     } catch (err) {
       showToast('Erreur réseau', 'error');
@@ -272,6 +273,7 @@ async function saveReorder() {
     });
     if (!res.ok) throw new Error(`Status ${res.status}`);
     showToast('Ordre sauvegardé ✓');
+    renderPreview();
   } catch (err) {
     console.error('[saveReorder]', err.message);
     showToast("Erreur lors de la sauvegarde de l'ordre", 'error');
@@ -312,6 +314,7 @@ function initEventDelegation() {
         if (!res.ok) throw new Error(`Status ${res.status}`);
         card.remove();
         showToast('Lien supprimé ✓');
+        renderPreview();
       } catch (err) {
         console.error('[deleteLink]', err.message);
         showToast('Erreur lors de la suppression', 'error');
@@ -343,6 +346,7 @@ function initEventDelegation() {
       if (!res.ok) throw new Error(`Status ${res.status}`);
       card.style.opacity = active ? '1' : '0.45';
       showToast(active ? 'Lien activé ✓' : 'Lien désactivé ✓');
+      renderPreview();
     } catch (err) {
       console.error('[toggleLink]', err.message);
       // Remettre la checkbox dans son état précédent
@@ -502,6 +506,7 @@ function initAddLinkForm() {
       }
 
       showToast('Lien ajouté ✓');
+      renderPreview();
 
     } catch (err) {
       console.error('[addLink]', err.message);
@@ -515,10 +520,54 @@ function initAddLinkForm() {
 }
 
 
+async function renderPreview() {
+  try {
+    const [profileRes, linksRes] = await Promise.all([
+      fetch('/api/profile'),
+      fetch('/api/links'),
+    ]);
+    const profile = await profileRes.json();
+    const links   = await linksRes.json();
+
+    const pfp = document.getElementById('pfpPreview');
+    if (pfp) {
+      const img = pfp.querySelector('img');
+      if (img) img.src = profile.avatar || '';
+    }
+
+    const nameEl = document.getElementById('usernamePreview');
+    const bioEl  = document.getElementById('bioPreview');
+    if (nameEl) nameEl.textContent = profile.name || '';
+    if (bioEl)  bioEl.textContent  = profile.bio  || '';
+
+    const container = document.getElementById('linkContainerPreview');
+    if (container) {
+      container.innerHTML = '';
+      links
+        .filter(l => l.active)
+        .sort((a, b) => a.order - b.order)
+        .forEach(link => {
+          const div = document.createElement('div');
+          div.className = 'linkPreview';
+          div.innerHTML = `
+            <div class="leftPreview"><img src="../assets/LogoJointInBlue.png" alt=""></div>
+            <div class="middlePreview"><a href="${link.url}" target="_blank">${link.title}</a></div>
+            <div class="rightPreview"></div>
+          `;
+          container.appendChild(div);
+        });
+    }
+
+  } catch (err) {
+    console.error('[renderPreview]', err.message);
+  }
+}
+
 // Point d'entrée
 document.addEventListener('DOMContentLoaded', () => {
   loadLinks();
   initEventDelegation();
   initDragAndDrop();
   initAddLinkForm();
+  renderPreview();
 });
