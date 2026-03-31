@@ -109,6 +109,7 @@ function createLinkCard(link) {
   //   toggleLink(link.id, e.target.checked);
   // });
 
+  if (!link.active) card.style.opacity = '0.45';
   return card;
 }
 
@@ -163,6 +164,7 @@ function initEventDelegation() {
         body:    JSON.stringify({ active }),
       });
       if (!res.ok) throw new Error(`Status ${res.status}`);
+      card.style.opacity = active ? '1' : '0.45';
       showToast(active ? 'Lien activé ✓' : 'Lien désactivé ✓');
     } catch (err) {
       console.error('[toggleLink]', err.message);
