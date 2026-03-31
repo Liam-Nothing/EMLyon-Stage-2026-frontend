@@ -58,6 +58,10 @@ function renderLinks(links) {
   }
 
   activeLinks.forEach(link => {
+    const clickable = document.createElement('a');
+    clickable.href = link.url;
+    clickable.target = "_blank";
+    clickable.rel = "noopener noreferrer";
     const div = document.createElement('div');
     div.className = 'link-card link-style-solide';
 
@@ -66,14 +70,15 @@ function renderLinks(links) {
         <img src="assets/LogoJointInBlue.png" alt="${link.title}">
       </div>
       <div class="middle">
-        <a href="${link.url}" target="_blank" rel="noopener noreferrer">
+        <p>
           ${link.icon ? link.icon + ' ' : ''}${link.title}
-        </a>
+        </p>
       </div>
       <div class="right"></div>
     `;
 
-    container.appendChild(div);
+    container.appendChild(clickable);
+    clickable.appendChild(div);
   });
 }
 

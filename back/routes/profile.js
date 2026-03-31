@@ -133,9 +133,22 @@ router.put('/profile/theme', (req, res) => {
     writeJSON(PROFILE_PATH, updatedProfile);
  
     res.json(updatedProfile);
+    
   } catch (err) {
     console.error('[PUT /api/profile/theme]', err.message);
     res.status(500).json({ error: 'Failed to update theme' });
+  }
+});
+
+// GET /api/profile/theme
+router.get('/profile/theme', (req, res) => {
+  try {
+    const profile = readJSON(PROFILE_PATH);
+ 
+    res.json(profile);
+  } catch (error) {
+    console.error('Erreur lecture profile.json :', error.message);
+    res.status(500).json({ error: 'Failed to read profile data' });
   }
 });
 

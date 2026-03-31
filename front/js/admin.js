@@ -547,14 +547,20 @@ async function renderPreview() {
         .filter(l => l.active)
         .sort((a, b) => a.order - b.order)
         .forEach(link => {
+          const clickable = document.createElement('a');
+          clickable.href = link.url;
+          clickable.target = "_blank";
+          clickable.rel = "noopener noreferrer";
+          clickable.style.width = "100%";
           const div = document.createElement('div');
           div.className = 'linkPreview';
           div.innerHTML = `
             <div class="leftPreview"><img src="../assets/LogoJointInBlue.png" alt=""></div>
-            <div class="middlePreview"><a href="${link.url}" target="_blank">${link.title}</a></div>
+            <div class="middlePreview"><p class="myLinkPreview">${link.title}</p></div>
             <div class="rightPreview"></div>
           `;
-          container.appendChild(div);
+          container.appendChild(clickable);
+          clickable.appendChild(div);
         });
     }
 
