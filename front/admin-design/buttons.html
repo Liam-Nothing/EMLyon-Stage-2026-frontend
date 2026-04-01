@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="buttons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <title>JointIn - Buttons</title>
+</head>
+<body>
+  
+  <header>
+      <img src="../assets/LogoJointInWhite.png" alt="logo" class="logo">
+
+      <div class="btn-align">
+          <a href="../index.html" class="btn-forme btn-main" id="public-btn">Page Publique</a>
+          <a href="" class="btn-forme btn-second" id="logout-btn">Log-out</a>
+      </div>
+      <!-- ajouter menu -->
+        <div class="menue">
+          <i class="fa-solid fa-bars"></i>
+      </div>
+  </header>
+
+  <main>
+
+    <nav class="navBar">
+
+      <div class="nav-left">
+        <a href="../admin/admin.html" class="grey">Liens</a>
+        <a href="customize.html">Design</a>
+        <a href="../admin/admin_profile.html" class="grey">Profil</a>
+      </div>
+
+      <div class="nav-right">
+        <p>Link : <a href="">xxx/xxxxxx.xx </a></p>
+        <a href="" class="hidden"><i class="fa-regular fa-copy"></i></a>
+      </div>
+
+    </nav>
+
+    <section id="theme">
+
+      <div class="titleNav">
+
+        <div class="leftTitleNav">
+          <a href="customize.html"><i class="fa-solid fa-angle-left"></i></a>
+          <h2>Buttons</h2>
+        </div>
+        <div class="saveTitleNav">
+          <div class="arrows">
+            <button id="undoButton" class="undoButton"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+            <button id="redoButton" class="redoButton"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+          </div>
+          <button class="btn-forme button" id="saveBtn">Sauvegarder</button>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="buttonStyle">
+
+      <h3>Buttons style :</h3>
+      <div class="styleAlign">
+
+        <p class="solidBtn" id="solidBtn">Solide</p>
+
+        <p class="outlineBtn" id="outlineBtn">Outline</p>
+
+      </div>
+
+    </section>
+
+
+  <!-- ============== SOLIDE SECTION ================ -->
+    <section id="solidSection">
+
+      <!-- BORDER RADIUS -->
+      <div class="radius">
+        <h3>Border radius :</h3>
+        <div class="radiusAlign">
+
+          <div class="radiusType" id="squareRadius">
+            <img src="../assets/square.png" alt="square">
+            <p>Square</p>
+          </div>
+
+          <div class="radiusType" id="roundRadius">
+            <img src="../assets/round.png" alt="round">
+            <p>Round</p>
+          </div>
+
+          <div class="radiusType" id="rounderRadius">
+            <img src="../assets/rounder.png" alt="rounder">
+            <p>Rounder</p>
+          </div>
+
+          <div class="radiusType" id="fullRadius">
+            <img src="../assets/full.png" alt="full">
+            <p>Full</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- BUTTON SHADOW -->
+      <div class="shadow" id="shadowSection">
+        <h3>Button shadow :</h3>
+        <div class="shadowAlign">
+
+          <div class="shadowType" id="noneShadow">
+            <p>None</p>
+          </div>
+
+          <div class="shadowType" id="softShadow">
+            <p>Soft</p>
+          </div>
+
+          <div class="shadowType" id="strongShadow">
+            <p>Strong</p>
+          </div>
+
+          <div class="shadowType" id="hardShadow">
+            <p>Hard</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- BUTTON COLOR -->
+       <div class="buttonColor">
+        <h3>Button color :</h3>
+        <div class="colorCard">
+          <label for="colorButtonSelect">
+            <span id="circleButtonColor" class="circleColor"></span>
+          </label>
+          <input type="color" name="colorButtonSelect" id="colorButtonSelect" value="#000000"> <!-- Have to be hidden -->
+
+          <p id="nameButtonColor">#000000</p>
+        </div>
+      </div>
+
+
+      <!-- TEXT BUTTON COLOR -->
+       <div class="textBtnColor">
+        <h3>Button text color :</h3>
+        <div class="colorCard">
+          <label for="colorTextBtnSelect">
+            <span id="circleTextBtnColor" class="circleColor"></span>
+          </label>
+          <input type="color" name="colorTextBtnSelect" id="colorTextBtnSelect" value="#000000"> <!-- Have to be hidden -->
+
+          <p id="nameTextBtnColor">#000000</p>
+        </div>
+      </div>
+
+    </section>
+<!-- ================================================= -->
+
+
+
+<!-- ================ OUTLINE SECTION =================== -->
+<!-- <section id="outlineSection">
+
+
+  BORDER RADIUS
+  <div class="radius">
+    <h3>Border radius :</h3>
+    <div class="radiusAlign">
+
+      <div class="radiusType" id="squareRadiusO">
+        <img src="../assets/square.png" alt="square">
+        <p>Square</p>
+      </div>
+
+      <div class="radiusType" id="roundRadiusO">
+        <img src="../assets/round.png" alt="round">
+        <p>Round</p>
+      </div>
+
+      <div class="radiusType" id="rounderRadiusO">
+        <img src="../assets/rounder.png" alt="rounder">
+        <p>Rounder</p>
+      </div>
+
+      <div class="radiusType" id="fullRadiusO">
+        <img src="../assets/full.png" alt="full">
+        <p>Full</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  BUTTON COLOR
+    <div class="buttonColor">
+    <h3>Button color :</h3>
+    <div class="colorCard">
+      <label for="colorButtonSelectO">
+        <span id="circleButtonColorO" class="circleColor"></span>
+      </label>
+      <input type="color" name="colorButtonSelectO" id="colorButtonSelectO" value="#000000">
+
+      <p id="nameButtonColorO">#000000</p>
+    </div>
+  </div>
+
+
+  TEXT BUTTON COLOR
+    <div class="textBtnColor">
+    <h3>Button text color :</h3>
+    <div class="colorCard">
+      <label for="colorTextBtnSelectO">
+        <span id="circleTextBtnColorO" class="circleColor"></span>
+      </label>
+      <input type="color" name="colorTextBtnSelectO" id="colorTextBtnSelectO" value="#000000">
+
+      <p id="nameTextBtnColorO">#000000</p>
+    </div>
+  </div>
+
+
+</section> -->
+<!-- ==================================================== -->
+
+  <footer>
+    <p>- Made with <a href="#">JointIn</a> -</p>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="buttons.js"></script>
+  <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
+</body>
+</html>
