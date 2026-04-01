@@ -124,6 +124,22 @@ function initAvatarUpload() {
     const file = e.target.files[0];
     if (!file) return;
 
+    // Validation format
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      showToast('Format non supporté. Utilise JPG, PNG, GIF ou WEBP.', 'error');
+      input.value = '';
+      return;
+    }
+
+    // Validation taille (2MB max)
+    const maxSize = 2 * 1024 * 1024; 
+    if (file.size > maxSize) {
+      showToast(`Image trop lourde (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum 2MB.`, 'error');
+      input.value = '';
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (ev) => {
       const base64 = ev.target.result;
