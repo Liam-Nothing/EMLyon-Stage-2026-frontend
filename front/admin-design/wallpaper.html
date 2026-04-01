@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="wallpaper.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <title>JointIn - Wallpaper</title>
+</head>
+<body>
+  
+  <header>
+      <img src="../assets/LogoJointInWhite.png" alt="logo" class="logo">
+
+      <div class="btn-align">
+          <a href="../index.html" class="btn-forme btn-main" id="public-btn">Page Publique</a>
+          <a href="" class="btn-forme btn-second" id="logout-btn">Log-out</a>
+      </div>
+      <!-- ajouter menu -->
+        <div class="menue">
+          <i class="fa-solid fa-bars"></i>
+      </div>
+  </header>
+
+  <main>
+
+    <nav class="navBar">
+
+      <div class="nav-left">
+        <a href="../admin/admin.html" class="grey">Liens</a>
+        <a href="customize.html">Design</a>
+        <a href="../admin/admin_profile.html" class="grey">Profil</a>
+      </div>
+
+      <div class="nav-right">
+        <p>Link : <a href="">xxx/xxxxxx.xx </a></p>
+        <a href="" class="hidden"><i class="fa-regular fa-copy"></i></a>
+      </div>
+
+    </nav>
+
+    <section id="theme">
+
+      <div class="titleNav">
+
+        <div class="leftTitleNav">
+          <a href="customize.html"><i class="fa-solid fa-angle-left"></i></a>
+          <h2>Wallpaper</h2>
+        </div>
+        <div class="saveTitleNav">
+          <div class="arrows">
+            <button id="undoButton" class="undoButton"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+            <button id="redoButton" class="redoButton"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+          </div>
+          <button class="btn-forme button" id="saveBtn">Sauvegarder</button>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <section id="wallpaperStyle">
+
+      <h3>Wallpaper style :</h3>
+      <div class="styleAlign">
+
+        <div class="styleCard">
+          <span id="fillCard" class="fillCard"></span>
+          <p id="fillCardP">Fill</p>
+        </div>
+        <div class="styleCard">
+          <span id="gradientCard" class="fillCard"></span>
+          <p id="gradientCardP">Gradient</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================ FILL SELECTED ================  -->
+
+    <section id="fillSelected">
+
+      <div class="bodyColor">
+        <h3>Body color :</h3>
+        <div class="colorCard">
+          <label for="colorBodySelect">
+            <span id="circleBodyColor" class="circleColor"></span>
+          </label>
+          <input type="color" name="colorBodySelect" id="colorBodySelect" value="#000000"> <!-- Have to be hidden -->
+
+          <p id="nameBodyColor">#000000</p>
+        </div>
+      </div>
+
+      <div class="backgroundColor">
+        <h3>Background color :</h3>
+        <div class="colorCard">
+          <label for="colorBackgroundSelect">
+            <span id="circleBackgroundColor" class="circleColor"></span>
+          </label>
+          <input type="color" name="colorBackgroundSelect" id="colorBackgroundSelect" value="#000000"> <!-- Have to be hidden -->
+
+          <p id="nameBackgroundColor">#000000</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =============================================== -->
+
+
+
+    <!-- ================ GRADIENT SELECTED ================  -->
+
+    <section id="gradientSelected">
+
+
+      <div class="bodyColor">
+
+        <h3>Body color :</h3>
+        <div class="colorCard">
+          <label for="colorBodySelected">
+            <span id="circleBodyColors" class="circleColor"></span>
+          </label>
+          <input type="color" name="colorBodySelect" id="colorBodySelected" value="#000000"> <!-- Have to be hidden -->
+
+          <p id="nameBodyColors">#000000</p>
+        </div>
+
+      </div>
+
+
+
+      <div class="gradientColors">
+
+        <h3>Gradient colors :</h3>
+        <div class="gradientAlign" >
+
+          <div class="gradientContainer" id="gradientContainer"></div>
+          <!-- ======== Added with the plus? ======== -->
+          <!-- <div class="gradientCard">
+            <div class="leftGradientCard">
+              <i class="fa-solid fa-grip-vertical"></i>
+            </div>
+
+            <div class="rightGradientCard">
+              <label for="colorGradientSelect">
+                <span id="circleGradientColor" class="circleColor"></span>
+              </label>
+              <input type="color" name="colorGradientSelect" id="colorGradientSelect" value="#000000">
+
+              <p id="nameBodyColor">#000000</p>
+            </div>
+          </div> -->
+          <!-- ================================== -->
+
+          <button class="addGradient" id="addGradient">
+            <i class="fa-solid fa-plus"></i>     <!-- MAX 3 COLORS -->
+          </button>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+    <!-- =================================================== -->
+
+  </main>
+
+  <footer>
+    <p>- Made with <a href="#">JointIn</a> -</p>
+  </footer>
+
+
+  <script src="../script.js"></script>
+  <script src="wallpaper.js"></script>
+  <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
+</body>
+</html>

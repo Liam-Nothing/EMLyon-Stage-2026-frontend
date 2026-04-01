@@ -1,0 +1,236 @@
+section {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 50px;
+}
+
+.leftTitleNav, .saveTitleNav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.arrows {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  padding: 14px 34px;
+  overflow: hidden;
+  position: relative;
+  opacity: 0.6;
+}
+
+.button.active {
+  opacity: 1;
+}
+
+.button.active:hover {
+  background-color: #2B5C6C;
+}
+
+.undoButton, .redoButton {
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.undoButton.active {
+  opacity: 1;
+}
+
+.redoButton.active {
+  opacity: 1;
+}
+
+.fa-angle-left {
+  font-size: 18px;
+}
+
+.card.selected {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* WALLPAPER STYLE */
+#wallpaperStyle {
+  margin: 0 40px 40px 40px;
+}
+
+h3 {
+  margin-bottom: 15px;
+}
+
+.styleAlign {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.styleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.fillCard {
+  /* background-color: aqua; */
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.fillCard.selected {  /* JAVASCRIPT */
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+.unselected {  /* JAVASCRIPT */
+  opacity: 0.5;
+}
+
+/* =================== FILL SELECTED =================== */
+
+.bodyColor, .backgroundColor  {
+  margin: 0 40px 40px 40px;
+}
+
+.colorCard {
+  padding: 20px 30px;
+  background-color: var(--surface-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+}
+
+.circleColor {
+  /* background-color: aqua; */
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  outline: 3px solid rgb(217, 217, 217);
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+input[type=color] {
+  display: none;
+}
+
+/* ===================================================== */
+
+
+/* =================== GRADIENT SELECTED =================== */
+
+.gradientColors {
+  margin: 0 40px 40px 40px;
+}
+
+.gradientAlign {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.gradientContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.gradientCard {
+  /* padding: 20px 30px; */
+  background-color: var(--surface-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.leftGradientCard {
+  background-color: var(--secondary-color);
+  padding: 43px 15px;
+  font-size: 22px;
+  font-weight: 500;
+  cursor: grab;
+}
+.rightGradientCard {
+  display: flex;
+  align-items: center;
+}
+
+.rightAlign {
+  padding: 20px 30px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.deleteCard {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.fa-trash {
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.fa-trash:hover {
+  color: var(--error-color);
+}
+
+.addGradient {
+  border: none;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 10px 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ========================================================= */
+
+/* error messages */
+.boxMessage {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  background: var(--error-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) ;
+  z-index: 9999;
+  animation: 0.3 ease 0s 1 normal none running slideIn;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
