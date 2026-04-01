@@ -8,6 +8,12 @@ window.addEventListener("scroll", () => {
   }
 });
 
+// ====== Chargement de la carte preview =========================================
+
+
+
+
+
 // document.addEventListener('DOMContentLoaded', () => {
   const backgrounds = document.getElementById('backgroundColor');
   const card = document.getElementById('cardPreview');
