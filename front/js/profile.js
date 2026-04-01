@@ -32,18 +32,36 @@ function applyThemeColors(colors) {
 }
 
 // Rendu de l'avatar
-function renderAvatar(avatar) {
+function renderAvatar(avatar, name) {
   const img = document.getElementById('profile-avatar');
   if (!img) return;
 
   if (avatar) {
     img.src = avatar;
+  } else {
+    // Affiche les initiales ou une silhouette quand l'utilisateur n'a pas une pfp
+    const initials = (name || '').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+
+    if (initials) {
+      // Remplace l'img par un div avec les initiales
+      const placeholder = document.createElement('div');
+      placeholder.style.cssText = `
+        width: 96px; height: 96px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 2rem; font-weight: bold;
+        background: #40798C; color: #FFFEF9;
+      `;
+      placeholder.textContent = initials;
+      img.replaceWith(placeholder);
+    } else {
+      // Silhouette générique
+      img.src = `data:image/svg+xml,<svg viewBox="0 0 24 24" fill="%23aaa" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>`;
+    }
   }
-  // Si pas d'avatar, on laisse l'image par défaut déjà dans le HTML
 }
 
 
-// Rendu des liens — génère les link-cards avec ta structure HTML
+// Rendu des liens
 function renderLinks(links) {
   const container = document.getElementById('links-container');
   if (!container) return;
@@ -88,7 +106,6 @@ async function loadProfile() {
   showState('loading');
 
   try {
-    // Fetch profile et links en parallèle
     const [profileRes, linksRes] = await Promise.all([
       fetch('/api/profile'),
       fetch('/api/links'),
@@ -112,7 +129,7 @@ async function loadProfile() {
     if (bioProfile && profile.bio) bioProfile.textContent = profile.bio;
 
     // Avatar
-    renderAvatar(profile.avatar);
+    renderAvatar(profile.avatar, profile.name);
 
     // Liens
     renderLinks(links);
