@@ -8,19 +8,19 @@
     "active": true
   },
   {
-    "id": "2",
-    "title": "Titre modifié",
-    "url": "https://www.linkedin.com/in/salsabila-latasse/",
-    "icon": "",
-    "order": 2,
-    "active": false
-  },
-  {
     "id": "4",
     "title": "My Github",
     "url": "https://github.com/Salsa-Lat",
     "icon": "",
-    "order": 3,
+    "order": 2,
     "active": true
+  },
+  {
+    "id": "2",
+    "title": "Titre modifié",
+    "url": "https://www.linkedin.com/in/salsabila-latasse/",
+    "icon": "",
+    "order": 3,
+    "active": false
   }
 ]

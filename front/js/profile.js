@@ -84,15 +84,15 @@ function renderLinks(links) {
     div.className = 'link-card link-style-solide';
 
     div.innerHTML = `
-      <div class="left">
+      <div class="left" id="leftPreview">
         <img src="assets/LogoJointInBlue.png" alt="${link.title}">
       </div>
-      <div class="middle">
-        <p>
+      <div class="middle" id="middlePreview">
+        <p class="textBtn">
           ${link.icon ? link.icon + ' ' : ''}${link.title}
         </p>
       </div>
-      <div class="right"></div>
+      <div class="right" id="rightPreview"></div>
     `;
 
     container.appendChild(clickable);
@@ -100,6 +100,64 @@ function renderLinks(links) {
   });
 }
 
+
+// APPLY COLOR ANOTHER WAY - TEST ======================================
+// =====================================================================
+
+function applyThemeApi() {
+  fetch("/api/profile/theme")
+  .then(response => response.json())
+  .then(data => {
+  
+    const backgrounds = document.body;
+    const card = document.getElementById('cardPreview');
+    const h1 = document.getElementById('profile-name');
+    const bio = document.getElementById('profile-bio');
+    const footer = document.getElementById('footer');
+    const foot = document.getElementById('stillFooter');
+  
+    const btnLink = document.querySelectorAll('.link-card');
+    const textBtnLink = document.querySelectorAll('.textBtn');
+    const imageLeft = document.querySelectorAll('.leftPreview');
+    const imageRight = document.querySelectorAll('.rightPreview');
+  
+  
+    backgrounds.style.backgroundColor = data.colors.background;
+    card.style.background = data.colors.cardBackground;
+    h1.style.color = data.colors.textColor;
+    bio.style.color = data.colors.textColor;
+    footer.style.color = data.colors.textColor;
+    foot.style.color = data.colors.textColor;
+    
+    btnLink.forEach(btn => {
+      btn.style.backgroundColor = data.colors.primary;
+      btn.style.borderRadius = data.colors.borderRadius;
+      btn.style.border = data.colors.border;
+      btn.style.boxShadow = data.colors.boxShadow;
+    });
+  
+    textBtnLink.forEach(text => {
+      text.style.color = data.colors.linkTextColor;
+    });
+  
+    imageLeft.forEach(img => {
+      img.style.borderRadius = data.colors.borderRadius;
+    });
+  
+    imageRight.forEach(img => {
+      img.style.borderRadius = data.colors.borderRadius;
+    });
+  
+  })
+  
+  .catch (error => {
+    console.log('error : Fail to load colors', error);
+  });
+
+}
+
+
+// =====================================================================
 
 // Chargement principal
 async function loadProfile() {
@@ -118,7 +176,8 @@ async function loadProfile() {
     const links   = await linksRes.json();
 
     // Couleurs du thème
-    applyThemeColors(profile.colors);
+    // applyThemeColors(profile.colors);
+    applyThemeApi();
 
     // Nom
     const nameProfile = document.getElementById('profile-name');
