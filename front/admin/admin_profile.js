@@ -87,6 +87,30 @@ function showToast(message, type = 'success') {
 }
 
 
+
+function showFieldError(inputEl, message) {
+  inputEl.style.borderColor = '#FF5C72';
+  let errorEl = inputEl.parentElement.querySelector('.error-message');
+  if (!errorEl) {
+    errorEl = document.createElement('span');
+    errorEl.className = 'error-message';
+    errorEl.style.cssText = 'color:#FF5C72;font-size:0.8rem;margin-top:4px;display:block;animation:fadeIn 0.2s ease';
+    inputEl.parentElement.appendChild(errorEl);
+  }
+  errorEl.textContent = message;
+  inputEl.addEventListener('input', () => clearFieldError(inputEl), { once: true });
+}
+
+
+
+function clearFieldError(inputEl) {
+  inputEl.style.borderColor = '';
+  const errorEl = inputEl.parentElement.querySelector('.error-message');
+  if (errorEl) errorEl.textContent = '';
+}
+
+
+
 // Chargement du profil depuis l'API
 async function loadProfile() {
   try {
@@ -115,21 +139,33 @@ async function loadProfile() {
 }
 
 
+
 // Sauvegarde via PUT /api/profile
 async function saveProfile() {
+  const nameInput = document.getElementById('name');
+  const bioInput  = document.getElementById('bio');
   const name   = document.getElementById('name').value.trim();
   const bio    = document.getElementById('bio').value.trim();
   const avatar = window._pendingAvatar || undefined;
 
   // Validation côté client
   if (name && name.length > 50) {
-    showToast('Le nom ne peut pas dépasser 50 caractères', 'error');
+    showFieldError(nameInput, `Nom trop long (${name.length}/50 caractères)`);
     return;
   }
   if (bio && bio.length > 160) {
-    showToast('La bio ne peut pas dépasser 160 caractères', 'error');
+    showFieldError(bioInput, `Bio trop longue (${bio.length}/160 caractères)`);
     return;
   }
+
+  // if (name && name.length > 50) {
+  //   showToast('Le nom ne peut pas dépasser 50 caractères', 'error');
+  //   return;
+  // }
+  // if (bio && bio.length > 160) {
+  //   showToast('La bio ne peut pas dépasser 160 caractères', 'error');
+  //   return;
+  // }
 
   const body = {};
   if (name)   body.name   = name;
@@ -162,6 +198,7 @@ async function saveProfile() {
     showToast('Erreur réseau, réessayez', 'error');
   }
 }
+
 
 
 // Upload avatar (base64)
@@ -233,6 +270,7 @@ function initButtons() {
   const bioInput = document.getElementById('bio');
   if (bioInput) {
     bioInput.addEventListener('input', () => {
+      clearFieldError(bioInput);
       const len = bioInput.value.length;
       bioInput.style.borderColor = len > 160 ? '#FF5C72' : len > 140 ? '#f0a500' : '';
     });
