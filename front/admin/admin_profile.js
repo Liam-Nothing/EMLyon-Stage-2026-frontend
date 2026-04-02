@@ -1,41 +1,114 @@
 // Toast notification
+
+// function showToast(message, type = 'success') {
+//   const existing = document.getElementById('toast');
+//   if (existing) existing.remove();
+
+//   const toast = document.createElement('div');
+//   toast.id = 'toast';
+//   toast.textContent = message;
+//   toast.style.cssText = `
+//     position: fixed;
+//     bottom: 24px;
+//     right: 24px;
+//     padding: 12px 20px;
+//     border-radius: 8px;
+//     font-size: 0.9rem;
+//     font-weight: 500;
+//     color: #fff;
+//     background: ${type === 'success' ? '#36D399' : '#FF5C72'};
+//     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+//     z-index: 9999;
+//     animation: slideIn 0.3s ease;
+//   `;
+
+//   if (!document.getElementById('toast-style')) {
+//     const style = document.createElement('style');
+//     style.id = 'toast-style';
+//     style.textContent = `
+//       @keyframes slideIn {
+//         from { opacity: 0; transform: translateY(12px); }
+//         to   { opacity: 1; transform: translateY(0); }
+//       }
+//     `;
+//     document.head.appendChild(style);
+//   }
+
+//   document.body.appendChild(toast);
+//   setTimeout(() => toast.remove(), 3000);
+// }
+
 function showToast(message, type = 'success') {
-  const existing = document.getElementById('toast');
-  if (existing) existing.remove();
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.style.cssText = `
+      position: fixed; top: 24px; right: 24px;
+      display: flex; flex-direction: column; gap: 8px;
+      z-index: 9999;
+    `;
+    document.body.appendChild(container);
+  }
+
+  const icon  = type === 'success' ? '✓' : '✕';
+  const color = type === 'success' ? '#36D399' : '#FF5C72';
 
   const toast = document.createElement('div');
-  toast.id = 'toast';
-  toast.textContent = message;
   toast.style.cssText = `
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #fff;
-    background: ${type === 'success' ? '#36D399' : '#FF5C72'};
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 500; color: #fff;
+    background: ${color};
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    z-index: 9999;
-    animation: slideIn 0.3s ease;
+    animation: toastIn 0.3s ease;
+    transition: opacity 0.4s ease;
   `;
+  toast.innerHTML = `<span style="font-weight:700;font-size:1rem">${icon}</span> ${message}`;
 
   if (!document.getElementById('toast-style')) {
     const style = document.createElement('style');
     style.id = 'toast-style';
     style.textContent = `
-      @keyframes slideIn {
-        from { opacity: 0; transform: translateY(12px); }
-        to   { opacity: 1; transform: translateY(0); }
+      @keyframes toastIn {
+        from { opacity: 0; transform: translateX(20px); }
+        to   { opacity: 1; transform: translateX(0); }
       }
     `;
     document.head.appendChild(style);
   }
 
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
 }
+
+
+
+function showFieldError(inputEl, message) {
+  inputEl.style.borderColor = '#FF5C72';
+  let errorEl = inputEl.parentElement.querySelector('.error-message');
+  if (!errorEl) {
+    errorEl = document.createElement('span');
+    errorEl.className = 'error-message';
+    errorEl.style.cssText = 'color:#FF5C72;font-size:0.8rem;margin-top:4px;display:block;animation:fadeIn 0.2s ease';
+    inputEl.parentElement.appendChild(errorEl);
+  }
+  errorEl.textContent = message;
+  inputEl.addEventListener('input', () => clearFieldError(inputEl), { once: true });
+}
+
+
+
+function clearFieldError(inputEl) {
+  inputEl.style.borderColor = '';
+  const errorEl = inputEl.parentElement.querySelector('.error-message');
+  if (errorEl) errorEl.textContent = '';
+}
+
 
 
 // Chargement du profil depuis l'API
@@ -66,21 +139,33 @@ async function loadProfile() {
 }
 
 
+
 // Sauvegarde via PUT /api/profile
 async function saveProfile() {
+  const nameInput = document.getElementById('name');
+  const bioInput  = document.getElementById('bio');
   const name   = document.getElementById('name').value.trim();
   const bio    = document.getElementById('bio').value.trim();
   const avatar = window._pendingAvatar || undefined;
 
   // Validation côté client
   if (name && name.length > 50) {
-    showToast('Le nom ne peut pas dépasser 50 caractères', 'error');
+    showFieldError(nameInput, `Nom trop long (${name.length}/50 caractères)`);
     return;
   }
   if (bio && bio.length > 160) {
-    showToast('La bio ne peut pas dépasser 160 caractères', 'error');
+    showFieldError(bioInput, `Bio trop longue (${bio.length}/160 caractères)`);
     return;
   }
+
+  // if (name && name.length > 50) {
+  //   showToast('Le nom ne peut pas dépasser 50 caractères', 'error');
+  //   return;
+  // }
+  // if (bio && bio.length > 160) {
+  //   showToast('La bio ne peut pas dépasser 160 caractères', 'error');
+  //   return;
+  // }
 
   const body = {};
   if (name)   body.name   = name;
@@ -113,6 +198,7 @@ async function saveProfile() {
     showToast('Erreur réseau, réessayez', 'error');
   }
 }
+
 
 
 // Upload avatar (base64)
@@ -184,6 +270,7 @@ function initButtons() {
   const bioInput = document.getElementById('bio');
   if (bioInput) {
     bioInput.addEventListener('input', () => {
+      clearFieldError(bioInput);
       const len = bioInput.value.length;
       bioInput.style.borderColor = len > 160 ? '#FF5C72' : len > 140 ? '#f0a500' : '';
     });

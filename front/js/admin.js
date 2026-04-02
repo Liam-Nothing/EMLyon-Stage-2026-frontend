@@ -1,74 +1,125 @@
 // Toast notification
-function showToast(message, type = 'success') {
+// function showToast(message, type = 'success') {
 
-  // Supprimer un toast existant
-  const existing = document.getElementById('toast');
-  if (existing) existing.remove();
+//   // Supprimer un toast existant
+//   const existing = document.getElementById('toast');
+//   if (existing) existing.remove();
+
+//   const toast = document.createElement('div');
+//   toast.id = 'toast';
+//   toast.textContent = message;
+//   toast.style.cssText = `
+//     position: fixed;
+//     bottom: 24px;
+//     right: 24px;
+//     padding: 12px 20px;
+//     border-radius: 8px;
+//     font-size: 0.9rem;
+//     font-weight: 500;
+//     color: #fff;
+//     background: ${type === 'success' ? '#36D399' : '#FF5C72'};
+//     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+//     z-index: 9999;
+//     animation: slideIn 0.3s ease;
+//   `;
+
+//   // Injection du keyframe si pas encore présent
+//   if (!document.getElementById('toast-style')) {
+//     const style = document.createElement('style');
+//     style.id = 'toast-style';
+//     style.textContent = `
+//       @keyframes slideIn {
+//         from { opacity: 0; transform: translateY(12px); }
+//         to   { opacity: 1; transform: translateY(0); }
+//       }
+//         .linkCard.dragging {
+//         opacity: 0.3;
+//         transform: scale(0.98);
+//       }
+//       .linkCard.drag-over {
+//         border-top: 3px solid var(--color-primary, #6C63FF);
+//       }
+//       .linkCard[draggable="true"] {
+//         cursor: grab;
+//       }
+//       .linkCard[draggable="true"]:active {
+//         cursor: grabbing;
+//       }
+//     `;
+//     document.head.appendChild(style);
+//   }
+
+//   document.body.appendChild(toast);
+//   setTimeout(() => toast.remove(), 3000);
+// }
+
+function showToast(message, type = 'success') {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.style.cssText = `
+      position: fixed; top: 24px; right: 24px;
+      display: flex; flex-direction: column; gap: 8px;
+      z-index: 9999;
+    `;
+    document.body.appendChild(container);
+  }
+
+  const icon  = type === 'success' ? '✓' : '✕';
+  const color = type === 'success' ? '#36D399' : '#FF5C72';
 
   const toast = document.createElement('div');
-  toast.id = 'toast';
-  toast.textContent = message;
   toast.style.cssText = `
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #fff;
-    background: ${type === 'success' ? '#36D399' : '#FF5C72'};
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 500; color: #fff;
+    background: ${color};
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    z-index: 9999;
-    animation: slideIn 0.3s ease;
+    animation: toastIn 0.3s ease;
+    transition: opacity 0.4s ease;
   `;
+  toast.innerHTML = `<span style="font-weight:700;font-size:1rem">${icon}</span> ${message}`;
 
-  // Injection du keyframe si pas encore présent
   if (!document.getElementById('toast-style')) {
     const style = document.createElement('style');
     style.id = 'toast-style';
     style.textContent = `
-      @keyframes slideIn {
-        from { opacity: 0; transform: translateY(12px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-        .linkCard.dragging {
-        opacity: 0.3;
-        transform: scale(0.98);
-      }
-      .linkCard.drag-over {
-        border-top: 3px solid var(--color-primary, #6C63FF);
-      }
-      .linkCard[draggable="true"] {
-        cursor: grab;
-      }
-      .linkCard[draggable="true"]:active {
-        cursor: grabbing;
+      @keyframes toastIn {
+        from { opacity: 0; transform: translateX(20px); }
+        to   { opacity: 1; transform: translateX(0); }
       }
     `;
     document.head.appendChild(style);
   }
 
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
 }
 
 
 // Affiche un message d'erreur inline sous un champ
 function showFieldError(inputEl, message) {
-  clearFieldError(inputEl);
-  const err = document.createElement('span');
-  err.className = 'field-error';
-  err.textContent = message;
-  err.style.cssText = 'color:#FF5C72;font-size:0.8rem;margin-top:4px;display:block;';
-  inputEl.parentElement.appendChild(err);
-  inputEl.style.borderColor = '#FF5C72';
+  const errorEl = document.getElementById('error-' + inputEl.id.replace('input-', ''));
+  if (errorEl) {
+    errorEl.textContent = message;
+    errorEl.classList.add('visible');
+  }
+
+  inputEl.addEventListener('input', () => clearFieldError(inputEl), { once: true });
 }
 
 function clearFieldError(inputEl) {
-  const err = inputEl.parentElement.querySelector('.field-error');
-  if (err) err.remove();
-  inputEl.style.borderColor = '';
+  inputEl.classList.remove('input-error');
+  const errorEl = document.getElementById('error-' + inputEl.id.replace('input-', ''));
+  if (errorEl) {
+    errorEl.textContent = '';
+    errorEl.classList.remove('visible');
+  }
 }
 
 
