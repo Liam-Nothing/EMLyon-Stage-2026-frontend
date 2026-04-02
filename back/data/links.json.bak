@@ -5,7 +5,7 @@
     "url": "https://x.com/?lang=fr",
     "icon": "",
     "order": 1,
-    "active": false
+    "active": true
   },
   {
     "id": "2",
@@ -13,7 +13,7 @@
     "url": "https://www.linkedin.com/in/salsabila-latasse/",
     "icon": "",
     "order": 2,
-    "active": true
+    "active": false
   },
   {
     "id": "4",

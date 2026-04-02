@@ -132,6 +132,33 @@ showPreview.addEventListener('click', () => {
     menuSection.classList.add('toggle');
 
   });
+
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+
+      back.style.display = 'none';
+
+      aside.classList.remove('fixedAp');
+      aside.style.width = '';
+      aside.style.height = '';
+      aside.style.top = '';
+      document.body.classList.add('remove-scrolling');
+
+      sections.forEach(section => {
+        section.classList.remove('hidden');
+      });
+      header.classList.remove('hidden');
+      nav.classList.remove('hidden');
+      footer.classList.remove('hidden');
+      menuSection.classList.add('toggle');
+
+      document.body.classList.remove('remove-scrolling');
+      menuSection.classList.remove('toggle');
+
+    }
+  });
+
 });
 
 // ============================ 
