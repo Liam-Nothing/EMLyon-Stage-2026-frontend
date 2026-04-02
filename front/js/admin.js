@@ -570,7 +570,7 @@ function initAddLinkForm() {
   if (btnAdd) btnAdd.addEventListener('click', handleSubmit);
 }
 
-
+// LOAD PREVIEW CARD =========================================
 async function renderPreview() {
   try {
     const [profileRes, linksRes] = await Promise.all([
@@ -614,6 +614,8 @@ async function renderPreview() {
           clickable.appendChild(div);
         });
     }
+
+    applyThemeApi();
 
   } catch (err) {
     console.error('[renderPreview]', err.message);

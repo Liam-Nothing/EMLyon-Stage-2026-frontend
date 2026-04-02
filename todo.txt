@@ -12,9 +12,8 @@
 - add the menu block with preview
 - copy link
 
-- responsive for admin-design
 - backEnd of wallpaper
-- theme saveBtn should be low opacity when click on theme on customize
 
 - mettre tout en Francais
 - Favicon on all
+- add font family in options
