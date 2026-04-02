@@ -104,19 +104,22 @@ function showToast(message, type = 'success') {
 
 // Affiche un message d'erreur inline sous un champ
 function showFieldError(inputEl, message) {
-  clearFieldError(inputEl);
-  const err = document.createElement('span');
-  err.className = 'field-error';
-  err.textContent = message;
-  err.style.cssText = 'color:#FF5C72;font-size:0.8rem;margin-top:4px;display:block;';
-  inputEl.parentElement.appendChild(err);
-  inputEl.style.borderColor = '#FF5C72';
+  const errorEl = document.getElementById('error-' + inputEl.id.replace('input-', ''));
+  if (errorEl) {
+    errorEl.textContent = message;
+    errorEl.classList.add('visible');
+  }
+
+  inputEl.addEventListener('input', () => clearFieldError(inputEl), { once: true });
 }
 
 function clearFieldError(inputEl) {
-  const err = inputEl.parentElement.querySelector('.field-error');
-  if (err) err.remove();
-  inputEl.style.borderColor = '';
+  inputEl.classList.remove('input-error');
+  const errorEl = document.getElementById('error-' + inputEl.id.replace('input-', ''));
+  if (errorEl) {
+    errorEl.textContent = '';
+    errorEl.classList.remove('visible');
+  }
 }
 
 
