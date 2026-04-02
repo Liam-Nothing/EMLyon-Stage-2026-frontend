@@ -1,7 +1,8 @@
-let themesData = [];            // Stocke tous les thèmes
-let selectedThemeId = null;     // ID du thème actuellement sélectionné
-let history = [];               // Historique des sélections
-let historyIndex = -1;          // Index dans l'historique
+let themesData = [];
+let selectedThemeId = null;
+let history = [];
+let historyIndex = -1;
+let hasChanged = false; // ✅ état de modification
 
 const container = document.getElementById('themeChoices');
 const saveButton = document.getElementById('saveBtn');
@@ -16,13 +17,16 @@ fetch("/api/themes")
     themesData = data;
     createCard(data);
 
-    // Charger le thème depuis le serveur
     fetch("/api/profile")
       .then(res => res.json())
       .then(profile => {
         if (profile.theme) {
-          selectTheme(profile.theme, false, true); // initial load, pas d'historique
+          selectTheme(profile.theme, false, true); // initial load
         }
+
+        // ✅ IMPORTANT : état clean au chargement
+        hasChanged = false;
+        saveButton.classList.remove('active');
       })
       .catch(() => console.log("Impossible de récupérer le thème du profil"));
   })
@@ -61,8 +65,7 @@ function createCard(data) {
 
     const card = wrapper.querySelector('.card');
     card.addEventListener('click', () => {
-      selectTheme(e.id, true)
-
+      selectTheme(e.id, true);
     });
 
     container.appendChild(wrapper);
@@ -72,25 +75,24 @@ function createCard(data) {
 
 // ======= SELECT THEME =======
 function selectTheme(id, saveHistory = true, initialLoad = false) {
-  // 🔹 Visuel
   document.querySelectorAll('.card').forEach(card => card.classList.remove('selected'));
   const card = document.getElementById(id);
   if (card) card.classList.add('selected');
 
-  // 🔹 Appliquer le thème
   applyTheme(id);
-
   selectedThemeId = id;
 
-  // 🔹 Historique
+  if (!initialLoad) {
+    hasChanged = true;
+    saveButton.classList.add('active'); // ✅ ici seulement
+  }
+
   if (saveHistory && !initialLoad) {
-    // si on était au milieu de l'historique, supprimer la suite
     history = history.slice(0, historyIndex + 1);
     history.push(id);
     historyIndex++;
   }
 
-  // 🔹 Activer / désactiver boutons
   updateButtons();
 }
 
@@ -128,16 +130,13 @@ function applyTheme(id) {
   textBtnLink.forEach(text => text.style.color = theme.colors.linkTextColor);
   imageLeft.forEach(img => img.style.borderRadius = theme.colors.borderRadius);
   imageRight.forEach(img => img.style.borderRadius = theme.colors.borderRadius);
-
-  // 🔹 Activer bouton sauvegarder
-  saveButton.classList.add('active');
 }
 
 
-// ======= BOUTON SAUVEGARDER =======
+// ======= SAVE =======
 saveButton.addEventListener('click', () => {
-  if (!selectedThemeId) {
-    showNotification("Veuillez sélectionner un thème avant de sauvegarder", "#FF5C72");
+  if (!hasChanged) {
+    showNotification("Aucun changement à sauvegarder", "#FF5C72");
     return;
   }
 
@@ -149,7 +148,8 @@ saveButton.addEventListener('click', () => {
   .then(res => res.json())
   .then(() => {
     showNotification("Thème sauvegardé", "#36D399");
-    saveButton.classList.remove('active'); // retirer après sauvegarde
+    saveButton.classList.remove('active');
+    hasChanged = false;
   })
   .catch(() => showNotification("Erreur lors de la sauvegarde", "#FF5C72"));
 });
@@ -159,7 +159,7 @@ saveButton.addEventListener('click', () => {
 undoButton.addEventListener('click', () => {
   if (historyIndex > 0) {
     historyIndex--;
-    selectTheme(history[historyIndex], false); // false = pas ajouter à l'historique
+    selectTheme(history[historyIndex], false);
   }
 });
 
@@ -175,13 +175,12 @@ redoButton.addEventListener('click', () => {
 function updateButtons() {
   undoButton.disabled = historyIndex <= 0;
   redoButton.disabled = historyIndex >= history.length - 1;
-  saveButton.disabled = !selectedThemeId; // désactiver si rien sélectionné
+  saveButton.disabled = !selectedThemeId;
 }
 
 
-// ======= NOTIFICATION SIMPLE =======
+// ======= NOTIFICATION =======
 function showNotification(msg, color) {
-  // alert(msg); // tu peux remplacer par un toast stylé
   const toast = document.createElement('div');
   toast.classList.add('boxMessage');
   toast.style.background = color;

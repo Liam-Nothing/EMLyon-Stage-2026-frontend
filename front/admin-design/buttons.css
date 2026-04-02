@@ -62,7 +62,13 @@ section {
   font-size: 18px;
 }
 
-#buttonStyle, #solidSection, #outlineSection {
+.radius, .shadow, .buttonColor, .textBtnColor {
+  margin: 0 40px 40px 40px;
+}
+#buttonStyle h3 {
+  margin: 0 40px 15px 40px;
+} 
+.styleAlign {
   margin: 0 40px 40px 40px;
 }
 
@@ -74,6 +80,8 @@ h3 {
   display: flex;
   align-items: center;
   gap: 40px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .solidBtn {
@@ -82,6 +90,7 @@ h3 {
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   cursor: pointer;
+  max-width: 175px;
 }
 
 .outlineBtn {
@@ -89,6 +98,7 @@ h3 {
   border-radius: 10px;
   border: 2px solid var(--text-color);
   cursor: pointer;
+  max-width: 175px;
 }
 
 .solidBtn.selected {
@@ -109,10 +119,6 @@ h3 {
   opacity: 0.5;
 }
 
-.radius, .shadow, .buttonColor {
-  margin-bottom: 40px;
-}
-
 .shadow {
   display: flex;
   flex-direction: column;
@@ -122,14 +128,15 @@ h3 {
 .radiusAlign, .shadowAlign {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .radiusType {
   display: flex;
   align-items: center;
-  padding: 20px 105px;
+  padding: 20px 100px;
   max-width: 150px;
   gap: 10px;
   display: flex;
@@ -162,7 +169,7 @@ h3 {
 .shadowType {
   display: flex;
   align-items: center;
-  padding: 20px 105px;
+  padding: 20px 100px;
   max-width: 150px;
   gap: 10px;
   display: flex;
@@ -194,6 +201,7 @@ h3 {
   box-shadow: var(--box-shadow);
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .circleColor {
@@ -208,5 +216,34 @@ h3 {
 }
 
 input[type=color] {
-  display: none;
+  /* display: none; */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  left: 125px;
+}
+
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+  section {
+    width: 100%;
+  }
+  .styleAlign {
+    gap: 25px;
+  }
+}
+@media (max-width:470px) {
+  .titleNav {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+  .saveTitleNav {
+    flex-direction: row-reverse;
+  }
+  .nav-right a {
+    display: none;
+  }
 }

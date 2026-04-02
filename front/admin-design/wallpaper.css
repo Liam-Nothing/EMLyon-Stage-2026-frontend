@@ -133,7 +133,21 @@ h3 {
 }
 
 input[type=color] {
-  display: none;
+  /* display: none; */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  left: 125px;
+}
+
+.gradientCard input[type=color] {
+  /* display: none; */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  left: 155px;
 }
 
 /* ===================================================== */
@@ -233,4 +247,27 @@ input[type=color] {
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+  section {
+    width: 100%;
+  }
+}
+@media (max-width:450px) {
+  .titleNav {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+  .saveTitleNav {
+    flex-direction: row-reverse;
+  }
+  .nav-right a {
+    display: none;
+  }
+  .rightGradientCard .circleColor {
+    margin-right: 10px;
+  }
 }
