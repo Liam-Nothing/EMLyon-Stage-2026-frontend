@@ -1,218 +1,177 @@
-const fs = require('fs');
-const express = require('express');
-const morgan = require('morgan');
 const path = require('path');
-
 const { readJSON, writeJSON } = require('../utils/jsonHelper.js');
-
-const app = express();
+const express = require('express');
+const router = express.Router();
 const LINKS = path.join(__dirname, '..', 'data', 'links.json');
 
-
-// // ─── Middlewares ───────────────────────────────────────────
-// app.use(express.json());
-// app.use(morgan('dev'));
-// app.use(express.static('public'));
-// app.use(express.static(path.join(__dirname, '../front')));
+// const link = readJSON(LINKS);
 
 
-// ─── Router ───────────────────────────────────────────
-const router = express.Router();
+// Helper : format d'erreur uniforme
+const err = (message) => ({ error: true, message });
 
 
-const link = readJSON(LINKS);
+// Validation URL 
+const isValidUrl = (url) => {
+  try { new URL(url); return true; }
+  catch { return false; }
+};
 
 
-// router.get('/', (req, res) => {
-//   res.json(link);
-// });
-
-
-
-// router.get('/', (req, res) => {
-//   try {
-//     // Vérifie si le fichier existe
-//     if (!fs.existsSync(LINKS)) {
-//       throw new Error("File not found");
-//     }
-
-//     // Lecture du fichier
-//     const data = fs.readFileSync(LINKS, "utf-8");
-
-//     // Parsing JSON (peut échouer si corrompu)
-//     const links = JSON.parse(data);
-
-//     res.json(links);
-//   } catch (error) {
-//     console.error(error);
-
-//     res.status(500).json({
-//       error: "Failed to read links data"
-//     });
-//   }
-
-// });
-
+// ROUTE GET
 router.get('/', (req, res) => {
   try {
     const links = readJSON(LINKS);
     res.json(links.sort((a, b) => a.order - b.order));
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to read links data' });
+  } catch (e) {
+    console.error('[GET /api/links]', e.message);
+    res.status(500).json({ error: 'Impossible de lire les liens' });
   }
 });
 
 
 
 // ROUTE POST
-router.post('/', (req, res, next) => {
-  const { title, url, icon } = req.body;
-
-  if (!title || !url) {
-    return res.status(400).json({ error: "Title and URL are required" });
+router.post('/', (req, res) => {
+  try {
+    const { title, url, icon = '' } = req.body;
+ 
+    if (!title || !title.trim())
+      return res.status(400).json(err('Le titre est requis'));
+    if (title.trim().length > 100)
+      return res.status(400).json(err('Le titre ne peut pas dépasser 100 caractères'));
+    if (!url || !url.trim())
+      return res.status(400).json(err("L'URL est requise"));
+    if (!url.startsWith('http://') && !url.startsWith('https://'))
+      return res.status(400).json(err("L'URL doit commencer par http:// ou https://"));
+    if (!isValidUrl(url))
+      return res.status(400).json(err("L'URL n'est pas valide"));
+ 
+    const links   = readJSON(LINKS) || [];
+    const maxOrder = Math.max(0, ...links.map(l => l.order || 0));
+ 
+    const newLink = {
+      id:        Date.now().toString(),
+      title:     title.trim(),
+      url:       url.trim(),
+      icon,
+      order:     maxOrder + 1,
+      active:    true,
+      createdAt: new Date().toISOString(),
+    };
+ 
+    links.push(newLink);
+    writeJSON(LINKS, links);
+ 
+    res.status(201).json(newLink);
+  } catch (e) {
+    console.error('[POST /api/links]', e.message);
+    res.status(500).json(err('Impossible de créer le lien'));
   }
-
-  // Lire les données
-  let links = readJSON(LINKS) || [];
-
-  // Générer les champs
-  const id = Date.now().toString();
-  const maxOrder = Math.max(0, ...links.map(link => link.order || 0));
-
-  const newLink = {
-    id,
-    title,
-    url,
-    icon,
-    order: maxOrder + 1,
-    active: true,
-    createdAt: new Date().toISOString()
-  };
-
-  // Ajouter
-  links.push(newLink);
-
-  // Sauvegarder
-  writeJSON(LINKS, links);
-
-  // Réponse
-  res.status(201).json(newLink);
-
-  next();
 });
 
 
 
-//ROUTE PUT
-router.put('/:id', (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const updates = req.body;
-    const links = readJSON(LINKS);
-    const linkIndex = links.findIndex(link => link.id ===id);
-
-    if (linkIndex === -1) {
-      return res.status(404).json({ error : 'link not found'});
+//ROUTE PUT /:ID
+router.put('/:id', (req, res) => {
+   try {
+    const { id }    = req.params;
+    const updates   = req.body;
+    const links     = readJSON(LINKS);
+    const linkIndex = links.findIndex(l => l.id === id);
+ 
+    if (linkIndex === -1)
+      return res.status(404).json(err('Lien introuvable'));
+ 
+    // Validation des champs envoyés
+    if (updates.title !== undefined) {
+      if (!updates.title.trim())
+        return res.status(400).json(err('Le titre ne peut pas être vide'));
+      if (updates.title.trim().length > 100)
+        return res.status(400).json(err('Le titre ne peut pas dépasser 100 caractères'));
     }
-
+    if (updates.url !== undefined) {
+      if (!updates.url.startsWith('http://') && !updates.url.startsWith('https://'))
+        return res.status(400).json(err("L'URL doit commencer par http:// ou https://"));
+      if (!isValidUrl(updates.url))
+        return res.status(400).json(err("L'URL n'est pas valide"));
+    }
+ 
     const existingLink = links[linkIndex];
-  
-    const updatedLink = {
+    const { id: _id, order: _order, createdAt: _cat, ...safeUpdates } = updates;
+ 
+    links[linkIndex] = {
       ...existingLink,
-      ...updates,
-      id:         existingLink.id,
-      order:      existingLink.order,
-      createdAt:  existingLink.createdAt,
+      ...safeUpdates,
+      id:        existingLink.id,
+      order:     existingLink.order,
+      createdAt: existingLink.createdAt,
     };
-
-    links[linkIndex] = updatedLink;
+ 
     writeJSON(LINKS, links);
-
-    res.status(200).json(updatedLink);
-  } catch {
-    res.status(500).json({ error : "Server error" });
+    res.json(links[linkIndex]);
+  } catch (e) {
+    console.error('[PUT /api/links/:id]', e.message);
+    res.status(500).json(err('Impossible de modifier le lien'));
   }
-
-  next();
-
 });
 
 
 // DELETE /api/links/:id
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', (req, res) => {
   try {
-    const id  = req.params.id;
-    let links = readJSON(LINKS);
-  
-    // Vérifie si le lien existe
-    const linkExists = links.some(link => link.id === id);
-
-    if (!linkExists) {
-      return res.status(404).json({error: 'link not found'});
-    }
-
-    //Suppression du lien
-    links = links.filter(link => link.id !== id);
-
-    //Recalculer l'order pour éviter les trous
-    links = links.map((link, index) => ({
-      ...link,
-      order: index + 1
-    }));
-
+    const { id } = req.params;
+    let links    = readJSON(LINKS);
+ 
+    if (!links.some(l => l.id === id))
+      return res.status(404).json(err('Lien introuvable'));
+ 
+    links = links
+      .filter(l => l.id !== id)
+      .sort((a, b) => a.order - b.order)
+      .map((l, i) => ({ ...l, order: i + 1 }));
+ 
     writeJSON(LINKS, links);
-
-    res.status(200).json({ message: 'link deleted'});
-    } catch (error) {
-      res.status(500).json({ error: "Server error" });
-    }
-
-    next();
-  });
-
-
-
-
-// ROUTE PATCH
-
-router.patch('/reorder', (req, res, next) => {
-  const newOrder = req.body;
-
-  // Vérifier que c'est un tableau
-  if (!Array.isArray(newOrder)) {
-    return res.status(400).json({ error: "Request body must be an array" });
+    res.json({ error: false, message: 'Lien supprimé' });
+  } catch (e) {
+    console.error('[DELETE /api/links/:id]', e.message);
+    res.status(500).json(err('Impossible de supprimer le lien'));
   }
-
-  // Lire les liens existants
-  const links = readJSON(LINKS) || [];
-
-  // Vérifier que tous les IDs existent
-  for (const item of newOrder) {
-    const link = links.find(l => l.id === item.id);
-    if (!link) {
-      return res.status(400).json({ error: `Link ID not found: ${item.id}` });
-    }
-  }
-
-  // Mettre à jour l'ordre
-  for (const item of newOrder) {
-    const link = links.find(l => l.id === item.id);
-    link.order = item.order;
-  }
-
-  // Trier les liens par ordre
-  links.sort((a, b) => a.order - b.order);
-
-  // Sauvegarder dans le fichier JSON
-  writeJSON(LINKS, links);
-
-  // Retourner le tableau mis à jour
-  res.status(200).json(links);
-
-  next();
 });
 
 
+// ROUTE PATCH
+router.patch('/reorder', (req, res) => {
+  try {
+    const newOrder = req.body;
+ 
+    if (!Array.isArray(newOrder) || newOrder.length === 0)
+      return res.status(400).json(err('Le body doit être un tableau non vide'));
+ 
+    for (const item of newOrder) {
+      if (!item.id || typeof item.order !== 'number')
+        return res.status(400).json(err('Chaque item doit avoir un id et un order numérique'));
+    }
+ 
+    const links      = readJSON(LINKS) || [];
+    const existingIds = new Set(links.map(l => l.id));
+    const invalidIds  = newOrder.filter(item => !existingIds.has(item.id));
+ 
+    if (invalidIds.length > 0)
+      return res.status(400).json(err(`IDs introuvables : ${invalidIds.map(i => i.id).join(', ')}`));
+ 
+    const orderMap = new Map(newOrder.map(item => [item.id, item.order]));
+    const reordered = links
+      .map(l => ({ ...l, order: orderMap.has(l.id) ? orderMap.get(l.id) : l.order }))
+      .sort((a, b) => a.order - b.order);
+ 
+    writeJSON(LINKS, reordered);
+    res.json(reordered);
+  } catch (e) {
+    console.error('[PATCH /api/links/reorder]', e.message);
+    res.status(500).json(err('Impossible de réordonner les liens'));
+  }
+});
 
-// app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+
 module.exports = router;
