@@ -12,6 +12,7 @@
 - copy link
 
 - add the menu block to every page after linking all 'a'
+- a verifier si apercu is scroll true
 - navBar copyLink icone disepeared ._.
 
 - backEnd of wallpaper
