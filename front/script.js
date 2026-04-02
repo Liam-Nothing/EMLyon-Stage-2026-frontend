@@ -65,18 +65,73 @@ function applyThemeApi() {
 
 
 
+// MENU BAR ================
+const menu = document.getElementById('menu');
+const menuSection = document.getElementById('menuSection');
 
-// // MENU BAR
-// const menu = document.getElementById('menu');
-// const main = document.querySelector('main');
+menu.addEventListener('click', () => {
+  document.body.classList.toggle('remove-scrolling');
+  menuSection.classList.toggle('toggle');
+});
 
-// menu.addEventListener('click', () => {
-//   const menuBar = document.createElement('div');
-//   menuBar.style.display = "absolute";
-//   menuBar.style.top = "5px";
-//   menuBar.style.width = "100%";
-//   menuBar.style.height = "100vh";
-//   menuBar.style.background = "var(--background-color)";
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    document.body.classList.remove('remove-scrolling');
+  menuSection.classList.remove('toggle');
+  }
+});
 
-//   main.appendChild(menuBar);
-// });
+// shows preview card
+const showPreview = document.getElementById('showsPreview');
+
+showPreview.addEventListener('click', () => {
+  const sections = document.querySelectorAll('section');
+  const header = document.querySelector('header');
+  const nav = document.querySelector('nav');
+  const footer = document.querySelector('footer');
+  const aside = document.querySelector('aside');
+
+  sections.forEach(section => {
+    section.classList.add('hidden');
+  });
+  header.classList.add('hidden');
+  nav.classList.add('hidden');
+  footer.classList.add('hidden');
+  
+  aside.classList.add('fixedAp');
+  aside.style.width = '100%';
+  aside.style.height = '100%';
+  aside.style.top = '0';
+  document.body.classList.remove('remove-scrolling');
+
+  const back = document.createElement('div');
+  back.innerHTML = '<i class="fa-solid fa-angle-left"></i>';
+  back.style.fontSize = '20px';
+  back.style.display = "inline-block";
+  back.style.position = 'absolute';
+  back.style.top = "0";
+  back.style.left = "0";
+  back.style.padding = '10px 15px';
+  aside.appendChild(back);
+
+  back.addEventListener('click', () => {
+    back.style.display = 'none';
+
+    aside.classList.remove('fixedAp');
+    aside.style.width = '';
+    aside.style.height = '';
+    aside.style.top = '';
+    document.body.classList.add('remove-scrolling');
+
+    sections.forEach(section => {
+      section.classList.remove('hidden');
+    });
+    header.classList.remove('hidden');
+    nav.classList.remove('hidden');
+    footer.classList.remove('hidden');
+    menuSection.classList.add('toggle');
+
+  });
+});
+
+// ============================ 

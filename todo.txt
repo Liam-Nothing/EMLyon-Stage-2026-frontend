@@ -9,8 +9,10 @@
 - position sticky
 - flex pr aside
 - pb with hierarchie loading of admin preview card
-- add the menu block with preview
 - copy link
+
+- add the menu block to every page after linking all 'a'
+- navBar copyLink icone disepeared ._.
 
 - backEnd of wallpaper
 
