@@ -1,41 +1,3 @@
-
-/* Toggle liens */
-/* .toggle{
-    width: 60px;
-    height: 30px;
-    background: #ccc;
-    border-radius: 30px;
-    position: relative;
-    cursor: pointer;
-}
-.toggle::before{
-    content: "";
-    position: absolute;
-    top:2px;
-    left:2px;
-    width: 26px;
-    height: 26px;
-    background:white;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-input{
-    display: none;
-}
-input:checked + .toggle{
-    background: #4c52ff;
-}
-input:checked + .toggle::before{
-    left: 32px;
-} */
-
-/* =================================================
-====================================================
-==================================================== */
-
-
-
-
 /* Toggle liens */
 .switch{
 position:relative;
@@ -338,6 +300,31 @@ button  {
   color: var(--background-color);
   border-color: var(--error-color);
   background-color: var(--error-color);
+}
+
+
+/* ==================================================================== */
+/* =========================== ERROR MESSAGE ========================== */
+/* ==================================================================== */
+.error-message {
+  display: none;
+  color: #FF5C72;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  animation: fadeIn 0.2s ease;
+}
+
+.error-message.visible {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+input.input-error {
+  border-color: #FF5C72 !important;
 }
 
 
