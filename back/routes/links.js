@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
 // ROUTE POST
 router.post('/', (req, res) => {
   try {
-    const { title, url, icon = '' } = req.body;
+    const { title, url, icon = '', image = '' } = req.body;
  
     if (!title || !title.trim())
       return res.status(400).json(err('Le titre est requis'));
@@ -55,6 +55,7 @@ router.post('/', (req, res) => {
       title:     title.trim(),
       url:       url.trim(),
       icon,
+      image,
       order:     maxOrder + 1,
       active:    true,
       createdAt: new Date().toISOString(),
