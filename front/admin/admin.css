@@ -303,6 +303,34 @@ button  {
   background-color: var(--error-color);
 }
 
+/* =========================== Emoji ========================== */
+.emoji-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.emoji-option {
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+}
+
+.emoji-option:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+.emoji-option.selected {
+  border-color: var(--color-primary, #6C63FF);
+  background: rgba(108, 99, 255, 0.1);
+}
+
+
 
 /* ==================================================================== */
 /* =========================== ERROR MESSAGE ========================== */
