@@ -48,3 +48,54 @@ btnAdd.addEventListener('click', () => {
   addLink.style.display = 'none';
   centerDiv.style.display = 'none';
 });
+
+
+
+function modifyLink() {
+  const modify = document.createElement('div');
+  modify.classList.add('modifyImgCard');
+  modify.innerHTML = `
+  <div class="navModify">
+    <p id="imageSetting">Image setting</p>
+    <p id="imageLayout">Layout</p>
+  </div>
+
+  <div class="image-setting" id="image-setting">
+    <div class="imageDisplay" id="imageDisplay"></div>
+    <div class="changeDiv">
+      <label for="change">Change</label>
+      <input type="file" name="change" id="change" class="change" accept="image/png, image/jpeg">
+    </div>
+    <div class="changeDiv">
+      <label for="remove">Remove</label>
+      <input type="file" name="remove" id="remove" class="remove" accept="image/png, image/jpeg">
+    </div>
+  </div>
+
+  <div class="image-layout" id="image-layout">
+    <form action="" method="get" class="layoutStyle">
+        <div class="options" id="option1">
+            <div class="check">
+                <input type="radio" name="option" id="leftOption">
+                <label for="leftOption">Left</label>
+            </div>
+            <img src="../assets/imgleft.png" alt="option1">
+        </div>
+        <div class="options" id="option2">
+            <div class="check">
+                <input type="radio" name="option" id="rightOption">
+                <label for="rightOption">Right</label>
+            </div>
+            <img src="../assets/imgright.png" alt="option2">
+        </div>
+    </form>
+  </div>
+  `;
+}
+
+
+const imgModify = document.getElementById('image-btn');
+
+imgModify.addEventListener('click', () => {
+  
+});
