@@ -398,6 +398,10 @@ aside.fixed {
   display: none;
 }
 
+.nav-right {
+  cursor: pointer;
+}
+
 /* =================================================================== */
 
 @media (max-width:1024px) {
@@ -428,7 +432,7 @@ aside.fixed {
 }
 
 @media (max-width:414px) {
-  .fa-copy {
+  .h {
     display: none;
   }
   header {

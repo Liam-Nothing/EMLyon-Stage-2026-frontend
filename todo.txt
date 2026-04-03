@@ -5,15 +5,10 @@
 
 - comment garder les modif meme en actualisant
 
-- page de presentation pr se connecter 
-- position sticky
-- flex pr aside
-- pb with hierarchie loading of admin preview card
+- page de presentation pr se connecter
 - copy link
 
 - add the menu block to every page after linking all 'a'
-- a verifier si apercu is scroll true
-- navBar copyLink icone disepeared ._.
 
 - backEnd of wallpaper
 
