@@ -501,9 +501,28 @@ function initAddLinkForm() {
   // Soumission via le bouton "Ajouter le lien"
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('handleSubmit appelé !');
 
     const title = inputTitle.value.trim();
     const url   = inputUrl.value.trim();
+    const icon  = document.getElementById('input-icon')?.value.trim() || '';
+    const imageFile = document.getElementById('input-image')?.files[0];
+
+    console.log('title:', title);
+  console.log('url:', url);
+  console.log('icon:', icon);
+  console.log('imageFile:', imageFile);
+
+    // Convertir l'image en base64 si présente
+    let image = '';
+    if (imageFile) {
+      image = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.readAsDataURL(imageFile);
+      });
+    }
+    console.log('image base64 length:', image.length);
 
     // Validation côté client 
     let valid = true;
@@ -527,10 +546,11 @@ function initAddLinkForm() {
 
     //  Appel API POST 
     try {
+      console.log('body envoyé:', JSON.stringify({ title, url, icon, image }).slice(0, 200));
       const res = await fetch('/api/links', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ title, url }),
+        body:    JSON.stringify({ title, url, icon, image }),
       });
 
       const data = await res.json();
@@ -570,6 +590,30 @@ function initAddLinkForm() {
   if (btnAdd) btnAdd.addEventListener('click', handleSubmit);
 }
 
+
+
+function initEmojiPicker() {
+  const grid    = document.getElementById('emoji-grid');
+  const input   = document.getElementById('input-icon');
+  if (!grid || !input) return;
+
+  grid.addEventListener('click', (e) => {
+    const option = e.target.closest('.emoji-option');
+    if (!option) return;
+
+    grid.querySelectorAll('.emoji-option').forEach(el => el.classList.remove('selected'));
+
+    option.classList.add('selected');
+    input.value = option.dataset.emoji;
+  });
+
+  input.addEventListener('input', () => {
+    grid.querySelectorAll('.emoji-option').forEach(el => el.classList.remove('selected'));
+  });
+}
+
+
+
 // LOAD PREVIEW CARD =========================================
 async function renderPreview() {
   try {
@@ -605,8 +649,20 @@ async function renderPreview() {
           clickable.style.width = "100%";
           const div = document.createElement('div');
           div.className = 'linkPreview';
+          // div.innerHTML = `
+          //   <div class="leftPreview"><img src="../assets/LogoJointInBlue.png" alt=""></div>
+          //   <div class="middlePreview"><p class="myLinkPreview">${link.title}</p></div>
+          //   <div class="rightPreview"></div>
+          // `;
           div.innerHTML = `
-            <div class="leftPreview"><img src="../assets/LogoJointInBlue.png" alt=""></div>
+            <div class="leftPreview">
+              ${link.image 
+              ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
+              : link.icon 
+              ? `<span style="font-size:1.4rem">${link.icon}</span>`
+              : `<img src="../assets/LogoJointInBlue.png" alt="">`
+              }
+            </div>
             <div class="middlePreview"><p class="myLinkPreview">${link.title}</p></div>
             <div class="rightPreview"></div>
           `;
@@ -622,11 +678,70 @@ async function renderPreview() {
   }
 }
 
+function initModal() {
+  const formulaire = document.getElementById('formulaire');
+  const buttonAdd  = document.getElementById('addLink');
+  const main     = document.querySelector('main');
+  const cancelBtn  = document.getElementById('btn-cancel');
+
+  if (!formulaire || !buttonAdd) return;
+
+  formulaire.style.display = 'none';
+
+  const centerDiv = document.createElement('div');
+  centerDiv.style.cssText = `
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60%;
+    background: #00000053;
+    z-index: 1000;
+  `;
+  main.appendChild(centerDiv);
+
+  //===== RESOPONSIVE
+   window.addEventListener('resize', () => {
+    if (window.innerWidth < 769) {
+      centerDiv.style.width = '100%';
+    } else {
+      centerDiv.style.width = '60%';
+    }
+  });
+
+
+  buttonAdd.addEventListener('click', () => {
+    centerDiv.style.display = 'flex';
+    formulaire.style.display = 'flex';
+    formulaire.style.flexDirection = 'column';
+    centerDiv.appendChild(formulaire);
+  });
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', () => {
+      formulaire.style.display = 'none';
+      centerDiv.style.display  = 'none';
+    });
+  }
+
+  if (btnAdd) {
+    btnAdd.addEventListener('click', () => {
+      formulaire.style.display = 'none';
+      centerDiv.style.display  = 'none';
+    });
+  }
+}
+
 // Point d'entrée
 document.addEventListener('DOMContentLoaded', () => {
   loadLinks();
   initEventDelegation();
   initDragAndDrop();
+  initModal();
   initAddLinkForm();
+  initEmojiPicker();
   renderPreview();
 });
