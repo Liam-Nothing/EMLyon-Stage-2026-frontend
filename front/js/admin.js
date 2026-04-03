@@ -577,6 +577,11 @@ function initAddLinkForm() {
       }
 
       showToast('Lien ajouté ✓');
+      const formulaire = document.getElementById('formulaire');
+      const centerDiv  = document.querySelector('[style*="z-index: 1000"]');
+      if (formulaire) formulaire.style.display = 'none';
+      if (centerDiv)  centerDiv.style.display  = 'none';
+
       renderPreview();
 
     } catch (err) {
@@ -727,12 +732,13 @@ function initModal() {
     });
   }
 
-  if (btnAdd) {
-    btnAdd.addEventListener('click', () => {
-      formulaire.style.display = 'none';
-      centerDiv.style.display  = 'none';
-    });
-  }
+//   if (btnAdd) {
+//     btnAdd.addEventListener('click', () => {
+//       formulaire.style.display = 'none';
+//       centerDiv.style.display  = 'none';
+//     });
+//   }
+// }
 }
 
 // Point d'entrée
