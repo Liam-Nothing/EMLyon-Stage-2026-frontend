@@ -17,6 +17,17 @@ buttonAdd.addEventListener('click', () => {
   centerDiv.style.width = '60%';
   centerDiv.style.background = '#00000053';
 
+  // RESPONSIVE
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 769) {
+      centerDiv.style.width = '100%';
+    } else {
+      centerDiv.style.width = '60%';
+    }
+  });
+
+  // =========
+
   main.appendChild(centerDiv);
 
   addLink.style.display = 'flex';
@@ -28,6 +39,12 @@ buttonAdd.addEventListener('click', () => {
 const cancelBtn = document.getElementById('btn-cancel');
 
 cancelBtn.addEventListener('click', () => {
+  addLink.style.display = 'none';
+  centerDiv.style.display = 'none';
+});
+
+const btnAdd = document.getElementById('btn-add-link');
+btnAdd.addEventListener('click', () => {
   addLink.style.display = 'none';
   centerDiv.style.display = 'none';
 });

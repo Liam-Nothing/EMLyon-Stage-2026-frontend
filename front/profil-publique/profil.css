@@ -184,6 +184,12 @@ body {
   flex-direction: column;
   gap: 8px;
   justify-content: center;
+  align-items: center;
+}
+
+.profile-bio {
+  text-align: center;
+  padding: 0 30px;
 }
 
 /* .big-card {

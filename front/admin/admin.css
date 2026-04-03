@@ -270,6 +270,7 @@ button  {
 .save-discard-btns {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .small-btn {
@@ -332,6 +333,18 @@ input.input-error {
 /* ==================================================================== */
 /* =========================== RESPONSIVE ============================= */
 /* ==================================================================== */
+@media (max-width:885px) {
+    /* .save-discard-btns {
+        flex-direction: column-reverse;
+    }
+    .small-btn {
+        width: fit-content;
+    } */
+    .formCard {
+        margin-top: 0;
+    }
+}
+
 @media (max-width:768px) {
     #liens, #formulaire, #formulaire-reseau, #reseau {
         width: 100%;
