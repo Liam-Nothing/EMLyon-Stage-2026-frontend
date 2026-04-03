@@ -60,9 +60,38 @@
                     <input type="url" id="input-url" placeholder="https://...">
                     <span class="error-message" id="error-url"></span>
                 </div>
+
+                <div class="formLink">
+                    <label style="font-size:0.85rem;opacity:0.7;margin-bottom:6px;display:block">Icône (optionnel)</label>
+                    <div class="emoji-grid" id="emoji-grid">
+                        <span class="emoji-option" data-emoji="🌐">🌐</span>
+                        <span class="emoji-option" data-emoji="🐙">🐙</span>
+                        <span class="emoji-option" data-emoji="💼">💼</span>
+                        <span class="emoji-option" data-emoji="🐦">🐦</span>
+                        <span class="emoji-option" data-emoji="✍️">✍️</span>
+                        <span class="emoji-option" data-emoji="🎵">🎵</span>
+                        <span class="emoji-option" data-emoji="🎬">🎬</span>
+                        <span class="emoji-option" data-emoji="💻">💻</span>
+                        <span class="emoji-option" data-emoji="📚">📚</span>
+                        <span class="emoji-option" data-emoji="🛒">🛒</span>
+                        <span class="emoji-option" data-emoji="📸">📸</span>
+                        <span class="emoji-option" data-emoji="🎮">🎮</span>
+                        <span class="emoji-option" data-emoji="📧">📧</span>
+                        <span class="emoji-option" data-emoji="🔗">🔗</span>
+                        <span class="emoji-option" data-emoji="📱">📱</span>
+                        <span class="emoji-option" data-emoji="🎨">🎨</span>
+                        <span class="emoji-option" data-emoji="🚀">🚀</span>
+                        <span class="emoji-option" data-emoji="💡">💡</span>
+                        <span class="emoji-option" data-emoji="🏆">🏆</span>
+                        <span class="emoji-option" data-emoji="❤️">❤️</span>
+                    </div>
+                    <input type="text" id="input-icon" placeholder="Ou tape un emoji..." maxlength="2" style="margin-top:8px;width:120px;text-align:center;font-size:1.2rem">
+                    <span class="error-message" id="error-icon"></span>
+                </div>
   
                 <div class="formLink">
-                    <input type="file">
+                    <label style="font-size:0.85rem;opacity:0.7;margin-bottom:6px;display:block">Image (optionnel)</label>
+                    <input type="file" id="input-image" accept="image/*">
                 </div>
 
                 <div class="save-discard-btns">
@@ -280,7 +309,7 @@
 
     <script src="../script.js"></script>
     <script src="../js/admin.js"></script>
-    <script src="admin.js"></script>
+    <!-- <script src="admin.js"></script> -->
     <script src="https://kit.fontawesome.com/c7036cb919.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -83,16 +83,48 @@ function renderLinks(links) {
     const div = document.createElement('div');
     div.className = 'link-card link-style-solide';
 
+    // div.innerHTML = `
+    //   // <div class="left" id="leftPreview">
+    //   //   <img src="assets/LogoJointInBlue.png" alt="${link.title}">
+    //   // </div>
+    //   // <div class="middle" id="middlePreview">
+    //   //   <p class="textBtn">
+    //   //     ${link.icon ? link.icon + ' ' : ''}${link.title}
+    //   //   </p>
+    //   // </div>
+    //   // <div class="right" id="rightPreview"></div>
+
+    //   <div class="left leftPreview">
+    //     ${link.image 
+    //       ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
+    //       : link.icon 
+    //       ? `<span style="font-size:1.4rem">${link.icon}</span>`
+    //       : ''
+    //     }
+    //   </div>
+
+    //   <div class="middle">
+    //     <p class="textBtn">${link.title}</p>
+    //   </div>
+      
+    //   <div class="right rightPreview"></div>
+    // `;
+
     div.innerHTML = `
-      <div class="left" id="leftPreview">
-        <img src="assets/LogoJointInBlue.png" alt="${link.title}">
+      <div class="left leftPreview">
+        ${link.image 
+          ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
+          : link.icon 
+          ? `<span style="font-size:1.4rem">${link.icon}</span>`
+          : ''
+        }
       </div>
-      <div class="middle" id="middlePreview">
-        <p class="textBtn">
-          ${link.icon ? link.icon + ' ' : ''}${link.title}
-        </p>
+
+      <div class="middle">
+        <p class="textBtn">${link.title}</p>
       </div>
-      <div class="right" id="rightPreview"></div>
+      
+      <div class="right rightPreview"></div>
     `;
 
     container.appendChild(clickable);
