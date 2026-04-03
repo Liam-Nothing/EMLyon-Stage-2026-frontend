@@ -185,11 +185,23 @@ function createEditForm(card, link) {
   card.innerHTML = `
     <div class="linkContent" style="width:100%">
       <div class="edit-form">
-        <input type="text" class="edit-title" value="${link.title}" placeholder="Titre">
-        <input type="url"  class="edit-url"   value="${link.url}"   placeholder="https://...">
-        <div class="edit-actions">
-          <button class="edit-cancel  btn-discard small-btn">Annuler</button>
-          <button class="edit-save    btn-main    small-btn">Sauvegarder</button>
+        <div class="edit-input">
+          <div class="inputsAlign">
+            <label for="editTitle"><strong>Titre:</strong></label>
+            <input type="text" class="edit-title" value="${link.title}" id="editTitle" placeholder="Titre">
+          </div>
+          <div class="inputsAlign">
+            <label for="editUrl">URL:</label>
+            <input type="url"  class="edit-url"   value="${link.url}"  id="editUrl"  placeholder="https://...">
+          </div>  
+        </div>
+
+        <div class="edit-image">
+          <i class="fa-regular fa-image image-btn" id="image-btn"></i>
+          <div class="edit-actions">
+            <button class="edit-cancel  btn-discard small-btn">Annuler</button>
+            <button class="edit-save    btn-main    small-btn">Sauvegarder</button>
+          </div>
         </div>
       </div>
     </div>
