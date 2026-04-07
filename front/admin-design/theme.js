@@ -51,9 +51,9 @@ function createCard(data) {
             </div>
           </div>
           <div class="links">
-            <span class="linkLinks" style="background:${e.colors.primary}; border-radius:${e.borderRadius}; border:${e.colors.border}; box-shadow:${e.boxShadow}"></span>
-            <span class="linkLinks" style="background:${e.colors.primary}; border-radius:${e.borderRadius}; border:${e.colors.border}; box-shadow:${e.boxShadow}"></span>
-            <span class="linkLinks" style="background:${e.colors.primary}; border-radius:${e.borderRadius}; border:${e.colors.border}; box-shadow:${e.boxShadow}"></span>
+            <span class="linkLinks" style="background:${e.colors.primary}; border-radius:${e.colors.borderRadius}; border:${e.colors.border}; box-shadow:${e.colors.boxShadow}"></span>
+            <span class="linkLinks" style="background:${e.colors.primary}; border-radius:${e.colors.borderRadius}; border:${e.colors.border}; box-shadow:${e.colors.boxShadow}"></span>
+            <span class="linkLinks" style="background:${e.colors.primary}; border-radius:${e.colors.borderRadius}; border:${e.colors.border}; box-shadow:${e.colors.boxShadow}"></span>
           </div>
         </div>
         <div class="footerTheme">
