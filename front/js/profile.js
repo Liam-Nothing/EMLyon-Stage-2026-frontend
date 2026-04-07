@@ -31,6 +31,15 @@ function applyThemeColors(colors) {
   if (colors.textColor)      root.style.setProperty('--color-text-primary',  colors.textColor);
 }
 
+function hashColor(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const h = Math.abs(hash) % 360;
+  return `hsl(${h}, 50%, 40%)`;
+}
+
 // Rendu de l'avatar
 function renderAvatar(avatar, name) {
   const img = document.getElementById('profile-avatar');
@@ -49,7 +58,7 @@ function renderAvatar(avatar, name) {
         width: 96px; height: 96px; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         font-size: 2rem; font-weight: bold;
-        background: #40798C; color: #FFFEF9;
+        background: ${hashColor(name)}; color: #FFFEF9;
       `;
       placeholder.textContent = initials;
       img.replaceWith(placeholder);
