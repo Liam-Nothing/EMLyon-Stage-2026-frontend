@@ -5,7 +5,7 @@
     "url": "https://github.com/Salsa-Lat",
     "icon": "",
     "order": 1,
-    "active": true,
+    "active": false,
     "image": ""
   },
   {
@@ -29,19 +29,11 @@
     "createdAt": "2026-04-03T10:15:10.749Z"
   },
   {
-    "id": "3",
-    "title": "My Twitter",
-    "url": "https://x.com/?lang=fr",
-    "icon": "",
-    "order": 4,
-    "active": false
-  },
-  {
     "id": "2",
     "title": "Titre modifié",
     "url": "https://www.linkedin.com/in/salsabila-latasse/",
     "icon": "",
-    "order": 5,
+    "order": 4,
     "active": false
   }
 ]
