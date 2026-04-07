@@ -58,6 +58,7 @@ router.post('/', (req, res) => {
       image,
       order:     maxOrder + 1,
       active:    true,
+      clicks:    0,
       createdAt: new Date().toISOString(),
     };
  
@@ -171,6 +172,27 @@ router.patch('/reorder', (req, res) => {
   } catch (e) {
     console.error('[PATCH /api/links/reorder]', e.message);
     res.status(500).json(err('Impossible de réordonner les liens'));
+  }
+});
+
+
+// POST /api/links/:id/click
+router.post('/:id/click', (req, res) => {
+  try {
+    const { id } = req.params;
+    const links   = readJSON(LINKS);
+    const index   = links.findIndex(l => l.id === id);
+
+    if (index === -1)
+      return res.status(404).json(err('Lien introuvable'));
+
+    links[index].clicks = (links[index].clicks || 0) + 1;
+    writeJSON(LINKS, links);
+
+    res.json({ clicks: links[index].clicks });
+  } catch (e) {
+    console.error('[POST /api/links/:id/click]', e.message);
+    res.status(500).json(err('Impossible d\'enregistrer le clic'));
   }
 });
 

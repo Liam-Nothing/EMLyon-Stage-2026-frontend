@@ -165,11 +165,16 @@ function createLinkCard(link) {
     <div class="linkContent">
       <div class="linkHeader">
         <strong>${link.title}</strong>
-        <button class="edit" title="Modifier">
-          <i class="fa-solid fa-pen"></i>
-        </button>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="click-badge" title="Nombre de clics">
+            👁 ${link.clicks || 0}
+          </span>
+          <button class="edit" title="Modifier">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+        </div>
       </div>
-
+      
       <div class="url">${link.url}</div>
 
       <hr>
