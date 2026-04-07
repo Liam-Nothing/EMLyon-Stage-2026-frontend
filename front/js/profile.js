@@ -89,6 +89,13 @@ function renderLinks(links) {
     clickable.href = link.url;
     clickable.target = "_blank";
     clickable.rel = "noopener noreferrer";
+
+    clickable.addEventListener('click', (e) => {
+    // Fire and forget — on n'attend pas la réponse
+      fetch(`/api/links/${link.id}/click`, { method: 'POST' })
+      .catch(() => {}); // silencieux si erreur
+    });
+    
     const div = document.createElement('div');
     div.className = 'link-card link-style-solide';
 
