@@ -85,7 +85,7 @@
       "linkTextColor": "#334011",
       "border": "none",
       "boxShadow": "3px 3px 4px rgba(0, 0, 0, 0.25)",
-      "borderRadius": "20px"
+      "borderRadius": "15px"
     },
     "cardStyle": "filled"
   },

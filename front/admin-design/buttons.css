@@ -213,6 +213,7 @@ h3 {
   outline: 3px solid rgb(217, 217, 217);
   margin-right: 25px;
   cursor: pointer;
+  background: #000000;
 }
 
 input[type=color] {
