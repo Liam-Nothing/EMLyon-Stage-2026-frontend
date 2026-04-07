@@ -104,6 +104,7 @@ function showToast(message, type = 'success') {
 
 // Affiche un message d'erreur inline sous un champ
 function showFieldError(inputEl, message) {
+  inputEl.classList.add('input-error', 'field-error');
   const errorEl = document.getElementById('error-' + inputEl.id.replace('input-', ''));
   if (errorEl) {
     errorEl.textContent = message;
@@ -119,6 +120,31 @@ function clearFieldError(inputEl) {
   if (errorEl) {
     errorEl.textContent = '';
     errorEl.classList.remove('visible');
+  }
+}
+
+function validateField(inputEl, rules) {
+  const value = inputEl.value.trim();
+  if (rules.required && !value)
+    return rules.requiredMsg || 'Ce champ est requis';
+  if (rules.maxLength && value.length > rules.maxLength)
+    return `Maximum ${rules.maxLength} caractères (actuellement ${value.length})`;
+  if (rules.url) {
+    try { new URL(value); }
+    catch { return "L'URL n'est pas valide (ex: https://exemple.com)"; }
+  }
+  if (rules.urlPrefix && !value.startsWith('http://') && !value.startsWith('https://'))
+    return "L'URL doit commencer par http:// ou https://";
+  return null;
+}
+
+function applyFieldState(inputEl, errorMessage) {
+  clearFieldError(inputEl);
+  if (errorMessage) {
+    showFieldError(inputEl, errorMessage);
+    inputEl.classList.remove('field-success');
+  } else if (inputEl.value.trim()) {
+    inputEl.classList.add('field-success');
   }
 }
 
@@ -505,6 +531,33 @@ function initAddLinkForm() {
 
   if (!form || !inputTitle || !inputUrl) return;
 
+  // Validation au blur
+  inputTitle.addEventListener('blur', () => {
+    applyFieldState(inputTitle, validateField(inputTitle, {
+      required: true, requiredMsg: 'Le titre est requis', maxLength: 80
+    }));
+    updateSubmitBtn();
+  });
+
+  inputUrl.addEventListener('blur', () => {
+    applyFieldState(inputUrl, validateField(inputUrl, {
+      required: true, requiredMsg: "L'URL est requise", urlPrefix: true, url: true
+    }));
+    updateSubmitBtn();
+  });
+
+  function updateSubmitBtn() {
+    const titleError = validateField(inputTitle, { required: true, maxLength: 80 });
+    const urlError   = validateField(inputUrl, { required: true, urlPrefix: true, url: true });
+    const isInvalid  = !!(titleError || urlError);
+    if (btnAdd) {
+      btnAdd.style.opacity       = isInvalid ? '0.5' : '1';
+      btnAdd.style.pointerEvents = isInvalid ? 'none' : 'auto';
+    }
+  }
+
+  updateSubmitBtn(); // appel initial
+
   // Bouton Annuler — vide le formulaire
   if (btnCancel) {
     btnCancel.addEventListener('click', (e) => {
@@ -527,9 +580,9 @@ function initAddLinkForm() {
     const imageFile = document.getElementById('input-image')?.files[0];
 
     console.log('title:', title);
-  console.log('url:', url);
-  console.log('icon:', icon);
-  console.log('imageFile:', imageFile);
+    console.log('url:', url);
+    console.log('icon:', icon);
+    console.log('imageFile:', imageFile);
 
     // Convertir l'image en base64 si présente
     let image = '';
