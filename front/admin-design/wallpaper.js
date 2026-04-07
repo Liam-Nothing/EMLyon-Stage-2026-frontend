@@ -79,7 +79,7 @@ function ajouterCarte(defaultColor = "#000000") {
   gradientCard.classList.add('gradientCard');
   gradientCard.draggable = "true";
   gradientCard.innerHTML = `
-    <div class="leftGradientCard">
+    <div class="leftGradientCard" draggable="true">
       <i class="fa-solid fa-grip-vertical"></i>
     </div>
 
@@ -308,95 +308,74 @@ function updateGradientPreview() {
   }
 }
 
-
-// NEED TO MAKE IT DRAGABLE FOR GRADIENT AND SAVE BUTTON SO IT SAVES CHANGES IN API
 // DRAG
 function initDragAndDrop() {
-  const list = document.getElementById('cardPreview');
-  if (!list) return;
-
   let draggedCard = null;
 
-  list.addEventListener('dragstart', (e) => {
-    const card = e.target.closest('.gradientCard');
-    if (!card) return;
+  container.addEventListener('dragstart', (e) => {
+    const handle = e.target.closest('.leftGradientCard');
+    if (!handle) return;
 
-    draggedCard = card;
-    setTimeout(() => card.classList.add('dragging'), 0);
+    draggedCard = handle.closest('.gradientCard');
+    if (!draggedCard) return;
+
+    // 🔥 FIX IMPORTANT
+    e.dataTransfer.setData('text/plain', 'dragging');
+
     e.dataTransfer.effectAllowed = 'move';
+    draggedCard.classList.add('dragging');
   });
 
-  list.addEventListener('dragend', (e) => {
-    const card = e.target.closest('.gradientCard');
-    if (!card) return;
-
-    card.classList.remove('dragging');
-    list.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
-    draggedCard = null;
+  container.addEventListener('dragend', () => {
+    if (draggedCard) draggedCard.classList.remove('dragging');
   });
 
-  list.addEventListener('dragover', (e) => {
+  container.addEventListener('dragover', (e) => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
 
     const target = e.target.closest('.gradientCard');
     if (!target || target === draggedCard) return;
 
-    list.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
-    target.classList.add('drag-over');
-  });
-
-  list.addEventListener('dragleave', (e) => {
-    const target = e.target.closest('.gradientCard');
-    if (target) target.classList.remove('drag-over');
-  });
-
-  list.addEventListener('drop', (e) => {
-    e.preventDefault();
-
-    const target = e.target.closest('.gradientCard');
-    if (!target || !draggedCard || target === draggedCard) return;
-
-    target.classList.remove('drag-over');
-
     const rect = target.getBoundingClientRect();
-    const midY = rect.top + rect.height / 2;
-    const isAfter = e.clientY > midY;
+    const isAfter = e.clientY > rect.top + rect.height / 2;
 
     if (isAfter) {
       target.after(draggedCard);
     } else {
       target.before(draggedCard);
     }
+  });
 
-    saveGradientOrder();
+  container.addEventListener('drop', (e) => {
+    e.preventDefault();
+
+    if (!draggedCard) {
+      console.log("❌ draggedCard NULL");
+      return;
+    }
+
+    console.log("✅ drop OK");
+
+    updateGradientPreview();
   });
 }
 
-async function saveGradientOrder() {
-  const list = document.getElementById('cardPreview');
-  if (!list) return;
+initDragAndDrop();
 
-  const cards = [...list.querySelectorAll('.gradientCard')];
+// NEED ADD SAVE BUTTON SO IT SAVES CHANGES IN API
 
-  const newOrder = cards.map((card, index) => ({
-  gradient: card.style.background,
-  order: index + 1,
-}));
+const saveButton = document.getElementById('saveBtn');
+const undoButton = document.getElementById('undoButton');
+const redoButton = document.getElementById('redoButton');
 
-  try {
-    const res = await fetch('/api/gradients/reorder', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newOrder),
-    });
 
-    if (!res.ok) throw new Error(`Status ${res.status}`);
+// TOAST 
 
-    showToast('Ordre des gradients sauvegardé ✓');
-    renderPreview();
-  } catch (err) {
-    console.error('[saveGradientOrder]', err.message);
-    showToast("Erreur lors de la sauvegarde", 'error');
-  }
+function showNotification(msg, color) {
+  const toast = document.createElement('div');
+  toast.classList.add('boxMessage');
+  toast.style.background = color;
+  toast.innerHTML = "<p>" + msg + "</p>";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
 }
