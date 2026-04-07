@@ -648,9 +648,31 @@ async function renderPreview() {
     const links   = await linksRes.json();
 
     const pfp = document.getElementById('pfpPreview');
+    // if (pfp) {
+    //   const img = pfp.querySelector('img');
+    //   if (img) img.src = profile.avatar || '';
+    // }
     if (pfp) {
-      const img = pfp.querySelector('img');
-      if (img) img.src = profile.avatar || '';
+      if (profile.avatar) {
+        const img = pfp.querySelector('img');
+        if (img) img.src = profile.avatar;
+      } else {
+        const initials = (profile.name || '')
+        .split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    
+        const h = [...(profile.name || '')].reduce((hash, c) => 
+        c.charCodeAt(0) + ((hash << 5) - hash), 0);
+        const color = `hsl(${Math.abs(h) % 360}, 50%, 40%)`;
+
+        pfp.innerHTML = `
+          <div style="
+          width:80px; height:80px; border-radius:50%;
+          background:${color}; color:#fff;
+          display:flex; align-items:center; justify-content:center;
+          font-size:1.8rem; font-weight:bold;
+          ">${initials || '?'}</div>
+        `;
+      }
     }
 
     const nameEl = document.getElementById('usernamePreview');
