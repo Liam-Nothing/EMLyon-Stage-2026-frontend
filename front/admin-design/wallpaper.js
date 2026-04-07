@@ -6,6 +6,8 @@ const gradient = document.getElementById('gradientCard');
 const gradientP = document.getElementById('gradientCardP');
 const gradientSelected = document.querySelector('.gradientColors');
 
+let hasChanged = false;
+
 fill.addEventListener('click', () => {
   fillP.classList.remove('unselected');
   gradientP.classList.add('unselected');
@@ -44,6 +46,10 @@ bodyColor.addEventListener('input', () => {
 circleBodyColor.style.background = bodyColor.value;
 nameBodyColor.textContent = bodyColor.value;
 bnacPreview.style.background = bodyColor.value;
+
+hasChanged = true;
+saveButton.classList.add('active');
+saveState();
 });
 
 // BACKGROUND COLOR FILL
@@ -55,6 +61,10 @@ backgroundColor.addEventListener('input', () => {
 circleBackgroundColor.style.background = backgroundColor.value;
 nameBackgroundColor.textContent = backgroundColor.value;
 cardPreview.style.background = backgroundColor.value;
+
+hasChanged = true;
+saveButton.classList.add('active');
+saveState();
 });
 
 // ADD GRADIENT
@@ -177,6 +187,8 @@ fetch("/api/profile/theme")
       cardPreview.style.background = colorValue;
     }
 
+    // Sauvegarder l'état initial
+    saveState();
   })
   .catch(err => console.error('Error server', err));
 
@@ -306,6 +318,11 @@ function updateGradientPreview() {
     // plusieurs couleurs → gradient 180deg
     cardPreview.style.background = `linear-gradient(180deg, ${colors.join(', ')})`;
   }
+
+  if (historyIndex >= 0) { 
+    hasChanged = true;
+    saveButton.classList.add('active');
+  }
 }
 
 // DRAG
@@ -379,3 +396,77 @@ function showNotification(msg, color) {
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }
+
+// Historique pour undo/redo
+let history = [];
+let historyIndex = -1;
+
+function saveState() {
+  const state = {
+    background: bnacPreview.style.background,
+    cardBackground: cardPreview.style.background,
+  };
+  // Supprimer les états après l'index actuel
+  history = history.slice(0, historyIndex + 1);
+  history.push(state);
+  historyIndex++;
+}
+
+function applyState(state) {
+  bnacPreview.style.background = state.background;
+  cardPreview.style.background  = state.cardBackground;
+  nameBodyColor.textContent       = state.background;
+  circleBodyColor.style.background = state.background;
+  nameBackgroundColor.textContent  = getColorFromBackground(state.cardBackground);
+  circleBackgroundColor.style.background = getColorFromBackground(state.cardBackground);
+}
+
+
+
+// Sauvegarder après chaque changement de couleur
+bodyColor.addEventListener('change', saveState);
+backgroundColor.addEventListener('change', saveState);
+
+// Undo
+undoButton.addEventListener('click', () => {
+  if (historyIndex <= 0) return;
+  historyIndex--;
+  applyState(history[historyIndex]);
+});
+
+// Redo
+redoButton.addEventListener('click', () => {
+  if (historyIndex >= history.length - 1) return;
+  historyIndex++;
+  applyState(history[historyIndex]);
+});
+
+
+saveButton.addEventListener('click', async () => {
+  if (!hasChanged) {
+    showNotification('Aucun changement à sauvegarder', '#FF5C72');
+    return;
+  }
+
+  const background     = bnacPreview.style.background;
+  const cardBackground = cardPreview.style.background;
+
+  try {
+    const res = await fetch('/api/profile', {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({
+        colors: { background, cardBackground }
+      }),
+    });
+
+    if (!res.ok) throw new Error('Erreur API');
+    showNotification('Sauvegardé ✓', '#36D399');
+    hasChanged = false;
+    saveButton.classList.remove('active');
+
+  } catch (e) {
+    console.error(e);
+    showNotification('Erreur lors de la sauvegarde', '#FF5C72');
+  }
+});
