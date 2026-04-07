@@ -395,6 +395,30 @@ input.input-error {
     box-shadow: 0 0 5px rgba(76,123,138,0.4);
 }
 
+#input-icon {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--text-color);
+    background: transparent;
+}
+
+
+#input-icon:focus{
+    outline: none;
+    border-color: #4c7b8a;
+    box-shadow: 0 0 5px rgba(76,123,138,0.4);
+}
+
+.changeDiv [type=file] {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--text-color);
+    background: transparent;
+    margin: 10px 0;
+}
+
 .edit-image {
     display: flex;
     padding: 20px 20px 0 20px;
@@ -423,6 +447,55 @@ input.input-error {
     margin-left: 5px;
 }
 
+/* MODIFY IMAGE LINK */
+.modifyImgCard {
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary-color);
+    margin: -30px 40px 20px 40px;
+    border-radius: 0 0 10px 10px;
+    padding: 20px 30px;
+}
+
+.navModify {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--text-color);
+}
+
+#imageSetting, #imageLayout {
+    cursor: pointer;
+}
+
+.image-layout {
+    display: none;
+}
+.imageLayout {
+    opacity: 0.5;
+}
+.layoutStyle {
+    width: 100%;
+}
+.options {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+#option1 {
+    border-bottom: 2px solid var(--text-color);
+}
+input[type=radio] {
+    cursor: pointer;
+}
+
+.changeAlign {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
 
 /* ==================================================================== */
 /* =========================== RESPONSIVE ============================= */

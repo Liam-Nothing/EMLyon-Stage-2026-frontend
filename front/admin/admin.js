@@ -51,7 +51,8 @@ btnAdd.addEventListener('click', () => {
 
 
 
-function modifyLink() {
+function modifyLink(a) {
+
   const modify = document.createElement('div');
   modify.classList.add('modifyImgCard');
   modify.innerHTML = `
@@ -91,11 +92,18 @@ function modifyLink() {
     </form>
   </div>
   `;
+
+  a.appendChild(modify);
 }
 
+document.querySelectorAll('.linkCard').forEach(card => {
+  const id = card.dataset.id;
+  const imgModify = document.getElementById('image-btn');
 
-const imgModify = document.getElementById('image-btn');
+  imgModify.addEventListener('click', () => {
+    modifyLink(id);
+  });
 
-imgModify.addEventListener('click', () => {
-  
 });
+
+

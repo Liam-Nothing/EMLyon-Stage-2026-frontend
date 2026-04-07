@@ -1,10 +1,10 @@
 const fill = document.getElementById('fillCard');
 const fillP = document.getElementById('fillCardP');
-const fillSelected = document.getElementById('fillSelected');
+const fillSelected = document.querySelector('.backgroundColor');
 
 const gradient = document.getElementById('gradientCard');
 const gradientP = document.getElementById('gradientCardP');
-const gradientSelected = document.getElementById('gradientSelected');
+const gradientSelected = document.querySelector('.gradientColors');
 
 fill.addEventListener('click', () => {
   fillP.classList.remove('unselected');
@@ -12,7 +12,7 @@ fill.addEventListener('click', () => {
   fill.classList.add('selected');
   gradient.classList.remove('selected');
 
-  fillSelected.style.display = "flex";
+  fillSelected.style.display = "block";
   gradientSelected.style.display = "none";
 });
 
@@ -23,17 +23,27 @@ gradient.addEventListener('click', () => {
   fill.classList.remove('selected');
 
   fillSelected.style.display = "none";
-  gradientSelected.style.display = "flex";
+  gradientSelected.style.display = "block";
+
+  //myb a function here for if theme plane, and click gradient, add plane color with default gradient
+  const currentBg = cardPreview.style.background || backgroundColor.value;
+
+  // 👉 si c'est une couleur simple
+  if (!currentBg.includes('gradient')) {
+    createSingleColorCard(currentBg);
+  }
 });
 
 // BODY COLOR FILL
 const bodyColor = document.getElementById('colorBodySelect');
 const circleBodyColor = document.getElementById('circleBodyColor');
 const nameBodyColor = document.getElementById('nameBodyColor');
+const bnacPreview = document.getElementById('backgroundColor');
 
 bodyColor.addEventListener('input', () => {
 circleBodyColor.style.background = bodyColor.value;
 nameBodyColor.textContent = bodyColor.value;
+bnacPreview.style.background = bodyColor.value;
 });
 
 // BACKGROUND COLOR FILL
@@ -44,6 +54,7 @@ const nameBackgroundColor = document.getElementById('nameBackgroundColor');
 backgroundColor.addEventListener('input', () => {
 circleBackgroundColor.style.background = backgroundColor.value;
 nameBackgroundColor.textContent = backgroundColor.value;
+cardPreview.style.background = backgroundColor.value;
 });
 
 // ADD GRADIENT
@@ -51,7 +62,7 @@ const add = document.getElementById('addGradient');
 const container = document.getElementById('gradientContainer');
 let compteur = 0;
 
-function ajouterCarte() {
+function ajouterCarte(defaultColor = "#000000") {
   if (compteur >= 3) {
 
     const toast = document.createElement('div');
@@ -66,6 +77,7 @@ function ajouterCarte() {
 
   const gradientCard = document.createElement('div');
   gradientCard.classList.add('gradientCard');
+  gradientCard.draggable = "true";
   gradientCard.innerHTML = `
     <div class="leftGradientCard">
       <i class="fa-solid fa-grip-vertical"></i>
@@ -92,23 +104,299 @@ function ajouterCarte() {
   const gradientCircle = document.getElementById(`circleGradientColor${compteur}`);
   const gradientName = document.getElementById(`nameBodyColor${compteur}`);
 
+  // ⚡ Important : valeur initiale
+  gradientColor.value = defaultColor;
+  gradientCircle.style.background = defaultColor;
+  gradientName.textContent = defaultColor;
+
+  // Event listener
   gradientColor.addEventListener('input', () => {
     gradientCircle.style.background = gradientColor.value;
     gradientName.textContent = gradientColor.value;
+    updateGradientPreview(); // rebuild le gradient avec toutes les cartes
   });
 
+  // 🔥 Mettre à jour le preview après création
+  updateGradientPreview();
 }
 
 add.addEventListener('click', () => {
   ajouterCarte();
 });
 
-// BODY COLOR GRADIENT
-const bodyColors = document.getElementById('colorBodySelected');
-const circleBodyColors = document.getElementById('circleBodyColors');
-const nameBodyColors = document.getElementById('nameBodyColors');
+// // BODY COLOR GRADIENT
+// const bodyColors = document.getElementById('colorBodySelected');
+// const circleBodyColors = document.getElementById('circleBodyColors');
+// const nameBodyColors = document.getElementById('nameBodyColors');
 
-bodyColors.addEventListener('input', () => {
-circleBodyColors.style.background = bodyColors.value;
-nameBodyColors.textContent = bodyColors.value;
-});
+// bodyColors.addEventListener('input', () => {
+// circleBodyColors.style.background = bodyColors.value;
+// nameBodyColors.textContent = bodyColors.value;
+// });
+
+const cardPreview = document.getElementById('cardPreview');
+
+
+fetch("/api/profile/theme")
+  .then(res => res.json())
+  .then(data => {
+    const colorValue = data.colors.cardBackground;
+
+    // 🎯 Sélection bouton (gradient ou couleur)
+    selectButtonBasedOnColor(colorValue);
+
+    // 🎨 Background des boutons preview
+    fill.style.background = getColorFromBackground(colorValue);
+    gradient.style.background = getBackground(colorValue);
+
+    // 🎯 RESET des cartes gradient
+    container.innerHTML = "";
+    compteur = 0;
+
+    // 🎯 Récupérer les couleurs du gradient
+    const gradientColors = getGradientColors(colorValue);
+
+    // 🎯 Créer les cartes SI gradient
+    if (gradientColors.length > 0) {
+      gradientColors.forEach(color => {
+        ajouterCarte(color);
+      });
+    }
+
+    // 🎨 BODY COLOR
+    if (bnacPreview) {
+      nameBodyColor.textContent = getHexIfPlainColor(data.colors.background);
+      circleBodyColor.style.background = data.colors.background;
+      bnacPreview.style.background = data.colors.background;
+    }
+
+    // 🎨 CARD COLOR
+    if (cardPreview) {
+      nameBackgroundColor.textContent = getColorFromBackground(colorValue);
+      circleBackgroundColor.style.background = getColorFromBackground(colorValue);
+      cardPreview.style.background = colorValue;
+    }
+
+  })
+  .catch(err => console.error('Error server', err));
+
+
+function getColorFromBackground(bgValue)  {
+  // Si ce n'est pas un gradient, on retourne directement
+  if (!bgValue.startsWith('linear-gradient')) return bgValue;
+
+  // Regex pour trouver toutes les couleurs (hex, rgb(a), hsl(a))
+  const colorRegex = /(#[0-9a-fA-F]{3,6}|rgba?\([^)]+\)|hsla?\([^)]+\))/g;
+
+  const colors = bgValue.match(colorRegex);
+
+  if (colors && colors.length >= 2) {
+      return colors[1]; // deuxième couleur
+  } else if (colors && colors.length === 1) {
+      return colors[0]; // fallback si une seule couleur
+  }
+
+  return bgValue; // fallback si aucune couleur détectée
+}
+
+
+
+function getBackground(bgValue) {
+    // Vérifier si c'est un gradient
+    if (bgValue.startsWith('linear-gradient')) {
+        // C'est déjà un gradient → on le garde
+        return bgValue;
+    } else {
+        // C'est une couleur unie → créer un gradient par défaut
+        // Par exemple du bgValue vers une couleur légèrement plus claire
+        return `linear-gradient(0deg, ${bgValue}, ${bgValue}99)`; 
+        // ${bgValue}99 ajoute un peu de transparence pour l'effet gradient
+    }
+}
+
+function getHexIfPlainColor(value) {
+    if (!value) return '';
+
+    // Si ça commence par "linear-gradient", ce n'est pas une couleur unie
+    if (value.startsWith('linear-gradient')) {
+        return ''; // ne rien retourner pour les gradients
+    }
+
+    // Sinon c'est une couleur unie → on retourne le hex / valeur telle quelle
+    return value;
+}
+
+
+function selectButtonBasedOnColor(value) {
+    if (!value) return;
+
+    const normalized = value.trim().toLowerCase();
+
+    if (normalized.includes('gradient')) {
+        // Gradient
+        fillP.classList.add('unselected');
+        gradientP.classList.remove('unselected');
+        gradient.classList.add('selected');
+        fill.classList.remove('selected');
+
+        fillSelected.style.display = "none";
+        gradientSelected.style.display = "block";
+    } else {
+        // Couleur simple
+        fillP.classList.remove('unselected');
+        gradientP.classList.add('unselected');
+        fill.classList.add('selected');
+        gradient.classList.remove('selected');
+
+        fillSelected.style.display = "block";
+        gradientSelected.style.display = "none";
+    }
+}
+
+function getGradientColors(bgValue) {
+  if (!bgValue) return [];
+
+  const normalized = bgValue.trim().toLowerCase();
+
+  if (!normalized.includes('gradient')) return [];
+
+  const colorRegex = /(#[0-9a-fA-F]{3,6}|rgba?\([^)]+\)|hsla?\([^)]+\))/g;
+
+  const colors = bgValue.match(colorRegex);
+
+  return colors ? colors.slice(0, 3) : []; // max 3 couleurs
+}
+
+function getBackground(bgValue) {
+    // Vérifier si c'est un gradient
+    if (bgValue.startsWith('linear-gradient')) {
+        // C'est déjà un gradient → on le garde
+        return bgValue;
+    } else {
+        // C'est une couleur unie → créer un gradient par défaut
+        // Par exemple du bgValue vers une couleur légèrement plus claire
+        return `linear-gradient(180deg, ${bgValue}, ${bgValue}99)`; 
+        // ${bgValue}99 ajoute un peu de transparence pour l'effet gradient
+    }
+}
+
+function createSingleColorCard(color) {
+  // reset
+  container.innerHTML = "";
+  compteur = 0;
+
+  // créer UNE seule carte
+  ajouterCarte(color);
+
+  // optionnel : appliquer un faux gradient visuel
+  const gradientValue = getBackground(color);
+  cardPreview.style.background = gradientValue;
+}
+
+function updateGradientPreview() {
+  const inputs = container.querySelectorAll('input[type="color"]');
+  const colors = Array.from(inputs).map(input => input.value);
+
+  if (colors.length === 0) return;
+
+  if (colors.length === 1) {
+    // 1 couleur → gradient par défaut 180deg
+    cardPreview.style.background = `linear-gradient(180deg, ${colors[0]}, ${colors[0]}99)`;
+  } else {
+    // plusieurs couleurs → gradient 180deg
+    cardPreview.style.background = `linear-gradient(180deg, ${colors.join(', ')})`;
+  }
+}
+
+
+// NEED TO MAKE IT DRAGABLE FOR GRADIENT AND SAVE BUTTON SO IT SAVES CHANGES IN API
+// DRAG
+function initDragAndDrop() {
+  const list = document.getElementById('cardPreview');
+  if (!list) return;
+
+  let draggedCard = null;
+
+  list.addEventListener('dragstart', (e) => {
+    const card = e.target.closest('.gradientCard');
+    if (!card) return;
+
+    draggedCard = card;
+    setTimeout(() => card.classList.add('dragging'), 0);
+    e.dataTransfer.effectAllowed = 'move';
+  });
+
+  list.addEventListener('dragend', (e) => {
+    const card = e.target.closest('.gradientCard');
+    if (!card) return;
+
+    card.classList.remove('dragging');
+    list.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    draggedCard = null;
+  });
+
+  list.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+
+    const target = e.target.closest('.gradientCard');
+    if (!target || target === draggedCard) return;
+
+    list.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    target.classList.add('drag-over');
+  });
+
+  list.addEventListener('dragleave', (e) => {
+    const target = e.target.closest('.gradientCard');
+    if (target) target.classList.remove('drag-over');
+  });
+
+  list.addEventListener('drop', (e) => {
+    e.preventDefault();
+
+    const target = e.target.closest('.gradientCard');
+    if (!target || !draggedCard || target === draggedCard) return;
+
+    target.classList.remove('drag-over');
+
+    const rect = target.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    const isAfter = e.clientY > midY;
+
+    if (isAfter) {
+      target.after(draggedCard);
+    } else {
+      target.before(draggedCard);
+    }
+
+    saveGradientOrder();
+  });
+}
+
+async function saveGradientOrder() {
+  const list = document.getElementById('cardPreview');
+  if (!list) return;
+
+  const cards = [...list.querySelectorAll('.gradientCard')];
+
+  const newOrder = cards.map((card, index) => ({
+  gradient: card.style.background,
+  order: index + 1,
+}));
+
+  try {
+    const res = await fetch('/api/gradients/reorder', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newOrder),
+    });
+
+    if (!res.ok) throw new Error(`Status ${res.status}`);
+
+    showToast('Ordre des gradients sauvegardé ✓');
+    renderPreview();
+  } catch (err) {
+    console.error('[saveGradientOrder]', err.message);
+    showToast("Erreur lors de la sauvegarde", 'error');
+  }
+}

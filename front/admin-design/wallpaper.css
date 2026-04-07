@@ -249,6 +249,14 @@ input[type=color] {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+.gradientCard.dragging {
+  opacity: 0.5;
+}
+
+.gradientCard.drag-over {
+  outline: 2px dashed #666;
+}
+
 /* RESPONSIVE */
 @media (max-width:768px) {
   section {
