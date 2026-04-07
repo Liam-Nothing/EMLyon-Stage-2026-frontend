@@ -162,3 +162,22 @@ showPreview.addEventListener('click', () => {
 });
 
 // ============================ 
+
+// COPY TEXT  ===============================================
+
+const copyLink = document.getElementById('nav-right');
+const copyText = document.getElementById('myLinkCopy');
+
+copyLink.addEventListener('click', () => {
+    const textToCopy = copyText.textContent; // seulement pour text
+    // const textToCopy = copyText.href; // pour href de <a>
+    // const textToCopy = "https://" + copyText.textContent; //si c un span au lieu de <a>
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            console.log('Texte copié !');
+        })
+        .catch(err => {
+            console.error('Erreur de copie : ', err);
+        });
+});
