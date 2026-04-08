@@ -227,6 +227,12 @@ async function loadProfile() {
     // applyThemeColors(profile.colors);
     applyThemeApi();
 
+    // Police
+    if (profile.fontFamily) {
+      const els = document.querySelectorAll('#profile-name, #profile-bio, .textBtn, #footer, #stillFooter');
+      els.forEach(el => el.style.fontFamily = profile.fontFamily);
+    }
+
     // Nom
     const nameProfile = document.getElementById('profile-name');
     if (nameProfile && profile.name) nameProfile.textContent = profile.name;
