@@ -251,3 +251,47 @@ async function loadProfile() {
 
 // Point d'entrée
 document.addEventListener('DOMContentLoaded', loadProfile);
+
+const menue = document.getElementById('menue');
+const menuSectionPublic = document.getElementById('menuSectionPublic');
+
+menue.addEventListener('click', () => {
+  document.body.classList.toggle('remove-scrolling');
+  menuSectionPublic.classList.toggle('toggle');
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 414) {
+    document.body.classList.remove('remove-scrolling');
+  menuSectionPublic.classList.remove('toggle');
+  }
+});
+
+//COPY TEXT MENU
+
+const copyLinkMenu = document.querySelector('.copyLink');
+const copyTextMenu = document.getElementById('menuCopyLink');
+
+copyLinkMenu.addEventListener('click', () => {
+    const textToCopy = "https://" + copyTextMenu.textContent; //si c un span au lieu de <a>
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          console.log('Texte copié !');
+          showNotification("Link Copied !", "#36D399");
+        })
+        .catch(err => {
+          console.error('Erreur de copie : ', err);
+          showNotification("Couldn't copy link", "#FF5C72");
+        });
+});
+
+// NEED TO DISPLAY A MSG (TOAST) TO SAY LINK COPIED
+function showNotification(msg, color) {
+  const toast = document.createElement('div');
+  toast.classList.add('boxMessage');
+  toast.style.background = color;
+  toast.innerHTML = "<p>" + msg + "</p>";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}

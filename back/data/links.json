@@ -27,13 +27,5 @@
     "order": 3,
     "active": true,
     "createdAt": "2026-04-03T10:15:10.749Z"
-  },
-  {
-    "id": "2",
-    "title": "Titre modifié",
-    "url": "https://www.linkedin.com/in/salsabila-latasse/",
-    "icon": "",
-    "order": 4,
-    "active": false
   }
 ]

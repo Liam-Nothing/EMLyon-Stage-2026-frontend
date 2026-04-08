@@ -80,7 +80,7 @@ h3 {
   align-items: center;
   gap: 40px;
   flex-wrap: wrap;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .solidBtn {
@@ -239,11 +239,27 @@ input[type=color] {
     flex-direction: column;
     align-items: start;
     gap: 10px;
+    margin: 0;
+    margin-left: 10px;
+    margin-bottom: 15px;
   }
   .saveTitleNav {
     flex-direction: row-reverse;
   }
   .nav-right a {
     display: none;
+  }
+  .alignleftpart {
+    width: 98%;
+    margin: auto;
+  }
+  #buttonStyle h3 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  .styleAlign, .radius, .shadow, .buttonColor, .textBtnColor {
+    margin: 0;
+    margin-left: 15px;
+    margin-bottom: 20px;
   }
 }
