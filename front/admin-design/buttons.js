@@ -259,10 +259,11 @@ saveButton.addEventListener('click', async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         colors: {
-          primary:       btnColor.value,
-          linkTextColor: textColor.value,
-          borderRadius:  getCurrentRadius(),
-          boxShadow:     getCurrentShadow(),
+        primary:        solidBtn.classList.contains('selected') ? btnColor.value : 'transparent',
+        btnBorderColor: btnColor.value,
+        linkTextColor:  textColor.value,
+        borderRadius:   getCurrentRadius(),
+        boxShadow:      getCurrentShadow(),
         }
       }),
     });
