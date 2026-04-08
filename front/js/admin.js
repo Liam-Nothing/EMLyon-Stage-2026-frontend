@@ -807,7 +807,7 @@ function initModal() {
     position: fixed;
     top: 0;
     left: 0;
-    width: 60%;
+    width: 67%;
     background: #00000053;
     z-index: 1000;
   `;
@@ -818,7 +818,7 @@ function initModal() {
     if (window.innerWidth < 769) {
       centerDiv.style.width = '100%';
     } else {
-      centerDiv.style.width = '60%';
+      centerDiv.style.width = '67%';
     }
   });
 

@@ -1,7 +1,5 @@
-- only need preview for profile admin
+A AJOUTER :
 - message attention comme quoi pas sauvergarder
-
-- comment garder les modif meme en actualisant
 
 - page de presentation pr se connecter
 
@@ -10,3 +8,24 @@
 - backEnd of wallpaper
 
 - mettre tout en Francais
+
+PROBLEME :
+- dans profile admin :
+  • preview interactif par rapport aux boutons (admin_profile.js ligne.416)
+
+- dans admin :
+  • Suppression d'un lien doit etre toast msg (et non alert)
+  • Une fois save changes, le link se met en style desactiver tout comme le checkbox mais rest active
+  • Qd click annuler, apres avoir clicker sur save, le checkbox se met en desactive (mais le style reste active) mais rest active
+
+  // les moins important (petit détail) :
+  • une fois ajouté un lien avec une icone, ne se déselectionne pas automatiquement
+  • Une fois ajout d'un lien (que se soit save ou discard mais qu'on a rempli les input), lors d'un autre ajout, les input reste vert ou rouge (les couleur reste)
+  • lorsqu'on essai de cliqué sur ajouté un lien sans avoir rempli whats requiere, ya plus le petit msg d'info
+
+- dans design :
+  • pb avec gradient : if plane color, gradient btn empty
+  • pb avec theme : automatically select a theme that isn't put
+
+  // moins important
+  • boutton color se met en noir lorsqu'on change le style 'solid'-'outline'
