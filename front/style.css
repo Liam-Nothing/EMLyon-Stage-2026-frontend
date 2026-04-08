@@ -159,7 +159,7 @@ header {
 
 /* Bar de Nav */
 nav {
-  width: 60%;
+  /* width: 60%; */
 }
 
 .navBar {
@@ -192,10 +192,12 @@ footer {
   display: flex;
   justify-content: center;
   padding: 20px 0;
-  width: 60%;
+  /* background-color: var(--text-color); */
+  /* width: 60%; */
   /* position: absolute;
   bottom: 0;
   left: 0; */
+  border-top: 1px solid rgba(215, 215, 215, 0.441);
 }
 
 footer a {
@@ -224,13 +226,14 @@ footer a {
 /* ==== PREVIEW =========================== */
 
 aside {
-  width: 40%;
+  width: 100%;
   border-left: 2px solid var(--text-color);
   height: 100vh;
   display: flex;
   justify-self: end;
-  position: absolute;
-  bottom: -80px;
+  position: sticky;
+  /* bottom: -80px; */
+  top: 0;
   align-items: center;
   justify-content: center;
 }
@@ -440,6 +443,18 @@ aside.fixed {
 
 /* =================================================================== */
 
+.alignwcard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    
+}
+
+.alignleftpart {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 @media (max-width:1024px) {
   .nav-right p {
     display: none;
@@ -462,9 +477,9 @@ aside.fixed {
   aside {
     display: none;
   }
-  footer {
-    width: 100%;
-  }
+  .alignwcard {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width:414px) {

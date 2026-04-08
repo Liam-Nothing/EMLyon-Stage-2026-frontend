@@ -1,12 +1,12 @@
-const el = document.getElementById("backgroundColor");
+// const el = document.getElementById("backgroundColor");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 80) {
-    el.classList.add("fixed");
-  } else {
-    el.classList.remove("fixed");
-  }
-});
+// window.addEventListener("scroll", () => {
+//   if (window.scrollY > 80) {
+//     el.classList.add("fixed");
+//   } else {
+//     el.classList.remove("fixed");
+//   }
+// });
 
 // ====== Chargement de la carte preview =========================================
 

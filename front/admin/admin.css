@@ -38,7 +38,7 @@ transform:translateX(20px);
 }
 
 section {
-  width: 60%;
+  /* width: 60%; */
   display: flex;
   flex-direction: column;
 }
@@ -519,8 +519,6 @@ input[type=radio] {
   opacity: 0.8;
 }
 
-
-
 /* ==================================================================== */
 /* =========================== RESPONSIVE ============================= */
 /* ==================================================================== */
@@ -537,9 +535,9 @@ input[type=radio] {
 }
 
 @media (max-width:768px) {
-    #liens, #formulaire, #formulaire-reseau, #reseau {
+    /* #liens, #formulaire, #formulaire-reseau, #reseau {
         width: 100%;
-    }
+    } */
 }
 
 @media (max-width:414px) {

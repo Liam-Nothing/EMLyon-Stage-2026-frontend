@@ -279,12 +279,141 @@ function initButtons() {
   }
 }
 
+// LOAD PREVIEW CARD =========================================
+async function renderPreview() {
+  try {
+    const [profileRes, linksRes] = await Promise.all([
+      fetch('/api/profile'),
+      fetch('/api/links'),
+    ]);
+    const profile = await profileRes.json();
+    const links   = await linksRes.json();
+
+    const pfp = document.getElementById('pfpPreview');
+    // if (pfp) {
+    //   const img = pfp.querySelector('img');
+    //   if (img) img.src = profile.avatar || '';
+    // }
+    if (pfp) {
+      if (profile.avatar) {
+        const img = pfp.querySelector('img');
+        if (img) img.src = profile.avatar;
+      } else {
+        const initials = (profile.name || '')
+        .split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    
+        const h = [...(profile.name || '')].reduce((hash, c) => 
+        c.charCodeAt(0) + ((hash << 5) - hash), 0);
+        const color = `hsl(${Math.abs(h) % 360}, 50%, 40%)`;
+
+        pfp.innerHTML = `
+          <div style="
+          width:80px; height:80px; border-radius:50%;
+          background:${color}; color:#fff;
+          display:flex; align-items:center; justify-content:center;
+          font-size:1.8rem; font-weight:bold;
+          ">${initials || '?'}</div>
+        `;
+      }
+    }
+
+    const nameEl = document.getElementById('usernamePreview');
+    const bioEl  = document.getElementById('bioPreview');
+    if (nameEl) nameEl.textContent = profile.name || '';
+    if (bioEl)  bioEl.textContent  = profile.bio  || '';
+
+    const container = document.getElementById('linkContainerPreview');
+    if (container) {
+      container.innerHTML = '';
+      links
+        .filter(l => l.active)
+        .sort((a, b) => a.order - b.order)
+        .forEach(link => {
+          const clickable = document.createElement('a');
+          clickable.href = link.url;
+          clickable.target = "_blank";
+          clickable.rel = "noopener noreferrer";
+          clickable.style.width = "100%";
+          const div = document.createElement('div');
+          div.className = 'linkPreview';
+          // div.innerHTML = `
+          //   <div class="leftPreview"><img src="../assets/LogoJointInBlue.png" alt=""></div>
+          //   <div class="middlePreview"><p class="myLinkPreview">${link.title}</p></div>
+          //   <div class="rightPreview"></div>
+          // `;
+          div.innerHTML = `
+            <div class="leftPreview">
+              ${link.image 
+              ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
+              : link.icon 
+              ? `<span style="font-size:2rem">${link.icon}</span>`
+              : `<img src="../assets/LogoJointInBlue.png" alt="">`
+              }
+            </div>
+            <div class="middlePreview"><p class="myLinkPreview">${link.title}</p></div>
+            <div class="rightPreview">
+              ${link.image 
+              ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
+              : link.icon 
+              ? `<span style="font-size:1.4rem">${link.icon}</span>`
+              : `<img src="../assets/LogoJointInBlue.png" alt="">`
+              }
+            </div>
+          `;
+          container.appendChild(clickable);
+          clickable.appendChild(div);
+        });
+    }
+
+    applyThemeApi();
+
+  } catch (err) {
+    console.error('[renderPreview]', err.message);
+  }
+}
+
+function previewResponsive() {
+  const user = document.getElementById('name');
+  const biog = document.getElementById('bio');
+
+  const userPreview = document.getElementById('usernamePreview');
+  const bioPreview = document.getElementById('bioPreview');
+
+  user.addEventListener('input', () => {
+    userPreview.textContent = user.value;
+  });
+
+  biog.addEventListener('input', () => {
+    bioPreview.textContent = biog.value;
+  });
+
+  const input = document.getElementById("pfp");
+const preview = document.querySelector(".pfpPreview img");
+
+input.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        });
+
+        reader.readAsDataURL(file);
+    }
+});
+  
+}
+
 
 // Point d'entrée
 document.addEventListener('DOMContentLoaded', () => {
   loadProfile();
   initAvatarUpload();
   initButtons();
+  renderPreview();
+  previewResponsive();     //FONCTION AU MAUVAIS ENDROIT, IL FAUT QUE SA SOIT RESPONSIVE PAR RAPPORT SAVE/DISCARD BTN
 });
 
 const edit = document.getElementById('modifyProfil');
