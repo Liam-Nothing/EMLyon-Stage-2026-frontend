@@ -12,7 +12,7 @@
 
 
 function applyThemeApi() {
-  fetch("/api/profile/theme")
+  fetch("/api/profile")
   .then(response => response.json())
   .then(data => {
   
@@ -54,7 +54,13 @@ function applyThemeApi() {
     imageRight.forEach(img => {
       img.style.borderRadius = data.colors.borderRadius;
     });
-  
+    
+
+    if (data.fontFamily) {
+      [h1, bio, foot, ...textBtnLink].forEach(el => {
+        if (el) el.style.fontFamily = data.fontFamily;
+      });
+    }
   })
   
   .catch (error => {
