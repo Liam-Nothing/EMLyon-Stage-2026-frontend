@@ -1,14 +1,12 @@
 - only need preview for profile admin
-- message attention seulement pr theme qd retour comme quoi pas sauvergarder
+- message attention comme quoi pas sauvergarder
 
 - comment garder les modif meme en actualisant
 
 - page de presentation pr se connecter
 
-- copy link
-- add the menu block to every page after linking all 'a'
+- add the menu block to public page
 
 - backEnd of wallpaper
 
 - mettre tout en Francais
-- Favicon on all
