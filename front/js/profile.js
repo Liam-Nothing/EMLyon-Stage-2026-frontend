@@ -84,7 +84,7 @@ function renderLinks(links) {
     return;
   }
 
-  activeLinks.forEach(link => {
+  activeLinks.forEach((link,index) => {
     const clickable = document.createElement('a');
     clickable.href = link.url;
     clickable.target = "_blank";
@@ -98,6 +98,7 @@ function renderLinks(links) {
     
     const div = document.createElement('div');
     div.className = 'link-card link-style-solide';
+    div.style.animationDelay = `${index * 0.1}s`;
 
     // div.innerHTML = `
     //   // <div class="left" id="leftPreview">
