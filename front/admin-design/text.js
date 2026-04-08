@@ -84,7 +84,7 @@ fontSelect.addEventListener('change', () => {
 });
 
 // Chargement initial depuis l'API 
-fetch('/api/profile/theme')
+fetch('/api/profile')
   .then(res => res.json())
   .then(data => {
     const c = data.colors || {};
@@ -95,9 +95,14 @@ fetch('/api/profile/theme')
     nameTextColor.textContent        = color;
     applyTextColor(color);
 
-    if (c.fontFamily) {
-      fontSelect.value = c.fontFamily;
-      applyFontFamily(c.fontFamily);
+    console.log('fontFamily reçu:', data.fontFamily);  
+    console.log('select avant set:', fontSelect.value); 
+
+
+    if (data.fontFamily) {
+      fontSelect.value = data.fontFamily;
+      applyFontFamily(data.fontFamily);
+      console.log('select après set:', fontSelect.value);
     }
 
     saveState(); 
@@ -129,9 +134,9 @@ saveButton.addEventListener('click', async () => {
       method:  'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        fontFamily: fontSelect.value,
         colors: {
           textColor:  textColorInput.value,
-          fontFamily: fontSelect.value,
         }
       }),
     });
