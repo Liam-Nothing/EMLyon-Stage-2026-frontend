@@ -169,15 +169,27 @@ const copyLink = document.getElementById('nav-right');
 const copyText = document.getElementById('myLinkCopy');
 
 copyLink.addEventListener('click', () => {
-    const textToCopy = copyText.textContent; // seulement pour text
+    // const textToCopy = copyText.textContent; // seulement pour text
     // const textToCopy = copyText.href; // pour href de <a>
-    // const textToCopy = "https://" + copyText.textContent; //si c un span au lieu de <a>
+    const textToCopy = "https://" + copyText.textContent; //si c un span au lieu de <a>
 
     navigator.clipboard.writeText(textToCopy)
         .then(() => {
-            console.log('Texte copié !');
+          console.log('Texte copié !');
+          showNotification("Link Copied !", "#36D399");
         })
         .catch(err => {
-            console.error('Erreur de copie : ', err);
+          console.error('Erreur de copie : ', err);
+          showNotification("Couldn't copy link", "#FF5C72");
         });
 });
+
+// NEED TO DISPLAY A MSG (TOAST) TO SAY LINK COPIED
+function showNotification(msg, color) {
+  const toast = document.createElement('div');
+  toast.classList.add('boxMessage');
+  toast.style.background = color;
+  toast.innerHTML = "<p>" + msg + "</p>";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}

@@ -37,6 +37,9 @@ body {
   font-size: var(--text-font-size);
   background-color: var(--background-color);
   /* line-height: 1.5; */
+  /* display: grid;
+  grid-template-rows: auto 1fr auto; */
+  min-height: 100vh;
 }
 
 a {
@@ -190,6 +193,9 @@ footer {
   justify-content: center;
   padding: 20px 0;
   width: 60%;
+  /* position: absolute;
+  bottom: 0;
+  left: 0; */
 }
 
 footer a {
@@ -414,6 +420,22 @@ aside.fixed {
 }
 .rightPreview span {
   display: none;
+}
+
+/*  ==== MIGHT REMOVE TOAST ============================= */
+.boxMessage {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  /* background: rgb(255, 92, 114); */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) ;
+  z-index: 9999;
+  animation: 0.3 ease 0s 1 normal none running slideIn;
 }
 
 /* =================================================================== */

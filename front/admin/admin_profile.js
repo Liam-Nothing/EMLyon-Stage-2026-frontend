@@ -252,6 +252,7 @@ function initButtons() {
     btnSave.addEventListener('click', (e) => {
       e.preventDefault();
       saveProfile();
+      editCard.style.display = "none";
     });
   }
 
@@ -260,6 +261,7 @@ function initButtons() {
   if (btnCancel) {
     btnCancel.addEventListener('click', (e) => {
       e.preventDefault();
+      editCard.style.display = "none";
       window._pendingAvatar = null;
       loadProfile();
       showToast('Modifications annulées');
@@ -283,4 +285,11 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProfile();
   initAvatarUpload();
   initButtons();
+});
+
+const edit = document.getElementById('modifyProfil');
+const editCard = document.getElementById('modify-profil');
+
+edit.addEventListener('click', () => {
+  editCard.style.display = "block";
 });
