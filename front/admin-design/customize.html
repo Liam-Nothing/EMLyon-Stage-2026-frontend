@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="customize.css">
 
+  <link rel="shortcut icon" href="../assets/LogoJointInWhite.png" type="image/x-icon">
+
   <title>JointIn - Design</title>
 </head>
 <body>
@@ -20,7 +22,7 @@
           <a href="" class="btn-forme btn-second" id="logout-btn">Log-out</a>
       </div>
       <!-- ajouter menu -->
-        <div class="menue">
+        <div class="menue" id="menu">
           <i class="fa-solid fa-bars"></i>
       </div>
   </header>
@@ -38,9 +40,9 @@
         <a href="../admin/admin_profile.html" class="grey">Profil</a>
       </div>
 
-      <div class="nav-right">
-        <p>Link : <a href="">xxx/xxxxxx.xx </a></p>
-        <a href="" class="h"><i class="fa-regular fa-copy"></i></a>
+      <div class="nav-right" id="nav-right">
+          <p>Link : <span id="myLinkCopy">xxx/xxxxxx.xx </span></p>
+          <a href="" class="h"><i class="fa-regular fa-copy"></i></a>
       </div>
 
     </nav>
@@ -130,6 +132,32 @@
         </aside>
         <!-- ============================================================== -->
       </div>
+
+<!-- ========= MENU SECTION ==================================================================== -->
+
+        <section id="menuSection" class="menuSection">
+            <div class="copyLink">
+                <p>Link : <span id="menuCopyLink">xxx/xxxxxx.xx</span><i class="fa-regular fa-copy"></i></p>
+            </div>
+            <div class="menuContent">
+                <div class="cardMenuStyle" id="showsPreview">
+                    <p>Aperçu</p>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+                <a href="../index.html" class="cardMenu"><div class="cardMenuStyle">
+                    <p>Page Publique</p>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div></a>
+                <a href="" class="cardMenu"><div class="cardMenuStyle">
+                    <p>Log-out</p>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div></a>
+            </div>
+        </section>
+
+        <!-- =========================================================================================== -->
+
+
   </main>
 
   <footer>

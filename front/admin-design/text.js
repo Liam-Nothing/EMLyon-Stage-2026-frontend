@@ -12,18 +12,18 @@ textColor.addEventListener('input', () => {
   stillFoot.style.color = textColor.value;
 });
 
-const upSocial = document.getElementById('upBtn');
-const downSocial = document.getElementById('downBtn');
+// const upSocial = document.getElementById('upBtn');
+// const downSocial = document.getElementById('downBtn');
 
-upSocial.addEventListener('click', () => {
-  downSocial.classList.remove('selected');
-  upSocial.classList.add('selected');
-});
+// upSocial.addEventListener('click', () => {
+//   downSocial.classList.remove('selected');
+//   upSocial.classList.add('selected');
+// });
 
-downSocial.addEventListener('click', () => {
-  downSocial.classList.add('selected');
-  upSocial.classList.remove('selected');
-});
+// downSocial.addEventListener('click', () => {
+//   downSocial.classList.add('selected');
+//   upSocial.classList.remove('selected');
+// });
 
 const user = document.getElementById('usernamePreview');
 const bio = document.getElementById('bioPreview');

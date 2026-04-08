@@ -184,6 +184,25 @@ copyLink.addEventListener('click', () => {
         });
 });
 
+//COPY TEXT MENU
+
+const copyLinkMenu = document.querySelector('.copyLink');
+const copyTextMenu = document.getElementById('menuCopyLink');
+
+copyLinkMenu.addEventListener('click', () => {
+    const textToCopy = "https://" + copyTextMenu.textContent; //si c un span au lieu de <a>
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          console.log('Texte copié !');
+          showNotification("Link Copied !", "#36D399");
+        })
+        .catch(err => {
+          console.error('Erreur de copie : ', err);
+          showNotification("Couldn't copy link", "#FF5C72");
+        });
+});
+
 // NEED TO DISPLAY A MSG (TOAST) TO SAY LINK COPIED
 function showNotification(msg, color) {
   const toast = document.createElement('div');

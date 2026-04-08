@@ -385,9 +385,8 @@ aside.fixed {
 
 .copyLink {
   padding: 10px 8px;
-}
-
-.copy {
+  display: flex;
+  align-items: center;
   color: var(--primary-color);
 }
 
