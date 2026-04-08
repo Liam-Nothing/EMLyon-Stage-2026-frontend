@@ -1,68 +1,148 @@
-const textColor = document.getElementById('textColorSelect');
+const textColorInput  = document.getElementById('textColorSelect');
 const circleTextColor = document.getElementById('circleTextColor');
-const nameTextColor = document.getElementById('nameTextColor');
+const nameTextColor   = document.getElementById('nameTextColor');
+const fontSelect      = document.getElementById('fontFamilySelect');
 
-textColor.addEventListener('input', () => {
-  circleTextColor.style.background = textColor.value;
-  nameTextColor.textContent = textColor.value;
-
-  user.style.color = textColor.value;
-  bio.style.color = textColor.value;
-  foot.style.color = textColor.value;
-  stillFoot.style.color = textColor.value;
-});
-
-// const upSocial = document.getElementById('upBtn');
-// const downSocial = document.getElementById('downBtn');
-
-// upSocial.addEventListener('click', () => {
-//   downSocial.classList.remove('selected');
-//   upSocial.classList.add('selected');
-// });
-
-// downSocial.addEventListener('click', () => {
-//   downSocial.classList.add('selected');
-//   upSocial.classList.remove('selected');
-// });
-
-const user = document.getElementById('usernamePreview');
-const bio = document.getElementById('bioPreview');
-const foot = document.getElementById('footer');
+const user      = document.getElementById('usernamePreview');
+const bio       = document.getElementById('bioPreview');
+const foot      = document.getElementById('footer');
 const stillFoot = document.getElementById('stillFooter');
 
-const options = document.querySelectorAll('.optionStyle');
+const saveButton = document.getElementById('saveBtn');
+const undoButton = document.getElementById('undoButton');
+const redoButton = document.getElementById('redoButton');
 
-options.forEach(element => {
-  element.addEventListener('click', () => {
-    if (element.value === "Default") {
-      user.style.fontFamily = "Rubik";
-      bio.style.fontFamily = "Noto Sans";
+let hasChanged   = false;
+let history      = [];
+let historyIndex = -1;
 
-      const myLink = document.querySelectorAll('.myLinkPreview');
-      myLink.forEach(el => {
-        el.style.fontFamily = "Noto Sans";
-      });
-      foot.style.fontFamily = "Noto Sans";
-      stillFoot.style.fontFamily = "Noto Sans";
-    } else {
-      user.style.fontFamily = element.value;
-      bio.style.fontFamily = element.value;
-  
-      const myLink = document.querySelectorAll('.myLinkPreview');
-      myLink.forEach(el => {
-        el.style.fontFamily = element.value;
-      });
-      foot.style.fontFamily = element.value;
-      stillFoot.style.fontFamily = element.value;
-    }
-  })
+// Historique
+function saveState() {
+  const state = {
+    textColor:  textColorInput.value,
+    fontFamily: fontSelect.value,
+  };
+  history      = history.slice(0, historyIndex + 1);
+  history.push(state);
+  historyIndex++;
+}
+
+function applyState(state) {
+  textColorInput.value              = state.textColor;
+  circleTextColor.style.background  = state.textColor;
+  nameTextColor.textContent         = state.textColor;
+  applyTextColor(state.textColor);
+
+  fontSelect.value = state.fontFamily;
+  applyFontFamily(state.fontFamily);
+}
+
+function markChanged() {
+  hasChanged = true;
+  saveButton.classList.add('active');
+}
+
+// Application couleur texte 
+function applyTextColor(color) {
+  user.style.color      = color;
+  bio.style.color       = color;
+  foot.style.color      = color;
+  stillFoot.style.color = color;
+
+  // document.querySelectorAll('.myLinkPreview').forEach(el => {
+  //   el.style.color = color;
+  // });
+}
+
+// Application police 
+function applyFontFamily(value) {
+  const font = value === 'Default' ? '' : value;
+
+  user.style.fontFamily      = value === 'Default' ? 'Rubik'     : font;
+  bio.style.fontFamily       = value === 'Default' ? 'Noto Sans' : font;
+  foot.style.fontFamily      = value === 'Default' ? 'Noto Sans' : font;
+  stillFoot.style.fontFamily = value === 'Default' ? 'Noto Sans' : font;
+
+  document.querySelectorAll('.myLinkPreview').forEach(el => {
+    el.style.fontFamily = value === 'Default' ? 'Noto Sans' : font;
+  });
+}
+
+// Listeners 
+textColorInput.addEventListener('input', () => {
+  circleTextColor.style.background = textColorInput.value;
+  nameTextColor.textContent        = textColorInput.value;
+  applyTextColor(textColorInput.value);
+  markChanged();
+  saveState();
 });
 
-fetch("/api/profile/theme")
+fontSelect.addEventListener('change', () => {
+  applyFontFamily(fontSelect.value);
+  markChanged();
+  saveState();
+});
+
+// Chargement initial depuis l'API 
+fetch('/api/profile/theme')
   .then(res => res.json())
   .then(data => {
-   circleTextColor.style.background = data.colors.textColor;
-   nameTextColor.textContent = data.colors.textColor;
+    const c = data.colors || {};
 
+    const color = c.textColor || '#000000';
+    textColorInput.value             = color;
+    circleTextColor.style.background = color;
+    nameTextColor.textContent        = color;
+    applyTextColor(color);
+
+    if (c.fontFamily) {
+      fontSelect.value = c.fontFamily;
+      applyFontFamily(c.fontFamily);
+    }
+
+    saveState(); 
   })
   .catch(err => console.error('Error server', err));
+
+// Undo / Redo 
+undoButton.addEventListener('click', () => {
+  if (historyIndex <= 0) return;
+  historyIndex--;
+  applyState(history[historyIndex]);
+});
+
+redoButton.addEventListener('click', () => {
+  if (historyIndex >= history.length - 1) return;
+  historyIndex++;
+  applyState(history[historyIndex]);
+});
+
+// Sauvegarde 
+saveButton.addEventListener('click', async () => {
+  if (!hasChanged) {
+    showNotification('Aucun changement à sauvegarder', '#FF5C72');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/profile', {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        colors: {
+          textColor:  textColorInput.value,
+          fontFamily: fontSelect.value,
+        }
+      }),
+    });
+
+    if (!res.ok) throw new Error('Erreur API');
+    showNotification('Sauvegardé ✓', '#36D399');
+    hasChanged = false;
+    saveButton.classList.remove('active');
+
+  } catch (e) {
+    console.error(e);
+    showNotification('Erreur lors de la sauvegarde', '#FF5C72');
+  }
+});
