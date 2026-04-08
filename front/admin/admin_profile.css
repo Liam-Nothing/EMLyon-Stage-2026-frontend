@@ -203,6 +203,9 @@ textarea {
     flex-direction: column;
     align-items: center;
   }
+  .alignwcard {
+        grid-template-rows: 2fr 1fr;
+  }
 }
 
 @media (max-width:500px) {
@@ -220,5 +223,8 @@ textarea {
 @media (max-width:414px) {
   .nav-right a {
     display: none;
+  }
+  #profil, #modify-profil {
+    padding: 0 5px;
   }
 }

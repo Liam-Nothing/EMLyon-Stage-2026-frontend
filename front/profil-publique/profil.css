@@ -258,8 +258,27 @@ body.active {
   transform: rotate(-180deg);
 } */
 
+main {
+  position: relative;
+}
+
 .menue {
   color: var(--text-color);
+}
+
+.menuPublic {
+  position: absolute;
+  flex-direction: column;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+  display: none;
+  border-top: 2px solid rgb(217, 217, 217);
+}
+
+.menuPublic.toggle {
+  display: flex;
 }
 
 @media (max-width:768px) {

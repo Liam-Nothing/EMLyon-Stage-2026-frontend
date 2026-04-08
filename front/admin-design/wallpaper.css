@@ -267,6 +267,9 @@ input[type=color] {
     flex-direction: column;
     align-items: start;
     gap: 10px;
+    margin: 0;
+    margin-left: 10px;
+    margin-bottom: 15px;
   }
   .saveTitleNav {
     flex-direction: row-reverse;
@@ -276,5 +279,17 @@ input[type=color] {
   }
   .rightGradientCard .circleColor {
     margin-right: 10px;
+  }
+  #wallpaperStyle {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .alignleftpart {
+    width: 98%;
+    margin: auto;
+  }
+  .bodyColor, .backgroundColor, .gradientColors {
+    margin: 0;
+    margin-bottom: 20px;
   }
 }

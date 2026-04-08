@@ -100,7 +100,6 @@ function setOutline() {
 solidBtn.addEventListener('click', () => {
   setSolid();
   updateLinkPreviewColor();
-  selectShadow('none');
   markChanged();
   saveState();
 });
@@ -110,6 +109,7 @@ outlineBtn.addEventListener('click', () => {
   updateLinkPreviewColor();
   markChanged();
   saveState();
+  selectShadow('none');
 });
 
 // Mise à jour preview liens 
@@ -152,6 +152,13 @@ function radiusSelected(x, a, b, c, value) {
     [a, b, c].forEach(el => el.classList.remove('selected'));
     x.classList.add('selected');
     document.querySelectorAll('.linkPreview').forEach(el => {
+      el.style.borderRadius = value;
+      el.style.boxShadow = value;
+    });
+    document.querySelectorAll('.leftPreview img').forEach(el => {
+      el.style.borderRadius = value;
+    });
+    document.querySelectorAll('.rightPreview img').forEach(el => {
       el.style.borderRadius = value;
     });
     markChanged();
@@ -254,6 +261,11 @@ saveButton.addEventListener('click', async () => {
   }
 
   try {
+    const isSolid = solidBtn.classList.contains('selected');
+
+    const primaryValue = isSolid ? btnColor.value : 'transparent';
+    const borderValue  = isSolid ? 'none' : `2px solid ${btnColor.value}`;
+
     const res = await fetch('/api/profile', {
       method:  'PUT',
       headers: { 'Content-Type': 'application/json' },
