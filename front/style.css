@@ -158,9 +158,9 @@ header {
 
 
 /* Bar de Nav */
-nav {
-  /* width: 60%; */
-}
+/* nav {
+  width: 60%;
+} */
 
 .navBar {
   display: flex;
