@@ -4,17 +4,30 @@ function showState(state) {
   const error = document.getElementById('error-state');
 
   if (state === 'loading') {
-    main.style.opacity  = '0.4';
+    main.style.visibility = 'visible';
+    // main.style.opacity  = '0.4';
     main.style.pointerEvents = 'none';
     if (error) error.hidden = true;
 
+    // Skeleton sur le container des liens
+    const container = document.getElementById('links-container');
+    if (container) {
+      container.innerHTML =`
+        <div class="skeleton" style="height:56px;margin-bottom:12px;border-radius:12px;"></div>
+        <div class="skeleton" style="height:56px;margin-bottom:12px;border-radius:12px;"></div>
+        <div class="skeleton" style="height:56px;margin-bottom:12px;border-radius:12px;"></div>
+      `;
+    }
+
   } else if (state === 'error') {
-    main.style.opacity  = '1';
+    main.style.visibility    = 'visible';
+    // main.style.opacity  = '1';
     main.style.pointerEvents = 'auto';
-    if (error) error.hidden = false;
+    if (error) error.hidden = true;
 
   } else if (state === 'content') {
-    main.style.opacity  = '1';
+    main.style.visibility    = 'visible';
+    // main.style.opacity  = '1';
     main.style.pointerEvents = 'auto';
     if (error) error.hidden = true;
   }
