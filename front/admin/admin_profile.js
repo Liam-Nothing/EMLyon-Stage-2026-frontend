@@ -343,6 +343,13 @@ async function renderPreview() {
     if (nameEl) nameEl.textContent = profile.name || '';
     if (bioEl)  bioEl.textContent  = profile.bio  || '';
 
+    // Police
+    if (profile.fontFamily) {
+      document.querySelectorAll('#usernamePreview, #bioPreview, .myLinkPreview').forEach(el => {
+        el.style.fontFamily = profile.fontFamily;
+      });
+    }
+
     const container = document.getElementById('linkContainerPreview');
     if (container) {
       container.innerHTML = '';

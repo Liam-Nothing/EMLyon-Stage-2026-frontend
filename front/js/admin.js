@@ -155,6 +155,7 @@ function createLinkCard(link) {
   card.className = 'linkCard';
   card.dataset.id = link.id;
   card.draggable  = true;
+  card.style.animation = 'slideIn 0.3s ease both'; 
   if (!link.active) card.style.opacity = '0.45';
 
   card.innerHTML = `
@@ -412,8 +413,12 @@ function initEventDelegation() {
       try {
         const res = await fetch(`/api/links/${id}`, { method: 'DELETE' });
         if (!res.ok) throw new Error(`Status ${res.status}`);
+        card.style.animation = 'fadeOut 0.3s ease both';
+        card.addEventListener('animationend', () => {
         card.remove();
         showToast('Lien supprimé ✓');
+        renderPreview();
+        }, { once: true });
         renderPreview();
       } catch (err) {
         console.error('[deleteLink]', err.message);
@@ -737,6 +742,13 @@ async function renderPreview() {
     const bioEl  = document.getElementById('bioPreview');
     if (nameEl) nameEl.textContent = profile.name || '';
     if (bioEl)  bioEl.textContent  = profile.bio  || '';
+
+    // Police
+    if (profile.fontFamily) {
+      document.querySelectorAll('#usernamePreview, #bioPreview, .myLinkPreview').forEach(el => {
+        el.style.fontFamily = profile.fontFamily;
+      });
+    }
 
     const container = document.getElementById('linkContainerPreview');
     if (container) {
