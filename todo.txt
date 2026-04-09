@@ -7,6 +7,8 @@ A AJOUTER :
 
 - mettre tout en Francais
 
+- Faire le css + responsive de modify an image ==== SALSA!!!!!!! ========================================
+
 PROBLEME :
 - dans profile admin :
   • preview interactif par rapport aux boutons (admin_profile.js ligne.416)
