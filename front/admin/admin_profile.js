@@ -227,6 +227,12 @@ function initAvatarUpload() {
     }
 
     const reader = new FileReader();
+
+    if (!window._originalAvatar) {
+      const current = document.querySelector(".pfpPreview img");
+      if (current) window._originalAvatar = current.src;
+    }
+
     reader.onload = (ev) => {
       const base64 = ev.target.result;
 
@@ -234,6 +240,10 @@ function initAvatarUpload() {
       document.querySelectorAll('.cardProfil img, .image-modify img').forEach(img => {
         img.src = base64;
       });
+
+      // 👉 AJOUT ICI
+      const preview = document.querySelector(".pfpPreview img");
+      if (preview) preview.src = base64;
 
       // Stocker en mémoire jusqu'à la sauvegarde
       window._pendingAvatar = base64;
@@ -263,6 +273,17 @@ function initButtons() {
       e.preventDefault();
       editCard.style.display = "none";
       window._pendingAvatar = null;
+
+       // 👉 RESTAURATION
+      if (window._originalAvatar) {
+        document.querySelectorAll('.cardProfil img, .image-modify img').forEach(img => {
+          img.src = window._originalAvatar;
+        });
+
+        const preview = document.querySelector(".pfpPreview img");
+        if (preview) preview.src = window._originalAvatar;
+      }
+
       loadProfile();
       showToast('Modifications annulées');
     });

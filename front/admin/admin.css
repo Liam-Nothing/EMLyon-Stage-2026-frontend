@@ -142,7 +142,7 @@ button  {
     color: var(--error-color);
 }
 
-.fa-pen:hover, .fa-image:hover {
+.fa-pen:hover {
     color: var(--primary-color);
 }
 
@@ -505,6 +505,31 @@ input[type=radio] {
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
+}
+
+#image-btn:hover {
+    color: var(--primary-color);
+}
+
+.removeImg {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: solid 2px var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 10px;
+    height: fit-content;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+.removeImg:hover {
+        color: var(--background-color);
+    border-color: var(--error-color);
+    background-color: var(--error-color);
+
 }
 
 

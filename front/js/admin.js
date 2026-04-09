@@ -771,7 +771,7 @@ async function renderPreview() {
               ${link.image 
               ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
               : link.icon 
-              ? `<span style="font-size:1.4rem">${link.icon}</span>`
+              ? `<span style="font-size:2rem">${link.icon}</span>`
               : `<img src="../assets/LogoJointInBlue.png" alt="">`
               }
             </div>
@@ -859,121 +859,122 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // TEST IMG CHANGE ==================================================================================
 // ==================================================================================================
-// function modifyLink(card) {
+function modifyLink(card) {
 
-//   // 🔥 si déjà ouvert → on ferme
-//   const existing = card.nextElementSibling;
-//   if (existing && existing.classList.contains('modifyImgCard')) {
-//     existing.remove();
-//     return;
-//   }
+  // 🔥 si déjà ouvert → on ferme
+  const existing = card.nextElementSibling;
+  if (existing && existing.classList.contains('modifyImgCard')) {
+    existing.remove();
+    return;
+  }
 
-//   // 🔥 ferme les autres ouverts
-//   document.querySelectorAll('.modifyImgCard').forEach(el => el.remove());
+  // 🔥 ferme les autres ouverts
+  document.querySelectorAll('.modifyImgCard').forEach(el => el.remove());
 
-//   const modify = document.createElement('div');
-//   modify.classList.add('modifyImgCard');
+  const modify = document.createElement('div');
+  modify.classList.add('modifyImgCard');
 
-//   modify.innerHTML =  `
-//   <div class="navModify">
-//     <p id="imageSetting" class="imageSetting">Image setting</p>
-//     <p id="imageLayout" class="imageLayout">Layout</p>
-//   </div>
+  modify.innerHTML =  `
+  <div class="navModify">
+    <p id="imageSetting" class="imageSetting">Image setting</p>
+    <p id="imageLayout" class="imageLayout">Layout</p>
+  </div>
 
-//   <div class="image-setting" id="image-setting">
-//     <div class="imageDisplay" id="imageDisplay"></div>
-//     <div class="changeAlign">
-//       <div class="changeDiv">
-//         <label for="change">Change image :</label>
-//         <input type="file" name="change" id="change" class="change" accept="image/png, image/jpeg">
-//       </div>
-//         <div class="formLink">
-//           <label>Icône :</label>
-//           <div class="emoji-grid" id="emoji-grid">
-//               <span class="emoji-option" data-emoji="🌐">🌐</span>
-//               <span class="emoji-option" data-emoji="🐙">🐙</span>
-//               <span class="emoji-option" data-emoji="💼">💼</span>
-//               <span class="emoji-option" data-emoji="🐦">🐦</span>
-//               <span class="emoji-option" data-emoji="✍️">✍️</span>
-//               <span class="emoji-option" data-emoji="🎵">🎵</span>
-//               <span class="emoji-option" data-emoji="🎬">🎬</span>
-//               <span class="emoji-option" data-emoji="💻">💻</span>
-//               <span class="emoji-option" data-emoji="📚">📚</span>
-//               <span class="emoji-option" data-emoji="🛒">🛒</span>
-//               <span class="emoji-option" data-emoji="📸">📸</span>
-//               <span class="emoji-option" data-emoji="🎮">🎮</span>
-//               <span class="emoji-option" data-emoji="📧">📧</span>
-//               <span class="emoji-option" data-emoji="🔗">🔗</span>
-//               <span class="emoji-option" data-emoji="📱">📱</span>
-//               <span class="emoji-option" data-emoji="🎨">🎨</span>
-//               <span class="emoji-option" data-emoji="🚀">🚀</span>
-//               <span class="emoji-option" data-emoji="💡">💡</span>
-//               <span class="emoji-option" data-emoji="🏆">🏆</span>
-//               <span class="emoji-option" data-emoji="❤️">❤️</span>
-//           </div>
-//           <input type="text" id="input-icon" placeholder="Ou tape un emoji..." maxlength="2" style="margin-top:8px;width:120px;text-align:center">
-//           <span class="error-message" id="error-icon"></span>
-//       </div>
-//     </div>
-//   </div>
+  <div class="image-setting" id="image-setting">
+    <div class="imageDisplay" id="imageDisplay"></div>
+    <div class="changeAlign">
+      <div class="changeDiv">
+        <label for="change">Change image :</label>
+        <input type="file" name="change" id="change" class="change" accept="image/png, image/jpeg">
+      </div>
+        <div class="formLink">
+          <label>Icône :</label>
+          <div class="emoji-grid" id="emoji-grid">
+              <span class="emoji-option" data-emoji="🌐">🌐</span>
+              <span class="emoji-option" data-emoji="🐙">🐙</span>
+              <span class="emoji-option" data-emoji="💼">💼</span>
+              <span class="emoji-option" data-emoji="🐦">🐦</span>
+              <span class="emoji-option" data-emoji="✍️">✍️</span>
+              <span class="emoji-option" data-emoji="🎵">🎵</span>
+              <span class="emoji-option" data-emoji="🎬">🎬</span>
+              <span class="emoji-option" data-emoji="💻">💻</span>
+              <span class="emoji-option" data-emoji="📚">📚</span>
+              <span class="emoji-option" data-emoji="🛒">🛒</span>
+              <span class="emoji-option" data-emoji="📸">📸</span>
+              <span class="emoji-option" data-emoji="🎮">🎮</span>
+              <span class="emoji-option" data-emoji="📧">📧</span>
+              <span class="emoji-option" data-emoji="🔗">🔗</span>
+              <span class="emoji-option" data-emoji="📱">📱</span>
+              <span class="emoji-option" data-emoji="🎨">🎨</span>
+              <span class="emoji-option" data-emoji="🚀">🚀</span>
+              <span class="emoji-option" data-emoji="💡">💡</span>
+              <span class="emoji-option" data-emoji="🏆">🏆</span>
+              <span class="emoji-option" data-emoji="❤️">❤️</span>
+          </div>
+          <input type="text" id="input-icon" placeholder="Ou tape un emoji..." maxlength="2" style="margin-top:8px;width:120px;text-align:center">
+          <span class="error-message" id="error-icon"></span>
+      </div>
+      <button class="removeImg" id="removeImg">Remove image or icone</button>
+    </div>
+  </div>
 
-//   <div class="image-layout" id="image-layout">
-//     <form action="" method="get" class="layoutStyle">
-//         <div class="options" id="option1">
-//             <div class="check">
-//                 <input type="radio" name="option" id="leftOption" class="leftOption" checked="checked">
-//                 <label for="leftOption">Left</label>
-//             </div>
-//             <img src="../assets/imgleft.png" alt="option1">
-//         </div>
-//         <div class="options" id="option2">
-//             <div class="check">
-//                 <input type="radio" name="option" id="rightOption" class="rightOption">
-//                 <label for="rightOption">Right</label>
-//             </div>
-//             <img src="../assets/imgright.png" alt="option2">
-//         </div>
-//     </form>
-//   </div>
-//   `;
+  <div class="image-layout" id="image-layout">
+    <form action="" method="get" class="layoutStyle">
+        <div class="options" id="option1">
+            <div class="check">
+                <input type="radio" name="option" id="leftOption" class="leftOption" checked="checked">
+                <label for="leftOption">Left</label>
+            </div>
+            <img src="../assets/imgleft.png" alt="option1">
+        </div>
+        <div class="options" id="option2">
+            <div class="check">
+                <input type="radio" name="option" id="rightOption" class="rightOption">
+                <label for="rightOption">Right</label>
+            </div>
+            <img src="../assets/imgright.png" alt="option2">
+        </div>
+    </form>
+  </div>
+  `;
 
-//   // 🔥 clé : insérer juste après la card
-//   card.after(modify);
+  // 🔥 clé : insérer juste après la card
+  card.after(modify);
 
-//   // ✅ IMPORTANT : query DANS modify
-//   const setting    = modify.querySelector('.imageSetting');
-//   const layout     = modify.querySelector('.imageLayout');
-//   const divSetting = modify.querySelector('.image-setting');
-//   const divLayout  = modify.querySelector('.image-layout');
+  // ✅ IMPORTANT : query DANS modify
+  const setting    = modify.querySelector('.imageSetting');
+  const layout     = modify.querySelector('.imageLayout');
+  const divSetting = modify.querySelector('.image-setting');
+  const divLayout  = modify.querySelector('.image-layout');
 
-//   // events
-//   setting.addEventListener('click', () => {
-//     setting.style.opacity = "1";
-//     layout.style.opacity = "0.5";
-//     divLayout.style.display  = "none";
-//     divSetting.style.display = "flex";
-//   });
+  // events
+  setting.addEventListener('click', () => {
+    setting.style.opacity = "1";
+    layout.style.opacity = "0.5";
+    divLayout.style.display  = "none";
+    divSetting.style.display = "flex";
+  });
 
-//   layout.addEventListener('click', () => {
-//     setting.style.opacity = "0.5";
-//     layout.style.opacity = "1";
-//     divLayout.style.display  = "flex";
-//     divSetting.style.display = "none";
-//   });
+  layout.addEventListener('click', () => {
+    setting.style.opacity = "0.5";
+    layout.style.opacity = "1";
+    divLayout.style.display  = "flex";
+    divSetting.style.display = "none";
+  });
 
-//   imageDisplay();
-// }
+  // imageDisplay();
+}
 
 
-// document.addEventListener('click', (e) => {
-//   const btn = e.target.closest('.image-btn');
-//   if (!btn) return;
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.image-btn');
+  if (!btn) return;
 
-//   const card = e.target.closest('.linkCard');
-//   if (!card) return;
+  const card = e.target.closest('.linkCard');
+  if (!card) return;
 
-//   modifyLink(card);
-// });
+  modifyLink(card);
+});
 
 // function imageDisplay() {
 
