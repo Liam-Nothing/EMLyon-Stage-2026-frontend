@@ -613,3 +613,8 @@ input[type=radio] {
 .linkCard.removing {
   animation: fadeOut 0.3s ease both;
 }
+
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
