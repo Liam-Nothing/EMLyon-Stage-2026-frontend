@@ -38,6 +38,27 @@
 //   setTimeout(() => toast.remove(), 3000);
 // }
 
+function setLoading(button, isLoading) {
+  if (isLoading) {
+    button.dataset.originalText = button.textContent;
+    button.innerHTML = `<span style="
+      display:inline-block;
+      width:14px; height:14px;
+      border:2px solid #fff;
+      border-top-color:transparent;
+      border-radius:50%;
+      animation:spin 0.6s linear infinite;
+      vertical-align:middle;
+    "></span>`;
+    button.disabled = true;
+    button.style.opacity = '0.7';
+  } else {
+    button.innerHTML = button.dataset.originalText;
+    button.disabled  = false;
+    button.style.opacity = '1';
+  }
+}
+
 function showToast(message, type = 'success') {
   let container = document.getElementById('toast-container');
   if (!container) {
@@ -172,6 +193,8 @@ async function saveProfile() {
   if (bio)    body.bio    = bio;
   if (avatar) body.avatar = avatar;
 
+  const btnSave = document.querySelector('.btn-main.save');
+  setLoading(btnSave, true);
   try {
     const res  = await fetch('/api/profile', {
       method:  'PUT',
@@ -196,6 +219,8 @@ async function saveProfile() {
   } catch (err) {
     console.error('[saveProfile]', err.message);
     showToast('Erreur réseau, réessayez', 'error');
+  } finally {
+    setLoading(btnSave, false);
   }
 }
 
@@ -450,3 +475,4 @@ const editCard = document.getElementById('modify-profil');
 edit.addEventListener('click', () => {
   editCard.style.display = "block";
 });
+
