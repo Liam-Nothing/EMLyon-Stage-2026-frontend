@@ -61,14 +61,22 @@ body {
 .link-card {
   padding: 8px 24px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; 
+  grid-template-columns: 1fr 2fr 1fr;  
+  animation: fadeIn 0.5s ease forwards;
 }
 
 .link-card:hover{
-    transform: translateY(-2px);
+    /* transform: translateY(-2px); */
+    transform: scale(1.02) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.link-card:active {
+  transform: scale(0.98) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* 1 - full */
@@ -206,10 +214,6 @@ body {
 }
 
 .profile-header {
-  animation: fadeIn 0.5s ease both;
-}
-
-.link-card {
   animation: fadeIn 0.5s ease both;
 }
 
