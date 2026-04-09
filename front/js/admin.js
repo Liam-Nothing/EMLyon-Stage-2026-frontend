@@ -53,6 +53,27 @@
 //   setTimeout(() => toast.remove(), 3000);
 // }
 
+function setLoading(button, isLoading) {
+  if (isLoading) {
+    button.dataset.originalText = button.textContent;
+    button.innerHTML = `<span style="
+      display:inline-block;
+      width:14px; height:14px;
+      border:2px solid #fff;
+      border-top-color:transparent;
+      border-radius:50%;
+      animation:spin 0.6s linear infinite;
+      vertical-align:middle;
+    "></span>`;
+    button.disabled = true;
+    button.style.opacity = '0.7';
+  } else {
+    button.innerHTML = button.dataset.originalText;
+    button.disabled  = false;
+    button.style.opacity = '1';
+  }
+}
+
 function showToast(message, type = 'success') {
   let container = document.getElementById('toast-container');
   if (!container) {
@@ -626,8 +647,8 @@ function initAddLinkForm() {
     if (!valid) return;
 
     //  Appel API POST 
+    setLoading(btnAdd, true);
     try {
-      console.log('body envoyé:', JSON.stringify({ title, url, icon, image }).slice(0, 200));
       const res = await fetch('/api/links', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -668,6 +689,8 @@ function initAddLinkForm() {
     } catch (err) {
       console.error('[addLink]', err.message);
       showToast('Erreur réseau, réessayez', 'error');
+    } finally {
+      setLoading(btnAdd, false);
     }
   };
 
@@ -987,6 +1010,8 @@ document.addEventListener('click', (e) => {
 
   modifyLink(card);
 });
+
+
 
 // function imageDisplay() {
 
