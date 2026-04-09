@@ -232,6 +232,80 @@ function createLinkCard(link) {
   return card;
 }
 
+// function createEditForm(card, link) {
+//   const originalHTML = card.innerHTML;
+
+//   card.innerHTML = `
+//     <div class="linkContent" style="width:100%">
+//       <div class="edit-form">
+//         <div class="edit-input">
+//           <div class="inputsAlign">
+//             <label for="editTitle"><strong>Titre:</strong></label>
+//             <input type="text" class="edit-title" value="${link.title}" id="editTitle" placeholder="Titre">
+//           </div>
+//           <div class="inputsAlign">
+//             <label for="editUrl">URL:</label>
+//             <input type="url"  class="edit-url"   value="${link.url}"  id="editUrl"  placeholder="https://...">
+//           </div>  
+//         </div>
+
+//         <div class="edit-image">
+//           <i class="fa-regular fa-image image-btn" id="image-btn"></i>
+//           <div class="edit-actions">
+//             <button class="edit-cancel  btn-discard small-btn">Annuler</button>
+//             <button class="edit-save    btn-main    small-btn">Sauvegarder</button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+
+//   // Annuler — restaure l'HTML original
+//   card.querySelector('.edit-cancel').addEventListener('click', () => {
+//     card.innerHTML = originalHTML;
+//     card.draggable = true;
+//     const modifyCard = document.querySelector('.modifyImgCard');
+//     if (!modifyCard) {
+//       return;
+//     } else {
+//       modifyCard.style.display = "none";  
+//     }
+//   });
+
+//   // Sauvegarder
+//   card.querySelector('.edit-save').addEventListener('click', async () => {
+//     const title = card.querySelector('.edit-title').value.trim();
+//     const url   = card.querySelector('.edit-url').value.trim();
+
+//     if (!title) { showToast('Le titre est requis', 'error'); return; }
+//     if (!url.startsWith('http://') && !url.startsWith('https://')) {
+//       showToast("L'URL doit commencer par http:// ou https://", 'error');
+//       return;
+//     }
+
+//     try {
+//       const res  = await fetch(`/api/links/${link.id}`, {
+//         method:  'PUT',
+//         headers: { 'Content-Type': 'application/json' },
+//         body:    JSON.stringify({ title, url }),
+//       });
+//       const data = await res.json();
+//       if (!res.ok) { showToast(data.error || 'Erreur', 'error'); return; }
+
+//       // Remplacer la card par la version mise à jour
+//       const newCard = createLinkCard({ ...link, title, url });
+//       card.replaceWith(newCard);
+//       showToast('Lien modifié ✓');
+//       renderPreview();
+
+//     } catch (err) {
+//       showToast('Erreur réseau', 'error');
+//     }
+//   });
+
+//   card.draggable = false; 
+// }
+
 function createEditForm(card, link) {
   const originalHTML = card.innerHTML;
 
@@ -245,37 +319,86 @@ function createEditForm(card, link) {
           </div>
           <div class="inputsAlign">
             <label for="editUrl">URL:</label>
-            <input type="url"  class="edit-url"   value="${link.url}"  id="editUrl"  placeholder="https://...">
-          </div>  
+            <input type="url" class="edit-url" value="${link.url}" id="editUrl" placeholder="https://...">
+          </div>
+        </div>
+
+        <!-- Panneau image/emoji -->
+        <div class="edit-media-panel" style="display:none; flex-direction:column; gap:10px; margin: 10px 0;">
+          <div style="display:flex; gap:10px; align-items:center;">
+            <label style="font-size:0.85rem; opacity:0.7;">Icône :</label>
+            <div class="edit-emoji-grid" style="display:flex;flex-wrap:wrap;gap:6px;">
+              ${['🌐','🐙','💼','🐦','✍️','🎵','🎬','💻','📚','🛒','📸','🎮','📧','🔗','📱','🎨','🚀','💡','🏆','❤️']
+                .map(e => `<span class="edit-emoji-option" data-emoji="${e}" style="font-size:1.3rem;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent;">${e}</span>`)
+                .join('')}
+            </div>
+            <input type="text" class="edit-icon-input" placeholder="emoji..." maxlength="2"
+              value="${link.icon || ''}"
+              style="width:80px;text-align:center;font-size:1.2rem;padding:6px;border-radius:8px;border:1px solid #ccc;">
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <label style="font-size:0.85rem; opacity:0.7;">Image :</label>
+            <input type="file" class="edit-image-input" accept="image/*" style="font-size:0.85rem;">
+            ${link.image ? `<img src="${link.image}" style="width:40px;height:40px;object-fit:cover;border-radius:8px;">` : ''}
+          </div>
+          <button class="edit-clear-media btn-discard small-btn" style="width:fit-content;font-size:0.8rem;">
+            Supprimer icône/image
+          </button>
         </div>
 
         <div class="edit-image">
-          <i class="fa-regular fa-image image-btn" id="image-btn"></i>
+          <i class="fa-regular fa-image image-btn" id="image-btn" style="cursor:pointer;font-size:1.2rem;"></i>
           <div class="edit-actions">
-            <button class="edit-cancel  btn-discard small-btn">Annuler</button>
-            <button class="edit-save    btn-main    small-btn">Sauvegarder</button>
+            <button class="edit-cancel btn-discard small-btn">Annuler</button>
+            <button class="edit-save btn-main small-btn">Sauvegarder</button>
           </div>
         </div>
       </div>
     </div>
   `;
 
-  // Annuler — restaure l'HTML original
+  // Toggle panneau image/emoji
+  const mediaPanel = card.querySelector('.edit-media-panel');
+  const imageBtn   = card.querySelector('#image-btn');
+  imageBtn.addEventListener('click', () => {
+    mediaPanel.style.display = mediaPanel.style.display === 'none' ? 'flex' : 'none';
+  });
+
+  // Sélection emoji dans la grille
+  const emojiGrid  = card.querySelector('.edit-emoji-grid');
+  const iconInput  = card.querySelector('.edit-icon-input');
+  emojiGrid.addEventListener('click', (e) => {
+    const option = e.target.closest('.edit-emoji-option');
+    if (!option) return;
+    emojiGrid.querySelectorAll('.edit-emoji-option').forEach(el => el.style.borderColor = 'transparent');
+    option.style.borderColor = '#4c7b8a';
+    iconInput.value = option.dataset.emoji;
+  });
+
+  // Saisie manuelle emoji
+  iconInput.addEventListener('input', () => {
+    emojiGrid.querySelectorAll('.edit-emoji-option').forEach(el => el.style.borderColor = 'transparent');
+  });
+
+  // Supprimer icône/image
+  card.querySelector('.edit-clear-media').addEventListener('click', () => {
+    iconInput.value = '';
+    card.querySelector('.edit-image-input').value = '';
+    emojiGrid.querySelectorAll('.edit-emoji-option').forEach(el => el.style.borderColor = 'transparent');
+  });
+
+  // Annuler
   card.querySelector('.edit-cancel').addEventListener('click', () => {
     card.innerHTML = originalHTML;
     card.draggable = true;
-    const modifyCard = document.querySelector('.modifyImgCard');
-    if (!modifyCard) {
-      return;
-    } else {
-      modifyCard.style.display = "none";  
-    }
   });
 
   // Sauvegarder
   card.querySelector('.edit-save').addEventListener('click', async () => {
-    const title = card.querySelector('.edit-title').value.trim();
-    const url   = card.querySelector('.edit-url').value.trim();
+    const title     = card.querySelector('.edit-title').value.trim();
+    const url       = card.querySelector('.edit-url').value.trim();
+    const icon      = card.querySelector('.edit-icon-input').value.trim();
+    const imageFile = card.querySelector('.edit-image-input').files[0];
 
     if (!title) { showToast('Le titre est requis', 'error'); return; }
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
@@ -283,17 +406,30 @@ function createEditForm(card, link) {
       return;
     }
 
+    // Convertir image en base64 si présente
+    let image = link.image || '';
+    if (imageFile) {
+      image = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(imageFile);
+      });
+    }
+
+    // Si icône renseignée, on efface l'image et vice-versa
+    const finalIcon  = icon  ? icon  : (image ? '' : (link.icon  || ''));
+    const finalImage = image ? image : (icon  ? '' : (link.image || ''));
+
     try {
-      const res  = await fetch(`/api/links/${link.id}`, {
+      const res = await fetch(`/api/links/${link.id}`, {
         method:  'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ title, url }),
+        body:    JSON.stringify({ title, url, icon: finalIcon, image: finalImage }),
       });
       const data = await res.json();
       if (!res.ok) { showToast(data.error || 'Erreur', 'error'); return; }
 
-      // Remplacer la card par la version mise à jour
-      const newCard = createLinkCard({ ...link, title, url });
+      const newCard = createLinkCard({ ...link, title, url, icon: finalIcon, image: finalImage });
       card.replaceWith(newCard);
       showToast('Lien modifié ✓');
       renderPreview();
@@ -303,8 +439,9 @@ function createEditForm(card, link) {
     }
   });
 
-  card.draggable = false; 
+  card.draggable = false;
 }
+
 
 
 function initDragAndDrop() {
@@ -1007,6 +1144,8 @@ document.addEventListener('click', (e) => {
 
   const card = e.target.closest('.linkCard');
   if (!card) return;
+
+  if (card.querySelector('.edit-form')) return;
 
   modifyLink(card);
 });
