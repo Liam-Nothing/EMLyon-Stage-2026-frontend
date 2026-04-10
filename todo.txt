@@ -26,3 +26,8 @@ PROBLEME :
 
   // moins important
   • boutton color se met en noir lorsqu'on change le style 'solid'-'outline'
+
+- dans preview card :
+  • dans profil admin, une fois annuler, le texte modifier reste (jusqua ce quon actualise)
+  • previewCard max-width is a pb when no bio
+  • can't have empty bio
