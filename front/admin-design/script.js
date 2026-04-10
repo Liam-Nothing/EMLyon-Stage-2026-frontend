@@ -97,7 +97,7 @@ async function renderPreview() {
               ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
               : link.icon 
               ? `<span style="font-size:2rem">${link.icon}</span>`
-              : `<img src="../assets/LogoJointInBlue.png" alt="">`
+              : ``
               }
             </div>
             <div class="middlePreview"><p class="myLinkPreview">${link.title}</p></div>
@@ -106,7 +106,7 @@ async function renderPreview() {
               ? `<img src="${link.image}" alt="${link.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` 
               : link.icon 
               ? `<span style="font-size:1.4rem">${link.icon}</span>`
-              : `<img src="../assets/LogoJointInBlue.png" alt="">`
+              : ``
               }
             </div>
           `;
