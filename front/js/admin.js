@@ -329,8 +329,8 @@ function createEditForm(card, link) {
         </div>
 
         <!-- Panneau image/emoji -->
-        <div class="edit-media-panel" style="display:none; flex-direction:column; gap:10px; margin: 10px 0;">
-          <div style="display:flex; gap:10px; align-items:center;">
+        <div class="edit-media-panel" style="display:none; flex-direction:column; gap:20px; margin-top: 20px;">
+          <div class="edit-input">
             <label style="font-size:0.85rem; opacity:0.7;">Icône :</label>
             <div class="edit-emoji-grid" style="display:flex;flex-wrap:wrap;gap:6px;">
               ${['🌐','🐙','💼','🐦','✍️','🎵','🎬','💻','📚','🛒','📸','🎮','📧','🔗','📱','🎨','🚀','💡','🏆','❤️']
@@ -341,12 +341,12 @@ function createEditForm(card, link) {
               value="${link.icon || ''}"
               style="width:80px;text-align:center;font-size:1.2rem;padding:6px;border-radius:8px;border:1px solid #ccc;">
           </div>
-          <div style="display:flex; gap:10px; align-items:center;">
+          <div class="edit-input">
             <label style="font-size:0.85rem; opacity:0.7;">Image :</label>
             <input type="file" class="edit-image-input" accept="image/*" style="font-size:0.85rem;">
             ${link.image ? `<img src="${link.image}" style="width:40px;height:40px;object-fit:cover;border-radius:8px;">` : ''}
           </div>
-          <button class="edit-clear-media btn-discard small-btn" style="width:fit-content;font-size:0.8rem;">
+          <button class="edit-clear-media btn-discard small-btn" style="width:fit-content;font-size:0.8rem;margin-left:20px;cursor:pointer;">
             Supprimer icône/image
           </button>
         </div>
