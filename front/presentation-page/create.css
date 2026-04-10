@@ -77,6 +77,11 @@ input[type=submit]:hover {
 .btns a {
   font-size: var(--small-text-font-size);
   color: rgb(117, 117, 117);
+  transition: 0.3s;
+}
+
+.btns a:hover {
+  color: rgb(74, 74, 74);
 }
 
 /* JAVASCRIPT */

@@ -1,0 +1,199 @@
+body {
+  background-color: var(--secondary-color);
+}
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.contain {
+  padding: 25px 20px;
+  background-color: var(--background-color);
+  box-shadow: var(--box-shadow);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  max-width: 1100px;
+  gap: 25px;
+}
+
+sup {
+  color: rgb(117, 117, 117);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.upperText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* BOUTTONS */
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.btns-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#next {
+  padding: 12px 32px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  position: relative;
+  transition: 0.3s;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: 14px 34px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  height: fit-content;
+}
+
+#next:hover {
+  background-color: #2B5C6C;
+}
+
+#pass {
+  border: none;
+  background-color: transparent;
+  color: rgb(117, 117, 117);
+  font-weight: 600;
+  transition: 0.3s;
+  font-size: 14px;
+  cursor: pointer;
+}
+#pass:hover {
+  color: rgb(74, 74, 74);
+}
+
+.btns a {
+  font-size: var(--small-text-font-size);
+  color: rgb(117, 117, 117);
+  transition: 0.3s;
+}
+
+.btns a:hover {
+  color: rgb(74, 74, 74);
+}
+
+/* ===================================================================================== */
+/* ============================ CARDS THEME LOAD API =================================== */
+
+.theme {
+  margin: 0 40px 40px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+
+.card.selected {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+.selectCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.card {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 170px;
+  height: 300px;
+  border-radius: 10px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.profil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 8px;
+  gap: 10px;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.contentTitle {
+  width: 40px;
+  height: 5px;
+}
+
+.contentBio {
+  height: 2px;
+  width: 80px;
+}
+
+.contentBio2 {
+  height: 2px;
+  width: 50px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.linkLinks {
+  background-color: aliceblue;
+  padding: 15px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerTheme {
+  width: 100%;
+  height: 5px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.footTheme {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+}
+
+/* ================================================= */
