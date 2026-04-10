@@ -1,0 +1,150 @@
+body {
+  background: var(--secondary-color);
+}
+
+/* CARD */
+#connect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.connect {
+  padding: 35px 50px;
+  background-color: var(--background-color);
+  box-shadow: var(--box-shadow);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  margin: auto;
+}
+
+/* LEFT SECTION */
+.leftSection {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px ;
+}
+
+/* GOOGLE BTN */
+.google {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 35px;
+  background-color: var(--surface-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: 0.3s;
+  width: fit-content;
+}
+.google:hover{
+    transform: scale(1.02);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.12);
+}
+.google:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.fa-google {
+  font-size: 30px;
+}
+
+/* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  p {
+    font-size: var(--small-text-font-size);
+
+    a {
+    font-size: var(--small-text-font-size);
+    color: var(--primary-color);
+    font-weight: 600;
+    }
+  }
+}
+
+.input input{
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: transparent;
+
+}
+
+.input input:focus{
+  outline: none;
+  border-color: #4c7b8a;
+  box-shadow: 0 0 5px rgba(76,123,138,0.4);
+}
+
+/* SUBMIT */
+.submit {
+  display: flex;
+  justify-content: end;
+  gap: 50px;
+  margin-top: 20px;
+}
+
+input[type=submit] {
+  padding: 12px 32px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  position: relative;
+  transition: 0.3s;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: 14px 34px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  height: fit-content;
+}
+
+input[type=submit]:hover {
+  background-color: #2B5C6C;
+}
+
+
+/* RIGHT SECTION */
+.rightSection {
+  max-width: 500px;
+
+  img {
+    width: 100%;
+  }
+}
+
+/* =============================================================== */
+/* ======================== RESPONSIVE =========================== */
+/* =============================================================== */
+@media (max-width:768px) {
+  .rightSection {
+    display: none;
+  }
+  .leftSection {
+    width: 100%;
+  }
+  .connect {
+    width: 100%;
+    padding: 35px 25px;
+  }
+}
