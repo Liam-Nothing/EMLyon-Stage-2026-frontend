@@ -7,7 +7,7 @@
     "background": "#7E5350",
     "primary": "transparent",
     "cardBackground": "linear-gradient(180deg, rgba(232, 227, 198, 0.65) 0%, #D19F8B 39%, #B48080 96%)",
-    "textColor": "#62292B",
+    "textColor": "#62292b",
     "linkTextColor": "#62292B",
     "border": "2px solid #62292B",
     "boxShadow": "none",
@@ -19,5 +19,6 @@
       "platform": "github",
       "url": "https://github.com/..."
     }
-  ]
+  ],
+  "fontFamily": "Default"
 }

@@ -23,6 +23,8 @@ PROBLEME :
 
 - dans design :
   • pb avec theme : automatically select a theme that isn't put
+  • text undo dont work
+  • undo/redo class style (for opacity) in button and wallpaper arent put
 
   // moins important
   • boutton color se met en noir lorsqu'on change le style 'solid'-'outline'
