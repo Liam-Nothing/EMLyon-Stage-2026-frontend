@@ -1,18 +1,17 @@
 A AJOUTER :
 - message attention comme quoi pas sauvergarder
 
-- page de presentation pr se connecter
-
-- backEnd of wallpaper
-
 - mettre tout en Francais
 
-- Faire le css + responsive de modify an image ==== SALSA!!!!!!! ========================================
+- pour page de présentation :
+  • Back-End
+  • required style
+
+  // optionnel
+  • Welcome msg
+
 
 PROBLEME :
-- dans profile admin :
-  • preview interactif par rapport aux boutons (admin_profile.js ligne.416)
-
 - dans admin :
   • Une fois save changes, le link se met en style desactiver tout comme le checkbox mais rest active
   • Qd click annuler, apres avoir clicker sur save, le checkbox se met en desactive (mais le style reste active) mais rest active
