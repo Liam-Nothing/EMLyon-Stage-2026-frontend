@@ -245,7 +245,7 @@ aside.fixed {
 
 .cardPreview {
   /* background-color: #C14141; */
-  max-width: 330px;
+  width: 330px;
   height: 640px;
   border-radius: 10px;
   overflow: hidden;
