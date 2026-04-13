@@ -190,7 +190,7 @@ async function saveProfile() {
 
   const body = {};
   if (name)   body.name   = name;
-  if (bio)    body.bio    = bio;
+  body.bio    = bio;
   if (avatar) body.avatar = avatar;
 
   const btnSave = document.querySelector('.btn-main.save');

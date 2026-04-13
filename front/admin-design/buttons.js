@@ -272,7 +272,7 @@ saveButton.addEventListener('click', async () => {
       body: JSON.stringify({
         colors: {
         primary:        solidBtn.classList.contains('selected') ? btnColor.value : 'transparent',
-        btnBorderColor: btnColor.value,
+        btnBorderColor: btnColor.value, //pb here might be 'solidBtn.classList.contains('selected') ? 'none' : btnColor.value,'
         linkTextColor:  textColor.value,
         borderRadius:   getCurrentRadius(),
         boxShadow:      getCurrentShadow(),

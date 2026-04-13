@@ -1,8 +1,9 @@
 /* ======= HERO SECTION ======================== */
 .heroAlign {
   display: flex;
-  height: 90vh;
+  min-height: 90vh;
   width: 90%;
+  max-width: 1700px;
   align-items: center;
   justify-content: space-between;
   margin: auto;
@@ -80,6 +81,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   width: 88%;
+  max-width: 1400px;
   margin: auto;
   padding: 50px 0;
 }

@@ -267,6 +267,7 @@ aside.fixed {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .profilPreview {
@@ -291,6 +292,13 @@ aside.fixed {
     object-fit: cover;
     object-position: center;
   }
+}
+
+#bioPreview {
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .linkContainerPreview {

@@ -243,7 +243,7 @@ async function loadProfile() {
 
     // Police
     if (profile.fontFamily) {
-      const els = document.querySelectorAll('#profile-name, #profile-bio, .textBtn, #footer, #stillFooter');
+      const els = document.querySelectorAll('#profile-name, #profile-bio, #footer, #stillFooter, .textBtn');
       els.forEach(el => el.style.fontFamily = profile.fontFamily);
     }
 

@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require ('path');
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 const frontDir = path.join(__dirname, '..', 'front');
  
 // Middleware

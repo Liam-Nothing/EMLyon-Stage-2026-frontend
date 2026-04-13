@@ -1,8 +1,6 @@
 A AJOUTER :
 - message attention comme quoi pas sauvergarder
 
-- mettre tout en Francais
-
 - pour page de présentation :
   • Back-End
   • required style
@@ -32,5 +30,3 @@ PROBLEME :
 
 - dans preview card :
   • dans profil admin, une fois annuler, le texte modifier reste (jusqua ce quon actualise)
-  • previewCard max-width is a pb when no bio
-  • can't have empty bio
