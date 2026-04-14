@@ -71,7 +71,7 @@ body {
 .link-card:hover{
     /* transform: translateY(-2px); */
     transform: scale(1.02) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+    /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important; */
 }
 
 .link-card:active {

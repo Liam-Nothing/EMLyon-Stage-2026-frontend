@@ -22,12 +22,8 @@ PROBLEME :
 - dans design :
   • pb avec theme : automatically select a theme that isn't put
   • dans theme : DELETE A GRADIENT COLOR!!!
-  • PB WITH BUTTON BORDER COLOR
   • text undo dont work
   • undo/redo class style (for opacity) in button and wallpaper arent put
-
-  // moins important
-  • boutton color se met en noir lorsqu'on change le style 'solid'-'outline'
 
 - dans preview card :
   • dans profil admin, une fois annuler, le texte modifier reste (jusqua ce quon actualise)

@@ -241,12 +241,6 @@ async function loadProfile() {
     // applyThemeColors(profile.colors);
     applyThemeApi();
 
-    // Police
-    if (profile.fontFamily) {
-      const els = document.querySelectorAll('#profile-name, #profile-bio, #footer, #stillFooter, .textBtn');
-      els.forEach(el => el.style.fontFamily = profile.fontFamily);
-    }
-
     // Nom
     const nameProfile = document.getElementById('profile-name');
     if (nameProfile && profile.name) nameProfile.textContent = profile.name;
@@ -260,6 +254,12 @@ async function loadProfile() {
 
     // Liens
     renderLinks(links);
+
+    // Police
+    if (profile.fontFamily) {
+      const els = document.querySelectorAll('#profile-name, #profile-bio, #footer, #stillFooter, .textBtn');
+      els.forEach(el => el.style.fontFamily = profile.fontFamily);
+    }
 
     showState('content');
 
