@@ -396,6 +396,10 @@ aside.fixed {
   display: flex;
   align-items: center;
   color: var(--primary-color);
+
+  p {
+    cursor: pointer;
+  }
 }
 
 .menuContent {
