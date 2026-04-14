@@ -8,6 +8,10 @@ const gradientSelected = document.querySelector('.gradientColors');
 
 let hasChanged = false;
 
+const saveButton = document.getElementById('saveBtn');
+const undoButton = document.getElementById('undoButton');
+const redoButton = document.getElementById('redoButton');
+
 fill.addEventListener('click', () => {
   fillP.classList.remove('unselected');
   gradientP.classList.add('unselected');
@@ -125,6 +129,12 @@ function ajouterCarte(defaultColor = "#000000") {
     gradientName.textContent = gradientColor.value;
     updateGradientPreview(); // rebuild le gradient avec toutes les cartes
   });
+
+  gradientColor.addEventListener('change', () => {
+  saveState(); 
+  hasChanged = true;
+  saveButton.classList.add('active');
+});
 
   // Bouton supprimer
   const deleteBtn = gradientCard.querySelector('.deleteCard');
@@ -334,7 +344,13 @@ function updateGradientPreview() {
   if (historyIndex >= 0) { 
     hasChanged = true;
     saveButton.classList.add('active');
+    // saveState();
   }
+}
+
+function updateArrows() {
+  undoButton.classList.toggle('active', historyIndex > 0);
+  redoButton.classList.toggle('active', historyIndex < history.length - 1);
 }
 
 // DRAG
@@ -391,15 +407,12 @@ function initDragAndDrop() {
 
 initDragAndDrop();
 
-// NEED ADD SAVE BUTTON SO IT SAVES CHANGES IN API
 
-const saveButton = document.getElementById('saveBtn');
-const undoButton = document.getElementById('undoButton');
-const redoButton = document.getElementById('redoButton');
+
+
 
 
 // TOAST 
-
 function showNotification(msg, color) {
   const toast = document.createElement('div');
   toast.classList.add('boxMessage');
@@ -422,6 +435,7 @@ function saveState() {
   history = history.slice(0, historyIndex + 1);
   history.push(state);
   historyIndex++;
+  updateArrows();
 }
 
 function applyState(state) {
@@ -431,6 +445,7 @@ function applyState(state) {
   circleBodyColor.style.background = state.background;
   nameBackgroundColor.textContent  = getColorFromBackground(state.cardBackground);
   circleBackgroundColor.style.background = getColorFromBackground(state.cardBackground);
+  updateArrows();
 }
 
 
