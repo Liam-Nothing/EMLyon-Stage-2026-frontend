@@ -368,6 +368,8 @@ async function renderPreview() {
     if (nameEl) nameEl.textContent = profile.name || '';
     if (bioEl)  bioEl.textContent  = profile.bio  || '';
 
+    copyName();
+
     // Police
     if (profile.fontFamily) {
       document.querySelectorAll('#usernamePreview, #bioPreview, .myLinkPreview').forEach(el => {
@@ -475,4 +477,3 @@ const editCard = document.getElementById('modify-profil');
 edit.addEventListener('click', () => {
   editCard.style.display = "block";
 });
-

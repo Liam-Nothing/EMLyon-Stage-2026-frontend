@@ -72,6 +72,8 @@ async function renderPreview() {
     if (nameEl) nameEl.textContent = profile.name || '';
     if (bioEl)  bioEl.textContent  = profile.bio  || '';
 
+    copyName();
+
     const container = document.getElementById('linkContainerPreview');
     if (container) {
       container.innerHTML = '';

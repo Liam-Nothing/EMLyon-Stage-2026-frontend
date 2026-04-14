@@ -177,7 +177,7 @@ const copyText = document.getElementById('myLinkCopy');
 copyLink.addEventListener('click', () => {
     // const textToCopy = copyText.textContent; // seulement pour text
     // const textToCopy = copyText.href; // pour href de <a>
-    const textToCopy = "https://" + copyText.textContent; //si c un span au lieu de <a>
+    const textToCopy = "https://" + copyText.textContent + ".app"; //si c un span au lieu de <a>
 
     navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -196,7 +196,7 @@ const copyLinkMenu = document.querySelector('.copyLink');
 const copyTextMenu = document.getElementById('menuCopyLink');
 
 copyLinkMenu.addEventListener('click', () => {
-    const textToCopy = "https://" + copyTextMenu.textContent; //si c un span au lieu de <a>
+    const textToCopy = "https://" + copyTextMenu.textContent + ".app"; //si c un span au lieu de <a>
 
     navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -208,6 +208,14 @@ copyLinkMenu.addEventListener('click', () => {
           showNotification("Couldn't copy link", "#FF5C72");
         });
 });
+
+function copyName() {
+  const userCopy = document.getElementById('usernamePreview');
+  const menuCopy = document.getElementById('menuCopyLink');
+  const copyName = document.getElementById('myLinkCopy');
+  copyName.textContent= "jointin/" + userCopy.textContent.toLowerCase();
+  menuCopy.textContent= "jointin/" + userCopy.textContent.toLowerCase();
+}
 
 // NEED TO DISPLAY A MSG (TOAST) TO SAY LINK COPIED
 function showNotification(msg, color) {
