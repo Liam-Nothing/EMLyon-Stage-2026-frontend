@@ -212,7 +212,7 @@ fetch('/api/profile/theme')
     const c = data.colors || {};
 
     const isSolid = c.primary && c.primary !== 'transparent' && !c.primary.includes('none');
-    btnColor.value  = isSolid ? c.primary : (c.btnBorderColor || '#4c7b8a');
+    btnColor.value  = isSolid ? c.primary : (c.border ? c.border.split(' ').pop() : '#4c7b8a'); // (c.btnBorderColor || '#4c7b8a')
     textColor.value = c.linkTextColor || '#000000';
 
     btnCircle.style.background  = c.primary       || '#000000';
@@ -271,8 +271,8 @@ saveButton.addEventListener('click', async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         colors: {
-        primary:        solidBtn.classList.contains('selected') ? btnColor.value : 'transparent',
-        btnBorderColor: btnColor.value, //pb here might be 'solidBtn.classList.contains('selected') ? 'none' : btnColor.value,'
+        primary:        primaryValue,
+        border:         borderValue, //btnBorderColor: btnColor.value, //pb here might be 'solidBtn.classList.contains('selected') ? 'none' : btnColor.value,' or might be 'border' instead of 'btnBorderColor'
         linkTextColor:  textColor.value,
         borderRadius:   getCurrentRadius(),
         boxShadow:      getCurrentShadow(),
