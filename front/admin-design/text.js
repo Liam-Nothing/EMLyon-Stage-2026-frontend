@@ -25,6 +25,7 @@ function saveState() {
   history      = history.slice(0, historyIndex + 1);
   history.push(state);
   historyIndex++;
+  updateArrows();
 }
 
 function applyState(state) {
@@ -35,11 +36,17 @@ function applyState(state) {
 
   fontSelect.value = state.fontFamily;
   applyFontFamily(state.fontFamily);
+  updateArrows();
 }
 
 function markChanged() {
   hasChanged = true;
   saveButton.classList.add('active');
+}
+
+function updateArrows() {
+  undoButton.classList.toggle('active', historyIndex > 0);
+  redoButton.classList.toggle('active', historyIndex < history.length - 1);
 }
 
 // Application couleur texte 
@@ -74,6 +81,10 @@ textColorInput.addEventListener('input', () => {
   nameTextColor.textContent        = textColorInput.value;
   applyTextColor(textColorInput.value);
   markChanged();
+  // saveState();
+});
+
+textColorInput.addEventListener('change', () => {
   saveState();
 });
 

@@ -39,6 +39,7 @@ function saveState() {
   history      = history.slice(0, historyIndex + 1);
   history.push(state);
   historyIndex++;
+  updateArrows();
 }
 
 function applyState(state) {
@@ -58,6 +59,7 @@ function applyState(state) {
   selectBordorRadius(state.borderRadius);
   selectShadow(state.boxShadow);
   updateLinkPreviewColor();
+  updateArrows();
 }
 
 function getCurrentRadius() {
@@ -78,6 +80,11 @@ function getCurrentShadow() {
 function markChanged() {
   hasChanged = true;
   saveButton.classList.add('active');
+}
+
+function updateArrows() {
+  undoButton.classList.toggle('active', historyIndex > 0);
+  redoButton.classList.toggle('active', historyIndex < history.length - 1);
 }
 
 // Solid / Outline 
@@ -132,8 +139,12 @@ btnColor.addEventListener('input', () => {
   btnName.textContent        = btnColor.value;
   updateLinkPreviewColor();
   markChanged();
-  saveState();
+  // saveState();
 });
+
+btnColor.addEventListener('change', () => {
+  saveState();
+})
 
 // Couleur texte 
 textColor.addEventListener('input', () => {
@@ -143,6 +154,10 @@ textColor.addEventListener('input', () => {
     el.style.color = textColor.value;
   });
   markChanged();
+  // saveState();
+});
+
+textColor.addEventListener('change', () => {
   saveState();
 });
 
