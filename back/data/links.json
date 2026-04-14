@@ -3,10 +3,11 @@
     "id": "4",
     "title": "My Github",
     "url": "https://github.com",
-    "icon": "🌐",
+    "icon": "❤️",
     "order": 1,
     "active": true,
-    "image": ""
+    "image": "",
+    "clicks": 5
   },
   {
     "id": "1775211033759",
