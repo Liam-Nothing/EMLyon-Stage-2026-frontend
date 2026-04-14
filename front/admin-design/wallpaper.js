@@ -126,6 +126,18 @@ function ajouterCarte(defaultColor = "#000000") {
     updateGradientPreview(); // rebuild le gradient avec toutes les cartes
   });
 
+  // Bouton supprimer
+  const deleteBtn = gradientCard.querySelector('.deleteCard');
+  deleteBtn.addEventListener('click', () => {
+    gradientCard.remove();
+    compteur--;
+    updateGradientPreview();
+    hasChanged = true;
+    saveButton.classList.add('active');
+    saveState();
+    showNotification('Couleur supprimée ✓', '#36D399');
+  });
+
   // 🔥 Mettre à jour le preview après création
   updateGradientPreview();
 }
