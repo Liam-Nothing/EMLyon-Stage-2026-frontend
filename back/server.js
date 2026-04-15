@@ -10,7 +10,9 @@ app.use(express.json());
 app.use(morgan('dev'));
 // app.use(express.static('public'));
 // app.use(express.static(path.join(__dirname, '../front')));
-app.use(express.static(frontDir));
+// app.use(express.static(frontDir));
+app.use(express.static(frontDir, { index: false }));
+app.use(express.static(path.join(__dirname, '../front/presentation-page')));
  
 // Routes API
 const linksRouter   = require('./routes/links');
@@ -30,6 +32,12 @@ app.get('/admin', (req, res) => {
 
 
 
+app.get('/', (req, res) => {
+  res.sendFile('presentation.html', { 
+    root: path.join(__dirname, '../front/presentation-page') 
+  });
+});
+
 // Fallback 
 app.get('*', (req, res) => {
   res.sendFile('index.html', { root: frontDir });
@@ -38,7 +46,7 @@ app.get('*', (req, res) => {
 // Démarrage du serveur
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur http://localhost:${PORT}`);
-  console.log(`  → Profil public : http://localhost:${PORT}`);
+  console.log(`  → Page présentation : http://localhost:${PORT}`);
   console.log(`  → Admin         : http://localhost:${PORT}/admin`);
   console.log(`  → API links     : http://localhost:${PORT}/api/links`);
   console.log(`  → API profile   : http://localhost:${PORT}/api/profile`);
