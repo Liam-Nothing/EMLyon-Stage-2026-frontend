@@ -56,3 +56,36 @@ function selectTheme(id) {
   const card = document.getElementById(id);
   if (card) card.classList.add('selected');
 }
+
+
+const btnPass = document.getElementById('pass');
+const btnNext = document.getElementById('next');
+
+btnPass.addEventListener('click', () => {
+  window.location.href = '../admin/admin.html';
+});
+
+btnNext.addEventListener('click', async () => {
+  const selected = document.querySelector('.card.selected');
+  if (!selected) {
+    alert('Veuillez sélectionner un thème ou cliquer sur Passer');
+    return;
+  }
+
+  const themeId = selected.id;
+
+  try {
+    const res = await fetch('/api/profile/theme', {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ themeId }),
+    });
+
+    if (!res.ok) throw new Error('Erreur API');
+    window.location.href = '../admin/admin.html';
+
+  } catch (e) {
+    console.error(e);
+    alert('Erreur lors de l\'application du thème');
+  }
+});
